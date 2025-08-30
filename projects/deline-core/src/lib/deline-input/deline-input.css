@@ -1,0 +1,22 @@
+.deline-input {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    font-size: 1rem;
+    border: 1px solid var(--deline-border, #d1d5db);
+    border-radius: var(--deline-radius, 0.5rem);
+    background: var(--deline-surface, #ffffff);
+    color: var(--deline-on-surface, #111827);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.deline-input:focus {
+    outline: none;
+    border-color: var(--deline-primary, #4f46e5);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.3);
+}
+
+.deline-input:disabled {
+    background: var(--deline-disabled, #f3f4f6);
+    color: var(--deline-on-disabled, #9ca3af);
+    cursor: not-allowed;
+}

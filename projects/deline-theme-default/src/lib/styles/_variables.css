@@ -1,0 +1,17 @@
+:root {
+    --deline-primary: #4f46e5;
+    --deline-primary-hover: #4338ca;
+    --deline-primary-active: #3730a3;
+    --deline-on-primary: #ffffff;
+
+    --deline-radius: 0.5rem;
+
+    --deline-disabled: #cbd5e1;
+    --deline-on-disabled: #6b7280;
+}
+
+[data-theme="dark"] {
+    --deline-primary: #1f2937;
+    --deline-on-primary: #f9fafb;
+    --deline-radius: 8px;
+}

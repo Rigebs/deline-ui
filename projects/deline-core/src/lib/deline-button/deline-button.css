@@ -1,0 +1,39 @@
+.deline-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    background-color: var(--deline-primary, #4f46e5);
+    color: var(--deline-on-primary, #ffffff);
+    font-size: 0.95rem;
+    font-weight: 500;
+    border: none;
+    border-radius: var(--deline-radius, 0.5rem);
+    padding: 0.6rem 1.2rem;
+    cursor: pointer;
+
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition:
+        background-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.1s ease;
+}
+
+.deline-btn:hover:not(:disabled) {
+    background-color: var(--deline-primary-hover, #4338ca);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.deline-btn:active:not(:disabled) {
+    transform: scale(0.97);
+    background-color: var(--deline-primary-active, #3730a3);
+}
+
+.deline-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: var(--deline-disabled, #cbd5e1);
+    color: var(--deline-on-disabled, #6b7280);
+    box-shadow: none;
+}
