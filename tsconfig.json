@@ -3,13 +3,10 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "./",
     "paths": {
-      "deline-core": [
-        "./dist/deline-core"
-      ],
-      "deline-theme-default": [
-        "./dist/deline-theme-default"
-      ]
+      "deline-core": ["projects/deline-core/src/public-api.ts"],
+      "deline-theme-default": ["projects/deline-theme-default/src/public-api.ts"]
     },
     "strict": true,
     "noImplicitOverride": true,
