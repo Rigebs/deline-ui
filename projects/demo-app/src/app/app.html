@@ -1,3 +1,7 @@
+<button type="button" (click)="toggleTheme()" class="theme-toggle">
+    {{ darkMode ? '☀️ Light' : '🌙 Dark' }}
+</button>
+
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <dln-input formControlName="email" placeholder="Correo electrónico" type="email"></dln-input>
 

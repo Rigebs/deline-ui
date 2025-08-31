@@ -3,15 +3,23 @@
     --deline-primary-hover: #4338ca;
     --deline-primary-active: #3730a3;
     --deline-on-primary: #ffffff;
-
+    --deline-surface: #ffffff;
+    --deline-on-surface: #111827;
+    --deline-border: #d1d5db;
     --deline-radius: 0.5rem;
-
     --deline-disabled: #cbd5e1;
     --deline-on-disabled: #6b7280;
 }
 
 [data-theme="dark"] {
-    --deline-primary: #1f2937;
+    --deline-primary: #6366f1;
+    --deline-primary-hover: #4f46e5;
+    --deline-primary-active: #4338ca;
     --deline-on-primary: #f9fafb;
+    --deline-surface: #1f2937;
+    --deline-on-surface: #f9fafb;
+    --deline-border: #374151;
     --deline-radius: 8px;
+    --deline-disabled: #4b5563;
+    --deline-on-disabled: #9ca3af;
 }

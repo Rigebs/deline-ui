@@ -3,3 +3,13 @@
     font-size: 0.9rem;
     margin-top: 4px;
 }
+
+.theme-toggle {
+    margin-bottom: 1rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--deline-border);
+    border-radius: var(--deline-radius);
+    background: var(--deline-surface);
+    color: var(--deline-on-surface);
+    cursor: pointer;
+}

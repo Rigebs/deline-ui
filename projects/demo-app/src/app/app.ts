@@ -1,4 +1,4 @@
-import { CommonModule, KeyValuePipe } from '@angular/common';
+import { KeyValuePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import {
@@ -10,6 +10,8 @@ import {
   DlnSelect,
   DlnTextarea,
 } from 'deline-core';
+
+import { ThemeService } from 'deline-theme-default';
 
 @Component({
   selector: 'app-root',
@@ -31,8 +33,9 @@ import {
 export class App {
   protected form: FormGroup;
   protected loading = false;
+  protected darkMode = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private themeService: ThemeService) {
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -41,6 +44,11 @@ export class App {
       description: ['', Validators.required],
       gender: ['male', Validators.required],
     });
+  }
+
+  toggleTheme() {
+    this.themeService.toggleDark();
+    this.darkMode = this.themeService.isDark();
   }
 
   protected errorMessages: Partial<Record<string, (error: any) => string>> = {
