@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DelineButton } from './deline-button';
+import { DlnRadioGroup } from './dln-radio-group';
 
-describe('DelineButton', () => {
-  let component: DelineButton;
-  let fixture: ComponentFixture<DelineButton>;
+describe('DlnRadioGroup', () => {
+  let component: DlnRadioGroup;
+  let fixture: ComponentFixture<DlnRadioGroup>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DelineButton]
+      imports: [DlnRadioGroup]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DelineButton);
+    fixture = TestBed.createComponent(DlnRadioGroup);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

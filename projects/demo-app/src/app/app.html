@@ -1,12 +1,35 @@
-<h1>Deline Demo</h1>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <dln-input formControlName="email" placeholder="Correo electrónico" type="email"></dln-input>
 
-<deline-button label="Aceptar"></deline-button>
-<deline-button label="Cancelar" [disabled]="true"></deline-button>
+    @if (form.get('email')?.errors && form.get('email')?.touched) { @for (error of
+    (form.get('email')?.errors | keyvalue); track error.key) {
+    <div class="error-message">
+        {{ errorMessages[error.key]?.(error.value) }}
+    </div>
+    } }
 
-<br /><br />
+    <dln-input formControlName="password" placeholder="Contraseña" type="password"></dln-input>
 
-<deline-input placeholder="Escribe tu nombre"></deline-input>
+    @if (form.get('password')?.errors && form.get('password')?.touched) {
+    @for (error of (form.get('password')?.errors | keyvalue); track error.key) {
+    <div class="error-message">
+        {{ errorMessages[error.key]?.(error.value) }}
+    </div>
+    }
+    }
 
-<br /><br />
+    <dln-checkbox formControlName="accept" label="Acepto los términos y condiciones">
+    </dln-checkbox>
 
-<deline-select [options]="['Opción 1', 'Opción 2', 'Opción 3']"></deline-select>
+    <dln-select formControlName="country" [options]="['Argentina', 'Chile', 'México']"></dln-select>
+
+    <dln-textarea formControlName="description" placeholder="Escribe tu descripción..."></dln-textarea>
+
+    <dln-radio-group formControlName="gender">
+        <dln-radio-button value="male">Male</dln-radio-button>
+        <dln-radio-button value="female">Female</dln-radio-button>
+    </dln-radio-group>
+
+    <dln-button type="submit" label="Enviar" [disabled]="form.invalid" [loading]="loading">
+    </dln-button>
+</form>

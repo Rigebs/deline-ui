@@ -1,0 +1,5 @@
+<label class="checkbox-container">
+    <input type="checkbox" [checked]="checked" [disabled]="disabled" (change)="toggle($event)" (blur)="onBlur()" />
+    <span class="checkmark"></span>
+    <span class="label-text">{{ label }}</span>
+</label>

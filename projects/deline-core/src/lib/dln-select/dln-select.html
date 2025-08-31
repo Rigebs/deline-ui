@@ -1,0 +1,8 @@
+<select class="deline-select" [value]="value" [disabled]="disabled" (change)="onChangeSelect($event)" (blur)="onBlur()">
+    <option value="" disabled hidden>{{ placeholder }}</option>
+    @for (option of options; track $index) {
+    <option [value]="option">
+        {{ option }}
+    </option>
+    }
+</select>

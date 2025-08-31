@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DelineSelect } from './deline-select';
+import { DlnSelect } from './dln-select';
 
-describe('DelineSelect', () => {
-  let component: DelineSelect;
-  let fixture: ComponentFixture<DelineSelect>;
+describe('DlnSelect', () => {
+  let component: DlnSelect;
+  let fixture: ComponentFixture<DlnSelect>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DelineSelect]
+      imports: [DlnSelect]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DelineSelect);
+    fixture = TestBed.createComponent(DlnSelect);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

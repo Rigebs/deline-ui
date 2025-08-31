@@ -1,4 +1,6 @@
 .deline-btn {
+    position: relative;
+    /* importante para centrar el spinner */
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -36,4 +38,24 @@
     background-color: var(--deline-disabled, #cbd5e1);
     color: var(--deline-on-disabled, #6b7280);
     box-shadow: none;
+}
+
+.content.hidden {
+    visibility: hidden;
+}
+
+.spinner {
+    position: absolute;
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid currentColor;
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
 }

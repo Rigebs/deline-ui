@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DelineInput } from './deline-input';
+import { DlnButton } from './dln-button';
 
-describe('DelineInput', () => {
-  let component: DelineInput;
-  let fixture: ComponentFixture<DelineInput>;
+describe('DlnButton', () => {
+  let component: DlnButton;
+  let fixture: ComponentFixture<DlnButton>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DelineInput]
+      imports: [DlnButton]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DelineInput);
+    fixture = TestBed.createComponent(DlnButton);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
