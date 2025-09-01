@@ -1,0 +1,53 @@
+.dln-card {
+  background: var(--deline-surface);
+  color: var(--deline-on-surface);
+  border-radius: var(--deline-radius);
+  padding: var(--deline-spacing-md);
+  transition: box-shadow var(--deline-transition-medium),
+    border-color var(--deline-transition-medium), background var(--deline-transition-medium);
+}
+
+.dln-card-border {
+  border: 1px solid var(--deline-border);
+}
+
+/* Sombras */
+.dln-card-shadow-sm {
+  box-shadow: var(--deline-shadow-sm);
+}
+.dln-card-shadow-md {
+  box-shadow: var(--deline-shadow-md);
+}
+.dln-card-shadow-lg {
+  box-shadow: var(--deline-shadow-lg);
+}
+
+.dln-card-header {
+  margin-bottom: var(--deline-spacing-sm);
+}
+
+.dln-card-title {
+  font-family: var(--deline-font-family);
+  font-size: var(--deline-font-size-lg);
+  font-weight: var(--deline-font-weight-bold);
+  margin: 0 0 0.25rem 0;
+}
+
+.dln-card-subtitle {
+  font-family: var(--deline-font-family);
+  font-size: var(--deline-font-size-md);
+  font-weight: var(--deline-font-weight-normal);
+  color: var(--deline-on-surface);
+  opacity: 0.75;
+  margin: 0;
+}
+
+.dln-card-body {
+  font-family: var(--deline-font-family);
+  font-size: var(--deline-font-size-md);
+}
+
+.dln-card-footer {
+  margin-top: var(--deline-spacing-md);
+  text-align: right;
+}

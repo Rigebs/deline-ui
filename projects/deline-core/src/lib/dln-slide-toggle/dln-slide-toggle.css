@@ -1,0 +1,52 @@
+.dln-slide-toggle {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  gap: var(--deline-spacing-md); /* un poco más de espacio */
+  user-select: none;
+}
+
+.dln-slide-toggle.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Track más ancho y alto */
+.track {
+  width: 2.5rem; /* ligeramente más ancho */
+  height: 1.25rem; /* ligeramente más alto */
+  background: var(--deline-disabled);
+  border-radius: 999px;
+  position: relative;
+  transition: background var(--deline-transition-medium);
+}
+
+/* Track cuando está activado */
+.track.checked {
+  background: var(--deline-primary);
+}
+
+/* Thumb más pequeño en proporción */
+.thumb {
+  width: 1rem; /* un poco más grande para que se vea bien */
+  height: 1rem;
+  background: var(--deline-surface);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 0.125rem; /* pequeño margen desde el borde */
+  transform: translate(0, -50%);
+  transition: left var(--deline-transition-medium);
+}
+
+/* Thumb cuando el track está activado */
+.track.checked .thumb {
+  left: calc(100% - 1.125rem); /* ajustado según nuevo tamaño del track */
+}
+
+/* Label */
+.label {
+  font-family: var(--deline-font-family);
+  font-size: var(--deline-font-size-md);
+  color: var(--deline-on-surface);
+}

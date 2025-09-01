@@ -8,6 +8,6 @@
 }
 
 body {
-  background-color: var(--deline-surface, #ffffff);
-  color: var(--deline-on-surface, #111827);
+  background-color: var(--deline-surface);
+  color: var(--deline-on-surface);
 }

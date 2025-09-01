@@ -1,22 +1,35 @@
 .deline-input {
-    width: 100%;
-    padding: 0.6rem 0.8rem;
-    font-size: 1rem;
-    border: 1px solid var(--deline-border, #d1d5db);
-    border-radius: var(--deline-radius, 0.5rem);
-    background: var(--deline-surface, #ffffff);
-    color: var(--deline-on-surface, #111827);
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  font-size: 1rem;
+  border: 1px solid var(--deline-border);
+  border-radius: var(--deline-radius);
+  background: var(--deline-surface);
+  color: var(--deline-on-surface);
+}
+
+.deline-input:hover:not(:disabled) {
+  border-color: var(--deline-primary-hover);
 }
 
 .deline-input:focus {
-    outline: none;
-    border-color: var(--deline-primary, #4f46e5);
-    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.3);
+  outline: none;
+  border-color: var(--deline-primary);
+  box-shadow: 0 0 0 3px var(--deline-primary-shadow);
 }
 
 .deline-input:disabled {
-    background: var(--deline-disabled, #f3f4f6);
-    color: var(--deline-on-disabled, #9ca3af);
-    cursor: not-allowed;
+  background: var(--deline-disabled);
+  color: var(--deline-on-disabled);
+  cursor: not-allowed;
+}
+
+.deline-input.secondary:focus {
+  border-color: var(--deline-secondary);
+  box-shadow: 0 0 0 3px var(--deline-secondary-shadow);
+}
+
+.deline-input.error {
+  border-color: var(--deline-error);
+  box-shadow: 0 0 0 3px var(--deline-error-shadow);
 }

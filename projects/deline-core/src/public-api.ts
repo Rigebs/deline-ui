@@ -9,3 +9,5 @@ export * from './lib/dln-textarea/dln-textarea';
 export * from './lib/dln-checkbox/dln-checkbox';
 export * from './lib/dln-radio-button/dln-radio-button';
 export * from './lib/dln-radio-group/dln-radio-group';
+export * from './lib/dln-card/dln-card';
+export * from './lib/dln-slide-toggle/dln-slide-toggle';

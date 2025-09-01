@@ -1,25 +1,152 @@
 :root {
-    --deline-primary: #4f46e5;
-    --deline-primary-hover: #4338ca;
-    --deline-primary-active: #3730a3;
-    --deline-on-primary: #ffffff;
-    --deline-surface: #ffffff;
-    --deline-on-surface: #111827;
-    --deline-border: #d1d5db;
-    --deline-radius: 0.5rem;
-    --deline-disabled: #cbd5e1;
-    --deline-on-disabled: #6b7280;
+  /* Colores primarios (azul) */
+  --deline-primary: #1e40af;
+  /* Azul oscuro */
+  --deline-primary-hover: #1e3a8a;
+  --deline-primary-active: #1e3a8a;
+  --deline-on-primary: #ffffff;
+
+  /* Secundario (azul claro / cyan) */
+  --deline-secondary: #3b82f6;
+  --deline-secondary-hover: #2563eb;
+  --deline-secondary-active: #1d4ed8;
+  --deline-on-secondary: #ffffff;
+
+  /* Acento (azul pastel) */
+  --deline-accent: #60a5fa;
+  --deline-accent-hover: #3b82f6;
+  --deline-accent-active: #2563eb;
+  --deline-on-accent: #111827;
+
+  /* Superficies */
+  --deline-surface: #ffffff;
+  --deline-on-surface: #1f2937;
+  --deline-border: #cbd5e1;
+
+  /* Estados */
+  --deline-disabled: #e5e7eb;
+  --deline-on-disabled: #9ca3af;
+  --deline-error: #ef4444;
+  --deline-on-error: #ffffff;
+  --deline-success: #22c55e;
+  --deline-on-success: #ffffff;
+
+  /* Tipografía */
+  --deline-font-family: 'Inter', sans-serif;
+  --deline-font-size-sm: 0.875rem;
+  --deline-font-size-md: 1rem;
+  --deline-font-size-lg: 1.125rem;
+  --deline-font-weight-normal: 400;
+  --deline-font-weight-bold: 600;
+
+  /* Espaciado */
+  --deline-spacing-xs: 0.25rem;
+  --deline-spacing-sm: 0.5rem;
+  --deline-spacing-md: 1rem;
+  --deline-spacing-lg: 1.5rem;
+  --deline-spacing-xl: 2rem;
+
+  /* Bordes y sombras */
+  --deline-radius: 0.5rem;
+  --deline-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --deline-shadow-md: 0 2px 6px rgba(0, 0, 0, 0.1);
+  --deline-shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+  --deline-primary-shadow: rgba(30, 64, 175, 0.3);
+  --deline-secondary-shadow: rgba(59, 130, 246, 0.3);
+  --deline-error-shadow: rgba(239, 68, 68, 0.3);
+
+  /* Primary (botón principal) */
+  --deline-btn-primary-bg: var(--deline-primary);
+  --deline-btn-primary-hover: var(--deline-primary-hover);
+  --deline-btn-primary-active: var(--deline-primary-active);
+  --deline-btn-primary-color: var(--deline-on-primary);
+  --deline-btn-primary-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --deline-btn-primary-shadow-hover: 0 4px 8px rgba(0, 0, 0, 0.15);
+
+  /* Secondary */
+  --deline-btn-secondary-bg: var(--deline-secondary);
+  --deline-btn-secondary-hover: var(--deline-secondary-hover);
+  --deline-btn-secondary-active: var(--deline-secondary-active);
+  --deline-btn-secondary-color: var(--deline-on-secondary);
+  --deline-btn-secondary-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --deline-btn-secondary-shadow-hover: 0 4px 8px rgba(0, 0, 0, 0.15);
+
+  /* Accent */
+  --deline-btn-accent-bg: var(--deline-accent);
+  --deline-btn-accent-hover: var(--deline-accent-hover);
+  --deline-btn-accent-active: var(--deline-accent-active);
+  --deline-btn-accent-color: var(--deline-on-accent);
+  --deline-btn-accent-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --deline-btn-accent-shadow-hover: 0 4px 8px rgba(0, 0, 0, 0.15);
+
+  /* Disabled */
+  --deline-btn-disabled-bg: var(--deline-disabled);
+  --deline-btn-disabled-color: var(--deline-on-disabled);
+
+  /* Sizes */
+  --deline-btn-padding-sm: 0.35rem 0.8rem;
+  --deline-btn-padding-md: 0.6rem 1.2rem;
+  --deline-btn-padding-lg: 0.8rem 1.5rem;
+  --deline-btn-font-sm: 0.875rem;
+  --deline-btn-font-md: 0.95rem;
+  --deline-btn-font-lg: 1.125rem;
 }
 
-[data-theme="dark"] {
-    --deline-primary: #6366f1;
-    --deline-primary-hover: #4f46e5;
-    --deline-primary-active: #4338ca;
-    --deline-on-primary: #f9fafb;
-    --deline-surface: #1f2937;
-    --deline-on-surface: #f9fafb;
-    --deline-border: #374151;
-    --deline-radius: 8px;
-    --deline-disabled: #4b5563;
-    --deline-on-disabled: #9ca3af;
+[data-theme='dark'] {
+  /* Colores primarios (azul) */
+  --deline-primary: #3b82f6;
+  --deline-primary-hover: #2563eb;
+  --deline-primary-active: #1d4ed8;
+  --deline-on-primary: #f9fafb;
+
+  /* Secundario (cyan oscuro) */
+  --deline-secondary: #0ea5e9;
+  --deline-secondary-hover: #0284c7;
+  --deline-secondary-active: #0369a1;
+  --deline-on-secondary: #f9fafb;
+
+  /* Acento */
+  --deline-accent: #60a5fa;
+  --deline-accent-hover: #3b82f6;
+  --deline-accent-active: #2563eb;
+  --deline-on-accent: #111827;
+
+  /* Superficies */
+  --deline-surface: #1f2937;
+  --deline-on-surface: #f9fafb;
+  --deline-border: #374151;
+
+  /* Estados */
+  --deline-disabled: #4b5563;
+  --deline-on-disabled: #9ca3af;
+  --deline-error: #f87171;
+  --deline-on-error: #111827;
+  --deline-success: #4ade80;
+  --deline-on-success: #111827;
+
+  /* Tipografía */
+  --deline-font-family: 'Inter', sans-serif;
+  --deline-font-size-sm: 0.875rem;
+  --deline-font-size-md: 1rem;
+  --deline-font-size-lg: 1.125rem;
+  --deline-font-weight-normal: 400;
+  --deline-font-weight-bold: 600;
+
+  /* Espaciado */
+  --deline-spacing-xs: 0.25rem;
+  --deline-spacing-sm: 0.5rem;
+  --deline-spacing-md: 1rem;
+  --deline-spacing-lg: 1.5rem;
+  --deline-spacing-xl: 2rem;
+
+  /* Bordes y sombras */
+  --deline-radius: 0.5rem;
+  --deline-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --deline-shadow-md: 0 2px 6px rgba(0, 0, 0, 0.4);
+  --deline-shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.6);
+
+  --deline-primary-shadow: rgba(59, 130, 246, 0.3);
+  --deline-secondary-shadow: rgba(14, 165, 233, 0.3);
+  --deline-error-shadow: rgba(248, 113, 113, 0.3);
 }

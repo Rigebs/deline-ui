@@ -1,0 +1,9 @@
+<div class="dln-slide-toggle" [class.disabled]="disabled" (click)="toggle()">
+    <div class="track" [class.checked]="value">
+        <div class="thumb"></div>
+    </div>
+
+    @if (label) {
+    <span class="label">{{ label }}</span>
+    }
+</div>

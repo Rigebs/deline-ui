@@ -1,0 +1,25 @@
+<div class="dln-card" [ngClass]="[
+    shadow === 'sm' ? 'dln-card-shadow-sm' : '',
+    shadow === 'md' ? 'dln-card-shadow-md' : '',
+    shadow === 'lg' ? 'dln-card-shadow-lg' : '',
+    border ? 'dln-card-border' : ''
+  ]">
+    @if (title || subtitle) {
+    <div class="dln-card-header">
+        @if (title) {
+        <h3 class="dln-card-title">{{ title }}</h3>
+        }
+        @if (subtitle) {
+        <p class="dln-card-subtitle">{{ subtitle }}</p>
+        }
+    </div>
+    }
+
+    <div class="dln-card-body">
+        <ng-content></ng-content>
+    </div>
+
+    <div class="dln-card-footer">
+        <ng-content select="[card-footer]"></ng-content>
+    </div>
+</div>

@@ -3,11 +3,13 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import {
   DlnButton,
+  DlnCard,
   DlnCheckbox,
   DlnInput,
   DlnRadioButton,
   DlnRadioGroup,
   DlnSelect,
+  DlnSlideToggle,
   DlnTextarea,
 } from 'deline-core';
 
@@ -26,6 +28,8 @@ import { ThemeService } from 'deline-theme-default';
     DlnTextarea,
     DlnRadioButton,
     DlnRadioGroup,
+    DlnCard,
+    DlnSlideToggle,
   ],
   templateUrl: './app.html',
   styleUrls: ['./app.css'],

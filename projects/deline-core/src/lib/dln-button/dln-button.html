@@ -1,4 +1,4 @@
-<button class="deline-btn" [disabled]="disabled || loading" [attr.type]="type">
+<button class="deline-btn" [disabled]="disabled || loading" [ngClass]="[variant, size]" [attr.type]="type">
     <span class="content" [class.hidden]="loading">
         @if (label) {
         {{ label }}
