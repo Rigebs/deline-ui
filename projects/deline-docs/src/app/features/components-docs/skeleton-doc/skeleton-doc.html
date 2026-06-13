@@ -1,0 +1,166 @@
+<header class="page-header">
+  <div class="page-breadcrumb">
+    <span class="page-breadcrumb-text">Componentes</span>
+  </div>
+  <h1 class="page-title">Skeleton</h1>
+  <p class="page-subtitle">Placeholder animado que indica carga de contenido. Utiliza un efecto shimmer para mejorar la percepción de espera.</p>
+
+  <div class="import-block">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+      <span class="import-label">Importación Standalone Angular</span>
+      <button (click)="copyImport()" class="import-copy-btn">
+        {{ importCopied() ? '✓ Copiado' : 'Copiar' }}
+      </button>
+    </div>
+    <pre class="import-code"><code><span style="color:#c792ea;">import</span> <span style="color:#82aaff;">&#123; Skeleton &#125;</span> <span style="color:#c792ea;">from</span> <span class="hljs-string">'deline-core'</span>;</code></pre>
+  </div>
+</header>
+
+<section class="docs-section" id="variants">
+  <h2 class="section-title">Variantes y Configuraciones</h2>
+  <p class="section-desc">Diferentes formas y tamaños del componente Skeleton.</p>
+
+  <div class="variants-list">
+    <div class="variant-card">
+      <h3 class="variant-card-title">Text Skeleton</h3>
+      <p class="variant-card-desc">Líneas de texto simuladas con la forma por defecto <code>text</code>.</p>
+      <div class="variant-row" style="flex-direction:column;gap:8px;padding:16px;">
+        <dln-skeleton width="80%"></dln-skeleton>
+        <dln-skeleton width="100%"></dln-skeleton>
+        <dln-skeleton width="60%"></dln-skeleton>
+      </div>
+      <div class="variant-divider">
+        <app-code-block code='<dln-skeleton width="80%"></dln-skeleton>
+<dln-skeleton width="100%"></dln-skeleton>
+<dln-skeleton width="60%"></dln-skeleton>'></app-code-block>
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <h3 class="variant-card-title">Card Skeleton</h3>
+      <p class="variant-card-desc">Placeholder para una tarjeta usando forma <code>rect</code>.</p>
+      <div class="variant-row" style="flex-direction:column;gap:12px;padding:16px;max-width:320px;">
+        <dln-skeleton shape="rect" width="100%" height="160px"></dln-skeleton>
+        <dln-skeleton width="80%"></dln-skeleton>
+        <dln-skeleton width="60%"></dln-skeleton>
+      </div>
+      <div class="variant-divider">
+        <app-code-block code='<dln-skeleton shape="rect" width="100%" height="160px"></dln-skeleton>
+<dln-skeleton width="80%"></dln-skeleton>
+<dln-skeleton width="60%"></dln-skeleton>'></app-code-block>
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <h3 class="variant-card-title">Avatar + Text Skeleton</h3>
+      <p class="variant-card-desc">Combinación de círculo y líneas para perfiles de usuario.</p>
+      <div class="variant-row" style="display:flex;gap:16px;align-items:center;padding:16px;">
+        <dln-skeleton shape="circle" width="48px" height="48px"></dln-skeleton>
+        <div style="flex:1;display:flex;flex-direction:column;gap:8px;">
+          <dln-skeleton width="50%"></dln-skeleton>
+          <dln-skeleton width="80%"></dln-skeleton>
+        </div>
+      </div>
+      <div class="variant-divider">
+        <app-code-block code='<dln-skeleton shape="circle" width="48px" height="48px"></dln-skeleton>
+<div>
+  <dln-skeleton width="50%"></dln-skeleton>
+  <dln-skeleton width="80%"></dln-skeleton>
+</div>'></app-code-block>
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <h3 class="variant-card-title">Table Row Skeleton</h3>
+      <p class="variant-card-desc">Simulación de filas de tabla con celdas de distintos anchos.</p>
+      <div class="variant-row" style="flex-direction:column;gap:8px;padding:16px;">
+        <div style="display:flex;gap:16px;">
+          <dln-skeleton width="30%"></dln-skeleton>
+          <dln-skeleton width="40%"></dln-skeleton>
+          <dln-skeleton width="30%"></dln-skeleton>
+        </div>
+        <div style="display:flex;gap:16px;">
+          <dln-skeleton width="25%"></dln-skeleton>
+          <dln-skeleton width="45%"></dln-skeleton>
+          <dln-skeleton width="30%"></dln-skeleton>
+        </div>
+        <div style="display:flex;gap:16px;">
+          <dln-skeleton width="35%"></dln-skeleton>
+          <dln-skeleton width="35%"></dln-skeleton>
+          <dln-skeleton width="30%"></dln-skeleton>
+        </div>
+      </div>
+      <div class="variant-divider">
+        <app-code-block code='<div style="display:flex;gap:16px;">
+  <dln-skeleton width="30%"></dln-skeleton>
+  <dln-skeleton width="40%"></dln-skeleton>
+  <dln-skeleton width="30%"></dln-skeleton>
+</div>
+<div style="display:flex;gap:16px;">
+  <dln-skeleton width="25%"></dln-skeleton>
+  <dln-skeleton width="45%"></dln-skeleton>
+  <dln-skeleton width="30%"></dln-skeleton>
+</div>'></app-code-block>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="docs-section" id="api">
+  <h2 class="section-title">API Reference</h2>
+  <p class="section-desc">Estructura técnica de Inputs para desarrollo en Angular.</p>
+
+  <div class="api-table-wrapper">
+    <div class="api-table-title">@Input() Properties</div>
+    <table class="api-table">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Tipo</th>
+          <th>Default</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (prop of inputProps; track prop.name) {
+          <tr>
+            <td><code>{{ prop.name }}</code></td>
+            <td><code>{{ prop.type }}</code></td>
+            <td><code>{{ prop.default }}</code></td>
+            <td>{{ prop.description }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="docs-section" id="use-cases">
+  <h2 class="section-title">Casos de Uso Comunes</h2>
+  <p class="section-desc">Snippets listos para copiar e implementar en tus proyectos.</p>
+
+  <div class="use-cases">
+    <div class="use-case-card">
+      <div class="use-case-label">Lista de usuarios</div>
+      <app-code-block code='@for (usuario of usuarios(); track usuario.id) {
+  <div class="user-row">
+    <dln-skeleton shape="circle" width="40px" height="40px"></dln-skeleton>
+    <div>
+      <dln-skeleton width="120px"></dln-skeleton>
+      <dln-skeleton width="180px"></dln-skeleton>
+    </div>
+  </div>
+}'></app-code-block>
+    </div>
+
+    <div class="use-case-card">
+      <div class="use-case-label">Dashboard cards</div>
+      <app-code-block code='@for (i of [1,2,3]; track i) {
+  <div class="stat-card">
+    <dln-skeleton shape="rect" width="100%" height="100px"></dln-skeleton>
+    <dln-skeleton width="60%"></dln-skeleton>
+  </div>
+}'></app-code-block>
+    </div>
+  </div>
+</section>

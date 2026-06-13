@@ -1,0 +1,129 @@
+<header class="page-header">
+  <div class="page-breadcrumb">
+    <span class="page-breadcrumb-text">Componentes</span>
+  </div>
+  <h1 class="page-title">Paginación</h1>
+  <p class="page-subtitle">Navegación por páginas para conjuntos de datos extensos. Permite al usuario moverse entre páginas de contenido de forma eficiente.</p>
+
+  <div class="import-block">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+      <span class="import-label">Importación Standalone Angular</span>
+      <button (click)="copyImport()" class="import-copy-btn">
+        {{ importCopied() ? '✓ Copiado' : 'Copiar' }}
+      </button>
+    </div>
+    <pre class="import-code"><code><span style="color:#c792ea;">import</span> <span style="color:#82aaff;">&#123; Pagination &#125;</span> <span style="color:#c792ea;">from</span> <span class="hljs-string">'deline-core'</span>;</code></pre>
+  </div>
+</header>
+
+<section class="docs-section" id="playground">
+  <h2 class="section-title">Playground Interactivo</h2>
+
+  <div class="playground">
+    <div class="playground-header">
+      <div class="playground-tabs">
+        <button class="playground-tab" [class.playground-tab--active]="!showCode()" (click)="showCode.set(false);$event.preventDefault()">Vista Previa</button>
+        <button class="playground-tab" [class.playground-tab--active]="showCode()" (click)="showCode.set(true);$event.preventDefault()">Código Angular generado</button>
+      </div>
+    </div>
+
+    <div class="playground-switcher">
+      <div class="playground-preview" [class.is-hidden]="showCode()" style="flex-direction:column;gap:24px;">
+        <dln-pagination [totalItems]="playTotal()" [pageSize]="playPageSize()" [currentPage]="playCurrent()" (pageChange)="onPageChange($event)"></dln-pagination>
+      </div>
+      <div class="playground-code" [class.is-visible]="showCode()">
+        <app-code-block [code]="genCode()"></app-code-block>
+      </div>
+    </div>
+
+    <div class="playground-controls">
+      <div class="control-group">
+        <label class="control-label">Total de elementos</label>
+        <input type="number" class="control-input" [ngModel]="playTotal()" (ngModelChange)="playTotal.set($any($event)); playCurrent.set(1)" min="1">
+      </div>
+      <div class="control-group">
+        <label class="control-label">Elementos por página</label>
+        <input type="number" class="control-input" [ngModel]="playPageSize()" (ngModelChange)="playPageSize.set($any($event)); playCurrent.set(1)" min="1">
+      </div>
+      <div class="control-group">
+        <label class="control-label">Página actual</label>
+        <span class="control-value">{{ playCurrent() }}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="docs-section" id="variants">
+  <h2 class="section-title">Variantes y Configuraciones</h2>
+  <p class="section-desc">Ejemplos con diferentes volúmenes de datos.</p>
+
+  <div class="variants-list">
+    <div class="variant-card">
+      <h3 class="variant-card-title">Datos pequeños</h3>
+      <p class="variant-card-desc">20 elementos, 5 por página.</p>
+      <div class="variant-row">
+        <dln-pagination [totalItems]="20" [pageSize]="5" [currentPage]="1" (pageChange)="onPageChange($event)"></dln-pagination>
+      </div>
+      <div class="variant-divider">
+        <app-code-block code='<dln-pagination [totalItems]="20" [pageSize]="5" [currentPage]="1" (pageChange)="onPageChange($event)"></dln-pagination>'></app-code-block>
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <h3 class="variant-card-title">Datos medianos</h3>
+      <p class="variant-card-desc">100 elementos, 10 por página.</p>
+      <div class="variant-row">
+        <dln-pagination [totalItems]="100" [pageSize]="10" [currentPage]="1" (pageChange)="onPageChange($event)"></dln-pagination>
+      </div>
+      <div class="variant-divider">
+        <app-code-block code='<dln-pagination [totalItems]="100" [pageSize]="10" [currentPage]="1" (pageChange)="onPageChange($event)"></dln-pagination>'></app-code-block>
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <h3 class="variant-card-title">Datos grandes</h3>
+      <p class="variant-card-desc">500 elementos, 20 por página.</p>
+      <div class="variant-row">
+        <dln-pagination [totalItems]="500" [pageSize]="20" [currentPage]="1" (pageChange)="onPageChange($event)"></dln-pagination>
+      </div>
+      <div class="variant-divider">
+        <app-code-block code='<dln-pagination [totalItems]="500" [pageSize]="20" [currentPage]="1" (pageChange)="onPageChange($event)"></dln-pagination>'></app-code-block>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="docs-section" id="api">
+  <h2 class="section-title">API Reference</h2>
+  <p class="section-desc">Estructura técnica de Inputs, Outputs y selectores para desarrollo en Angular.</p>
+
+  <app-api-table title="@Input() Properties" [rows]="inputProps"></app-api-table>
+  <app-api-table title="@Output() Events" [rows]="outputProps" typeLabel="Tipo de Emisión" defaultLabel="Valor"></app-api-table>
+</section>
+
+<section class="docs-section" id="use-cases">
+  <h2 class="section-title">Casos de Uso Comunes</h2>
+  <p class="section-desc">Snippets listos para copiar e implementar en tus proyectos.</p>
+
+  <div class="use-cases">
+    <div class="use-case-card">
+      <div class="use-case-label">Paginación básica</div>
+      <app-code-block code='<dln-pagination
+  [totalItems]="resultados.length"
+  [pageSize]="10"
+  [currentPage]="paginaActual"
+  (pageChange)="cargarPagina($event)">
+</dln-pagination>'></app-code-block>
+    </div>
+
+    <div class="use-case-card">
+      <div class="use-case-label">Con página inicial personalizada</div>
+      <app-code-block code='<dln-pagination
+  [totalItems]="200"
+  [pageSize]="20"
+  [currentPage]="5"
+  (pageChange)="onPageChange($event)">
+</dln-pagination>'></app-code-block>
+    </div>
+  </div>
+</section>

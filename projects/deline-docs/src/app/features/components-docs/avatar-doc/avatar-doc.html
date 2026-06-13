@@ -1,0 +1,142 @@
+<header class="page-header">
+  <div class="page-breadcrumb">
+    <span class="page-breadcrumb-text">Componentes</span>
+  </div>
+  <h1 class="page-title">Avatar</h1>
+  <p class="page-subtitle">Componente visual que representa a un usuario mediante una imagen o iniciales. Genera un color de fondo único basado en el nombre.</p>
+
+  <div class="import-block">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+      <span class="import-label">Importación Standalone Angular</span>
+      <button (click)="copyImport()" class="import-copy-btn">
+        {{ importCopied() ? '✓ Copiado' : 'Copiar' }}
+      </button>
+    </div>
+    <pre class="import-code"><code><span style="color:#c792ea;">import</span> <span style="color:#82aaff;">&#123; Avatar &#125;</span> <span style="color:#c792ea;">from</span> <span class="hljs-string">'deline-core'</span>;</code></pre>
+  </div>
+</header>
+
+<section class="docs-section" id="playground">
+  <h2 class="section-title">Playground Interactivo</h2>
+
+  <div class="playground">
+    <div class="playground-header">
+      <div class="playground-tabs">
+        <button class="playground-tab" [class.playground-tab--active]="!showCode()" (click)="showCode.set(false);$event.preventDefault()">Vista Previa</button>
+        <button class="playground-tab" [class.playground-tab--active]="showCode()" (click)="showCode.set(true);$event.preventDefault()">Código Angular generado</button>
+      </div>
+    </div>
+
+    <div class="playground-switcher">
+      <div class="playground-preview" [class.is-hidden]="showCode()" style="flex-direction:column;gap:24px;align-items:center;">
+        <dln-avatar [name]="playName()" [size]="playSize()" [src]="playSrc() || null"></dln-avatar>
+      </div>
+      <div class="playground-code" [class.is-visible]="showCode()">
+        <app-code-block [code]="genCode()"></app-code-block>
+      </div>
+    </div>
+
+    <div class="playground-controls">
+      <div class="control-group" style="flex:1;">
+        <label class="control-label">Nombre</label>
+        <input type="text" [(ngModel)]="playName" class="control-input" placeholder="Nombre del usuario">
+      </div>
+      <div class="control-group">
+        <label class="control-label">Tamaño</label>
+        <select [value]="playSize()" (change)="playSize.set($any($event.target).value)" class="control-select">
+          <option value="sm">sm</option>
+          <option value="md">md</option>
+          <option value="lg">lg</option>
+        </select>
+      </div>
+      <div class="control-group" style="flex:1;">
+        <label class="control-label">URL Imagen</label>
+        <input type="text" [(ngModel)]="playSrc" class="control-input" placeholder="https://... (opcional)">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="docs-section" id="variants">
+  <h2 class="section-title">Variantes y Configuraciones</h2>
+  <p class="section-desc">Diferentes tamaños y modos de visualización del componente Avatar.</p>
+
+  <div class="variants-list">
+    <div class="variant-card">
+      <h3 class="variant-card-title">Tamaños (size)</h3>
+      <div class="variant-row" style="gap:24px;align-items:center;">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+          <dln-avatar name="Usuario" size="sm"></dln-avatar>
+          <span style="font-size:12px;color:var(--doc-secondary-text);">sm (32px)</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+          <dln-avatar name="Usuario" size="md"></dln-avatar>
+          <span style="font-size:12px;color:var(--doc-secondary-text);">md (48px)</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+          <dln-avatar name="Usuario" size="lg"></dln-avatar>
+          <span style="font-size:12px;color:var(--doc-secondary-text);">lg (80px)</span>
+        </div>
+      </div>
+      <div class="variant-divider">
+        <app-code-block code='<dln-avatar name="Usuario" size="sm"></dln-avatar>
+<dln-avatar name="Usuario" size="md"></dln-avatar>
+<dln-avatar name="Usuario" size="lg"></dln-avatar>'></app-code-block>
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <h3 class="variant-card-title">Con imagen vs Iniciales</h3>
+      <div class="variant-row" style="gap:24px;align-items:center;">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+          <dln-avatar name="Ana García" size="lg"></dln-avatar>
+          <span style="font-size:12px;color:var(--doc-secondary-text);">Iniciales</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+          <dln-avatar name="Carlos López" size="lg"></dln-avatar>
+          <span style="font-size:12px;color:var(--doc-secondary-text);">Iniciales</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+          <dln-avatar name="María Torres" size="lg"></dln-avatar>
+          <span style="font-size:12px;color:var(--doc-secondary-text);">Iniciales</span>
+        </div>
+      </div>
+      <div class="variant-divider">
+        <app-code-block code='<dln-avatar name="Ana García" size="lg"></dln-avatar>
+<dln-avatar name="Carlos López" size="lg"></dln-avatar>
+<dln-avatar name="María Torres" size="lg"></dln-avatar>'></app-code-block>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="docs-section" id="api">
+  <h2 class="section-title">API Reference</h2>
+  <p class="section-desc">Estructura técnica de Inputs, Outputs y selectores para desarrollo en Angular.</p>
+
+  <app-api-table title="@Input() Properties" [rows]="inputProps"></app-api-table>
+</section>
+
+<section class="docs-section" id="use-cases">
+  <h2 class="section-title">Casos de Uso Comunes</h2>
+  <p class="section-desc">Snippets listos para copiar e implementar en tus proyectos.</p>
+
+  <div class="use-cases">
+    <div class="use-case-card">
+      <div class="use-case-label">Avatar con imagen</div>
+      <app-code-block code='<dln-avatar
+  name="Juan Pérez"
+  src="assets/avatar.jpg"
+  size="md">
+</dln-avatar>'></app-code-block>
+    </div>
+
+    <div class="use-case-card">
+      <div class="use-case-label">Avatar solo con iniciales</div>
+      <app-code-block code='<dln-avatar
+  name="Laura Martínez"
+  size="lg">
+</dln-avatar>'></app-code-block>
+    </div>
+  </div>
+</section>

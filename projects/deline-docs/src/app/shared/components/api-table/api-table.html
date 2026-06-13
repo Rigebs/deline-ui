@@ -1,0 +1,25 @@
+<div class="api-section">
+  <div class="api-title">{{ title() }}</div>
+  <div class="api-table">
+    <table>
+      <thead>
+        <tr>
+          <th>Propiedad</th>
+          <th>{{ typeLabel() }}</th>
+          <th>{{ defaultLabel() }}</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (row of rows(); track row.name) {
+          <tr>
+            <td><span class="prop-name">{{ row.name }}</span></td>
+            <td>{{ row.type }}</td>
+            <td>{{ row.default ?? '-' }}</td>
+            <td class="prop-desc">{{ row.description }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

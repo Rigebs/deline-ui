@@ -1,0 +1,131 @@
+<header class="page-header">
+  <div class="page-breadcrumb">
+    <span class="page-breadcrumb-text">Componentes</span>
+  </div>
+  <h1 class="page-title">Modal</h1>
+  <p class="page-subtitle">Ventana de diálogo modal que se superpone al contenido principal para capturar atención o solicitar una acción del usuario.</p>
+
+  <div class="import-block">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+      <span class="import-label">Importación Standalone Angular</span>
+      <button (click)="copyImport()" class="import-copy-btn">
+        {{ importCopied() ? '✓ Copiado' : 'Copiar' }}
+      </button>
+    </div>
+    <pre class="import-code"><code><span style="color:#c792ea;">import</span> <span style="color:#82aaff;">&#123; Modal &#125;</span> <span style="color:#c792ea;">from</span> <span class="hljs-string">'deline-core'</span>;</code></pre>
+  </div>
+</header>
+
+<section class="docs-section" id="playground">
+  <h2 class="section-title">Playground Interactivo</h2>
+
+  <div class="playground">
+    <div class="playground-header">
+      <div class="playground-tabs">
+        <button class="playground-tab" [class.playground-tab--active]="!showCode()" (click)="showCode.set(false);$event.preventDefault()">Vista Previa</button>
+        <button class="playground-tab" [class.playground-tab--active]="showCode()" (click)="showCode.set(true);$event.preventDefault()">Código Angular generado</button>
+      </div>
+    </div>
+
+    <div class="playground-switcher">
+      <div class="playground-preview" [class.is-hidden]="showCode()" style="flex-direction:column;gap:16px;">
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <dln-button (click)="isOpen.set(true)">Abrir Modal</dln-button>
+        </div>
+
+        <dln-modal [isOpen]="isOpen()" [title]="playTitle()" [size]="selectedSize()" (closed)="isOpen.set(false)">
+          <p>Este es el contenido del modal. Puedes personalizar el título, tamaño y pie.</p>
+          @if (showFooter()) {
+            <ng-template #modalFooter>
+              <dln-button variant="ghost" (click)="isOpen.set(false)">Cancelar</dln-button>
+              <dln-button (click)="isOpen.set(false)">Aceptar</dln-button>
+            </ng-template>
+          }
+        </dln-modal>
+      </div>
+      <div class="playground-code" [class.is-visible]="showCode()">
+        <app-code-block [code]="genCode()"></app-code-block>
+      </div>
+    </div>
+
+    <div class="playground-controls">
+      <div class="control-group">
+        <label class="control-label">Título</label>
+        <input
+          class="control-select"
+          type="text"
+          [value]="playTitle()"
+          (input)="playTitle.set($any($event.target).value)"
+          placeholder="Título del modal"
+        />
+      </div>
+      <div class="control-group">
+        <label class="control-label">Tamaño</label>
+        <select (change)="selectedSize.set($any($event.target).value)" class="control-select">
+          <option value="sm" [selected]="selectedSize() === 'sm'">sm</option>
+          <option value="md" [selected]="selectedSize() === 'md'">md</option>
+          <option value="lg" [selected]="selectedSize() === 'lg'">lg</option>
+          <option value="xl" [selected]="selectedSize() === 'xl'">xl</option>
+          <option value="full" [selected]="selectedSize() === 'full'">full</option>
+        </select>
+      </div>
+      <div class="control-group" style="justify-content:flex-end;">
+        <label class="control-checkbox">
+          <input type="checkbox" [checked]="showFooter()" (change)="showFooter.set($any($event.target).checked)">
+          <span>Footer</span>
+        </label>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="docs-section" id="sizes">
+  <h2 class="section-title">Tamaños</h2>
+  <p class="section-desc">El modal está disponible en cinco tamaños predefinidos que se adaptan a diferentes tipos de contenido.</p>
+
+  <div class="variants-list">
+    @for (size of sizes; track size) {
+      <div class="variant-card">
+        <h3 class="variant-card-title">Modal {{ size }}</h3>
+        <div class="variant-row">
+          <dln-button (click)="openSizeDemo(size)">Abrir {{ size }}</dln-button>
+        </div>
+        <div class="variant-divider">
+          <app-code-block [code]="genSizeCode(size)"></app-code-block>
+        </div>
+      </div>
+    }
+  </div>
+
+  <dln-modal [isOpen]="isOpenSize()" [title]="'Modal ' + demoSize()" [size]="demoSize()" (closed)="isOpenSize.set(false)">
+    <p>Modal de tamaño <strong>{{ demoSize() }}</strong>.</p>
+    <ng-template #modalFooter>
+      <dln-button (click)="isOpenSize.set(false)">Cerrar</dln-button>
+    </ng-template>
+  </dln-modal>
+</section>
+
+<section class="docs-section" id="api">
+  <h2 class="section-title">API Reference</h2>
+  <p class="section-desc">Estructura técnica de Inputs, Outputs y selectores para desarrollo en Angular.</p>
+
+  <app-api-table title="@Input() Properties" [rows]="inputProps"></app-api-table>
+  <app-api-table title="@Output() Events" [rows]="outputProps" typeLabel="Tipo de Emisión" defaultLabel="Valor"></app-api-table>
+</section>
+
+<section class="docs-section" id="use-cases">
+  <h2 class="section-title">Casos de Uso Comunes</h2>
+  <p class="section-desc">Snippets listos para copiar e implementar en tus proyectos.</p>
+
+  <div class="use-cases">
+    <div class="use-case-card">
+      <div class="use-case-label">Diálogo de confirmación</div>
+      <app-code-block [code]="confirmationCode"></app-code-block>
+    </div>
+
+    <div class="use-case-card">
+      <div class="use-case-label">Modal con formulario</div>
+      <app-code-block [code]="formModalCode"></app-code-block>
+    </div>
+  </div>
+</section>

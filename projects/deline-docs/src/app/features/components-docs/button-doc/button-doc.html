@@ -1,0 +1,172 @@
+<header class="page-header">
+  <div class="page-breadcrumb">
+    <span class="page-breadcrumb-text">Componentes</span>
+  </div>
+  <h1 class="page-title">Button</h1>
+  <p class="page-subtitle">Elemento interactivo utilizado para iniciar una acción o comando mediante clics, pulsaciones táctiles o navegación por teclado.</p>
+
+  <div class="import-block">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+      <span class="import-label">Importación Standalone Angular</span>
+      <button (click)="copyImport()" class="import-copy-btn">
+        {{ importCopied() ? '✓ Copiado' : 'Copiar' }}
+      </button>
+    </div>
+    <pre class="import-code"><code><span style="color:#c792ea;">import</span> <span style="color:#82aaff;">&#123; Button &#125;</span> <span style="color:#c792ea;">from</span> <span class="hljs-string">'deline-core'</span>;</code></pre>
+  </div>
+</header>
+
+<section class="docs-section" id="playground">
+  <h2 class="section-title">Playground Interactivo</h2>
+
+  <div class="playground">
+    <div class="playground-header">
+      <div class="playground-tabs">
+        <button class="playground-tab" [class.playground-tab--active]="!showCode()" (click)="showCode.set(false);$event.preventDefault()">Vista Previa</button>
+        <button class="playground-tab" [class.playground-tab--active]="showCode()" (click)="showCode.set(true);$event.preventDefault()">Código Angular generado</button>
+      </div>
+    </div>
+
+    <div class="playground-switcher">
+      <div class="playground-preview" [class.is-hidden]="showCode()">
+        <dln-button [variant]="playVariant()"
+                     [color]="playColor()"
+                     [size]="playSize()"
+                     [disabled]="disabled()"
+                     [isLoading]="loading()">
+          @if (loading()) { Cargando... } @else { Acción Base }
+        </dln-button>
+      </div>
+      <div class="playground-code" [class.is-visible]="showCode()">
+        <app-code-block [code]="genCode()"></app-code-block>
+      </div>
+    </div>
+
+    <div class="playground-controls">
+      <div class="control-group">
+        <label class="control-label">Variant</label>
+        <select (change)="setVariant($any($event.target).value)" class="control-select">
+          <option value="solid">solid</option>
+          <option value="outlined">outlined</option>
+          <option value="text">text</option>
+        </select>
+      </div>
+      <div class="control-group">
+        <label class="control-label">Color</label>
+        <select (change)="setColor($any($event.target).value)" class="control-select">
+          <option value="primary">primary (Azul)</option>
+          <option value="secondary">secondary</option>
+          <option value="danger">danger</option>
+        </select>
+      </div>
+      <div class="control-group">
+        <label class="control-label">Size</label>
+        <select (change)="setSize($any($event.target).value)" class="control-select">
+          <option value="sm">sm</option>
+          <option value="md" selected>md</option>
+          <option value="lg">lg</option>
+        </select>
+      </div>
+      <div class="control-checkboxes">
+        <label class="control-checkbox">
+          <input type="checkbox" (change)="setDisabled($any($event.target).checked)">
+          <span>Disabled</span>
+        </label>
+        <label class="control-checkbox">
+          <input type="checkbox" (change)="setLoading($any($event.target).checked)">
+          <span>Loading</span>
+        </label>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="docs-section" id="variants">
+  <h2 class="section-title">Variantes y Propiedades Visuales</h2>
+  <p class="section-desc">Muestra estática completa de todas las configuraciones semánticas soportadas.</p>
+
+  <div class="variants-list">
+    <div class="variant-card">
+      <h3 class="variant-card-title">Variantes de Estilo (variant)</h3>
+      <div class="variant-row">
+        <dln-button variant="solid">Solid / Contained</dln-button>
+        <dln-button variant="outline">Outlined</dln-button>
+        <dln-button variant="ghost">Text / Ghost</dln-button>
+        <dln-button [isIconOnly]="true" aria-label="Añadir">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path></svg>
+        </dln-button>
+      </div>
+      <div class="variant-divider">
+        <app-code-block code='<dln-button variant="solid">Solid</dln-button>
+<dln-button variant="outline">Outlined</dln-button>
+<dln-button variant="ghost">Ghost</dln-button>
+<dln-button [isIconOnly]="true" aria-label="Añadir">
+  <svg>...</svg>
+</dln-button>'></app-code-block>
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <h3 class="variant-card-title">Tamaños (sizes)</h3>
+      <div class="variant-row">
+        <dln-button size="sm">Small (sm)</dln-button>
+        <dln-button size="md">Medium (md)</dln-button>
+        <dln-button size="lg">Large (lg)</dln-button>
+      </div>
+      <div class="variant-divider">
+        <h4 class="variant-subtitle">Block / Full Width</h4>
+        <dln-button [fullWidth]="true">Ocupa el 100% del padre</dln-button>
+      </div>
+      <div class="variant-divider">
+        <app-code-block code='<dln-button size="sm">Small</dln-button>
+<dln-button size="md">Medium</dln-button>
+<dln-button size="lg">Large</dln-button>
+<dln-button [fullWidth]="true">Full Width</dln-button>'></app-code-block>
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <h3 class="variant-card-title">Colores Semánticos (color)</h3>
+      <div class="variant-row">
+        <dln-button color="default">Primary</dln-button>
+        <dln-button color="info">Info</dln-button>
+        <dln-button color="success">Success</dln-button>
+        <dln-button color="warning">Warning</dln-button>
+        <dln-button color="error">Danger/Error</dln-button>
+      </div>
+      <div class="variant-divider">
+        <app-code-block code='<dln-button color="default">Primary</dln-button>
+<dln-button color="info">Info</dln-button>
+<dln-button color="success">Success</dln-button>
+<dln-button color="warning">Warning</dln-button>
+<dln-button color="error">Error</dln-button>'></app-code-block>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="docs-section" id="api">
+  <h2 class="section-title">API Reference</h2>
+  <p class="section-desc">Estructura técnica de Inputs y selectores para desarrollo en Angular.</p>
+
+  <app-api-table title="@Input() Properties" [rows]="inputProps"></app-api-table>
+</section>
+
+<section class="docs-section" id="use-cases">
+  <h2 class="section-title">Casos de Uso Comunes</h2>
+  <p class="section-desc">Snippets listos para copiar e implementar en tus proyectos.</p>
+
+  <div class="use-cases">
+    <div class="use-case-card">
+      <div class="use-case-label">Botón con Icono Estructural</div>
+      <app-code-block code='<dln-button variant="solid">
+  <svg icon-left>...</svg> Descargar Archivo
+</dln-button>'></app-code-block>
+    </div>
+
+    <div class="use-case-card">
+      <div class="use-case-label">Formularios / Estado Asíncrono (Loading)</div>
+      <app-code-block code='<dln-button [isLoading]="isSubmitting" color="error">Guardar Cambios</dln-button>'></app-code-block>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,159 @@
+<header class="page-header">
+  <div class="page-breadcrumb">
+    <span class="page-breadcrumb-text">Componentes</span>
+  </div>
+  <h1 class="page-title">Empty State</h1>
+  <p class="page-subtitle">Estado vacío que comunica ausencia de contenido o resultados. Ideal para vistas sin datos, búsquedas sin resultados o listas vacías.</p>
+
+  <div class="import-block">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+      <span class="import-label">Importación Standalone Angular</span>
+      <button (click)="copyImport()" class="import-copy-btn">
+        {{ importCopied() ? '✓ Copiado' : 'Copiar' }}
+      </button>
+    </div>
+    <pre class="import-code"><code><span style="color:#c792ea;">import</span> <span style="color:#82aaff;">&#123; EmptyState &#125;</span> <span style="color:#c792ea;">from</span> <span class="hljs-string">'deline-core'</span>;</code></pre>
+  </div>
+</header>
+
+<section class="docs-section" id="playground">
+  <h2 class="section-title">Playground Interactivo</h2>
+
+  <div class="playground">
+    <div class="playground-header">
+      <div class="playground-tabs">
+        <button class="playground-tab" [class.playground-tab--active]="!showCode()" (click)="showCode.set(false);$event.preventDefault()">Vista Previa</button>
+        <button class="playground-tab" [class.playground-tab--active]="showCode()" (click)="showCode.set(true);$event.preventDefault()">Código Angular generado</button>
+      </div>
+    </div>
+
+    <div class="playground-switcher">
+      <div class="playground-preview" [class.is-hidden]="showCode()" style="flex-direction:column;gap:24px;">
+        <dln-empty-state [title]="playTitle()" [description]="playDescription()">
+          @if (playHasAction()) {
+            <dln-button>Reintentar</dln-button>
+          }
+        </dln-empty-state>
+      </div>
+      <div class="playground-code" [class.is-visible]="showCode()">
+        <app-code-block [code]="genCode()"></app-code-block>
+      </div>
+    </div>
+
+    <div class="playground-controls">
+      <div class="control-group" style="flex:2;">
+        <label class="control-label">Título</label>
+        <input type="text" class="control-input" [value]="playTitle()" (input)="playTitle.set($any($event.target).value)" placeholder="Sin resultados">
+      </div>
+      <div class="control-group" style="flex:2;">
+        <label class="control-label">Descripción</label>
+        <input type="text" class="control-input" [value]="playDescription()" (input)="playDescription.set($any($event.target).value)" placeholder="Descripción opcional">
+      </div>
+      <div class="control-group" style="justify-content:flex-end;">
+        <label class="control-checkbox">
+          <input type="checkbox" [checked]="playHasAction()" (change)="playHasAction.set($any($event.target).checked)">
+          <span>Mostrar acción</span>
+        </label>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="docs-section" id="variants">
+  <h2 class="section-title">Variantes y Configuraciones</h2>
+  <p class="section-desc">Diferentes formas de presentar un estado vacío según el contexto.</p>
+
+  <div class="variants-list">
+    <div class="variant-card">
+      <h3 class="variant-card-title">Básico</h3>
+      <div class="variant-row">
+        <dln-empty-state title="No hay datos"></dln-empty-state>
+      </div>
+      <div class="variant-divider">
+        <app-code-block code='<dln-empty-state title="No hay datos"></dln-empty-state>'></app-code-block>
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <h3 class="variant-card-title">Con descripción</h3>
+      <div class="variant-row">
+        <dln-empty-state title="Sin resultados" description="No encontramos lo que buscas. Intenta ajustar los filtros."></dln-empty-state>
+      </div>
+      <div class="variant-divider">
+        <app-code-block code='<dln-empty-state
+  title="Sin resultados"
+  description="No encontramos lo que buscas. Intenta ajustar los filtros.">
+</dln-empty-state>'></app-code-block>
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <h3 class="variant-card-title">Con acción</h3>
+      <div class="variant-row">
+        <dln-empty-state title="Carrito vacío" description="Agrega productos para comenzar">
+          <dln-button>Ir a tienda</dln-button>
+        </dln-empty-state>
+      </div>
+      <div class="variant-divider">
+        <app-code-block code='<dln-empty-state
+  title="Carrito vacío"
+  description="Agrega productos para comenzar">
+  <dln-button>Ir a tienda</dln-button>
+</dln-empty-state>'></app-code-block>
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <h3 class="variant-card-title">Con icono personalizado</h3>
+      <div class="variant-row">
+        <dln-empty-state title="Sin notificaciones" description="No tienes notificaciones nuevas">
+          <ng-template #icon>
+            <span style="font-size:48px;">🔔</span>
+          </ng-template>
+        </dln-empty-state>
+      </div>
+      <div class="variant-divider">
+        <app-code-block code='<dln-empty-state
+  title="Sin notificaciones"
+  description="No tienes notificaciones nuevas">
+  <ng-template #icon>
+    <span style="font-size:48px;">🔔</span>
+  </ng-template>
+</dln-empty-state>'></app-code-block>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="docs-section" id="api">
+  <h2 class="section-title">API Reference</h2>
+  <p class="section-desc">Estructura técnica de Inputs, Content projection y selectores para desarrollo en Angular.</p>
+
+  <app-api-table title="@Input() Properties" [rows]="inputProps"></app-api-table>
+  <app-api-table title="Content Projection" [rows]="contentProps" typeLabel="Tipo" defaultLabel="Uso"></app-api-table>
+</section>
+
+<section class="docs-section" id="use-cases">
+  <h2 class="section-title">Casos de Uso Comunes</h2>
+  <p class="section-desc">Snippets listos para copiar e implementar en tus proyectos.</p>
+
+  <div class="use-cases">
+    <div class="use-case-card">
+      <div class="use-case-label">Búsqueda sin resultados</div>
+      <app-code-block code='<dln-empty-state
+  title="Sin resultados"
+  description="No encontramos lo que buscas. Intenta con otros términos.">
+  <dln-button>Limpiar filtros</dln-button>
+</dln-empty-state>'></app-code-block>
+    </div>
+
+    <div class="use-case-card">
+      <div class="use-case-label">Lista vacía</div>
+      <app-code-block code='<dln-empty-state
+  title="No hay elementos"
+  description="Agrega tu primer elemento para comenzar.">
+  <dln-button>Crear nuevo</dln-button>
+</dln-empty-state>'></app-code-block>
+    </div>
+  </div>
+</section>

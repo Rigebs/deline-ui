@@ -1,0 +1,22 @@
+<aside class="sidebar">
+  @for (group of groups; track group.title) {
+    <div class="sidebar-group">
+      <h5 class="sidebar-group-title">{{ group.title }}</h5>
+      <ul class="sidebar-list">
+        @for (item of group.items; track item.route) {
+          <li class="sidebar-item">
+            @if (item.disabled) {
+              <span class="sidebar-link sidebar-link--disabled">{{ item.label }}</span>
+            } @else {
+              <a [routerLink]="item.route"
+                 class="sidebar-link"
+                 [class.sidebar-link--active]="isActive(item.route)">
+                {{ item.label }}
+              </a>
+            }
+          </li>
+        }
+      </ul>
+    </div>
+  }
+</aside>

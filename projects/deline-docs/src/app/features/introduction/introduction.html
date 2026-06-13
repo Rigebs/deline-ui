@@ -1,0 +1,24 @@
+<div class="intro-header">
+  <span style="font-size:14px;font-weight:500;color:var(--doc-primary-text);display:block;margin-bottom:8px;">Documentación</span>
+  <h1 class="intro-title">Deline UI</h1>
+  <p class="intro-desc">
+    Biblioteca de componentes Angular moderna, tipada y accesible. Construida con standalone components, señales y diseño atómico.
+  </p>
+
+  <div class="import-block" style="max-width:560px;">
+    <div class="import-label">Instalación</div>
+    <pre class="import-code"><code>npm install deline-core deline-icons</code></pre>
+  </div>
+</div>
+
+<section>
+  <h2 class="section-title">Componentes Disponibles</h2>
+  <div class="components-grid">
+    @for (cmp of components; track cmp.route) {
+      <a [routerLink]="cmp.route" class="component-card">
+        <h4 class="component-card-title">{{ cmp.label }}</h4>
+        <p class="component-card-desc">{{ cmp.description }}</p>
+      </a>
+    }
+  </div>
+</section>

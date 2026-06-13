@@ -1,0 +1,127 @@
+<header class="page-header">
+  <div class="page-breadcrumb">
+    <span class="page-breadcrumb-text">Componentes</span>
+  </div>
+  <h1 class="page-title">Tabs</h1>
+  <p class="page-subtitle">Navegación por pestañas que permite alternar entre secciones de contenido. Soporta modelo bidireccional y personalización de etiquetas.</p>
+
+  <div class="import-block">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+      <span class="import-label">Importación Standalone Angular</span>
+      <button (click)="copyImport()" class="import-copy-btn">
+        {{ importCopied() ? '✓ Copiado' : 'Copiar' }}
+      </button>
+    </div>
+    <pre class="import-code"><code><span style="color:#c792ea;">import</span> <span style="color:#82aaff;">&#123; Tabs &#125;</span> <span style="color:#c792ea;">from</span> <span class="hljs-string">'deline-core'</span>;</code></pre>
+  </div>
+</header>
+
+<section class="docs-section" id="playground">
+  <h2 class="section-title">Playground Interactivo</h2>
+
+  <div class="playground">
+    <div class="playground-header">
+      <div class="playground-tabs">
+        <button class="playground-tab" [class.playground-tab--active]="!showCode()" (click)="showCode.set(false);$event.preventDefault()">Vista Previa</button>
+        <button class="playground-tab" [class.playground-tab--active]="showCode()" (click)="showCode.set(true);$event.preventDefault()">Código Angular generado</button>
+      </div>
+    </div>
+
+    <div class="playground-switcher">
+      <div class="playground-preview" [class.is-hidden]="showCode()" style="flex-direction:column;gap:24px;">
+        <dln-tabs [labels]="playLabels()" [(activeIndex)]="playActiveIndex" (tabChange)="playActiveIndex.set($event)"></dln-tabs>
+        <p style="margin:0;color:var(--text-secondary);font-size:14px;">
+          Tab activo: <strong>{{ playActiveIndex() }}</strong> — "{{ playLabels()[playActiveIndex()] }}"
+        </p>
+      </div>
+      <div class="playground-code" [class.is-visible]="showCode()">
+        <app-code-block [code]="genCode()"></app-code-block>
+      </div>
+    </div>
+
+    <div class="playground-controls">
+      <div class="control-group">
+        <label class="control-label">Etiquetas (separadas por coma)</label>
+        <input type="text" [ngModel]="playLabels().join(', ')" (ngModelChange)="updateLabels($event)" class="control-input" />
+      </div>
+      <div class="control-group" style="justify-content:flex-end;">
+        <label class="control-label">Tab activo: {{ playActiveIndex() }}</label>
+        <select (change)="setActiveIndex($any($event.target).value)" class="control-select" [value]="playActiveIndex()">
+          @for (label of playLabels(); track $index) {
+            <option [value]="$index">{{ $index }} — {{ label }}</option>
+          }
+        </select>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="docs-section" id="variants">
+  <h2 class="section-title">Variantes y Configuraciones</h2>
+  <p class="section-desc">Diferentes configuraciones del componente Tabs.</p>
+
+  <div class="variants-list">
+    <div class="variant-card">
+      <h3 class="variant-card-title">Tabs mínimos</h3>
+      <div class="variant-row">
+        <dln-tabs [labels]="['Uno', 'Dos']"></dln-tabs>
+      </div>
+      <div class="variant-divider">
+        <app-code-block code='<dln-tabs [labels]="[&apos;Uno&apos;, &apos;Dos&apos;]"></dln-tabs>'></app-code-block>
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <h3 class="variant-card-title">Muchos tabs</h3>
+      <div class="variant-row">
+        <dln-tabs [labels]="['Tab 1', 'Tab 2', 'Tab 3', 'Tab 4', 'Tab 5']"></dln-tabs>
+      </div>
+      <div class="variant-divider">
+        <app-code-block code='<dln-tabs [labels]="[&apos;Tab 1&apos;, &apos;Tab 2&apos;, &apos;Tab 3&apos;, &apos;Tab 4&apos;, &apos;Tab 5&apos;]"></dln-tabs>'></app-code-block>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="docs-section" id="api">
+  <h2 class="section-title">API Reference</h2>
+  <p class="section-desc">Estructura técnica de Inputs, Outputs y selectores para desarrollo en Angular.</p>
+
+  <app-api-table title="@Input() Properties" [rows]="inputProps"></app-api-table>
+  <app-api-table title="@Output() Events" [rows]="outputProps" typeLabel="Tipo de Emisión" defaultLabel="Valor"></app-api-table>
+</section>
+
+<section class="docs-section" id="use-cases">
+  <h2 class="section-title">Casos de Uso Comunes</h2>
+  <p class="section-desc">Snippets listos para copiar e implementar en tus proyectos.</p>
+
+  <div class="use-cases">
+    <div class="use-case-card">
+      <div class="use-case-label">Cambio de contenido con ngSwitch</div>
+      <app-code-block code='<dln-tabs
+  [labels]="[&apos;Perfil&apos;, &apos;Ajustes&apos;, &apos;Notificaciones&apos;]"
+  [(activeIndex)]="tabIndex">
+</dln-tabs>
+
+<ng-container [ngSwitch]="tabIndex">
+  <ng-container *ngSwitchCase="0">
+    <p>Contenido del perfil</p>
+  </ng-container>
+  <ng-container *ngSwitchCase="1">
+    <p>Contenido de ajustes</p>
+  </ng-container>
+  <ng-container *ngSwitchCase="2">
+    <p>Contenido de notificaciones</p>
+  </ng-container>
+</ng-container>'></app-code-block>
+    </div>
+
+    <div class="use-case-card">
+      <div class="use-case-label">Control con evento</div>
+      <app-code-block code='<dln-tabs
+  [labels]="[&apos;Paso 1&apos;, &apos;Paso 2&apos;, &apos;Paso 3&apos;]"
+  (tabChange)="onStepChange($event)">
+</dln-tabs>'></app-code-block>
+    </div>
+  </div>
+</section>

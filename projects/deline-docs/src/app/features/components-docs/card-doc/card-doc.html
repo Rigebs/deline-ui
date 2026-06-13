@@ -1,0 +1,161 @@
+<header class="page-header">
+  <div class="page-breadcrumb">
+    <span class="page-breadcrumb-text">Componentes</span>
+  </div>
+  <h1 class="page-title">Card</h1>
+  <p class="page-subtitle">Contenedor elevado para agrupar contenido relacionado. Soporta header, body y footer mediante proyección de contenido.</p>
+
+  <div class="import-block">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+      <span class="import-label">Importación Standalone Angular</span>
+      <button (click)="copyImport()" class="import-copy-btn">
+        {{ importCopied() ? '✓ Copiado' : 'Copiar' }}
+      </button>
+    </div>
+    <pre class="import-code"><code><span style="color:#c792ea;">import</span> <span style="color:#82aaff;">&#123; Card &#125;</span> <span style="color:#c792ea;">from</span> <span class="hljs-string">'deline-core'</span>;</code></pre>
+  </div>
+</header>
+
+<section class="docs-section" id="playground">
+  <h2 class="section-title">Playground Interactivo</h2>
+
+  <div class="playground">
+    <div class="playground-header">
+      <div class="playground-tabs">
+        <button class="playground-tab playground-tab--active" [class.playground-tab--active]="!showCode()" (click)="showCode.set(false);$event.preventDefault()">Vista Previa</button>
+        <button class="playground-tab" [class.playground-tab--active]="showCode()" (click)="showCode.set(true);$event.preventDefault()">Código Angular generado</button>
+      </div>
+    </div>
+
+    <div class="playground-switcher">
+      <div class="playground-preview" [class.is-hidden]="showCode()" style="flex-direction:column;gap:16px;">
+        <dln-card [padding]="playPadding()" [hoverable]="playHoverable()" [shadow]="playShadow()">
+          <span card-header>Título de la Tarjeta</span>
+          <p style="margin:0;line-height:1.6;">Este es el contenido principal de la tarjeta. Puede incluir texto, imágenes u otros componentes.</p>
+          <dln-button card-footer size="sm">Acción</dln-button>
+        </dln-card>
+      </div>
+      <div class="playground-code" [class.is-visible]="showCode()">
+        <app-code-block [code]="genCode()"></app-code-block>
+      </div>
+    </div>
+
+    <div class="playground-controls">
+      <div class="control-group">
+        <label class="control-label">Padding</label>
+        <select (change)="playPadding.set($any($event.target).value)" class="control-select">
+          <option value="1rem">1rem (sm)</option>
+          <option value="1.5rem" selected>1.5rem (md)</option>
+          <option value="2rem">2rem (lg)</option>
+        </select>
+      </div>
+      <div class="control-group" style="justify-content:flex-end;">
+        <label class="control-checkbox">
+          <input type="checkbox" (change)="playHoverable.set($any($event.target).checked)">
+          <span>Hoverable</span>
+        </label>
+        <label class="control-checkbox">
+          <input type="checkbox" checked (change)="playShadow.set($any($event.target).checked)">
+          <span>Shadow</span>
+        </label>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="docs-section" id="variants">
+  <h2 class="section-title">Variantes y Configuraciones</h2>
+  <p class="section-desc">Diferentes formas de usar el componente Card.</p>
+
+  <div class="variants-list">
+    <div class="variant-card">
+      <h3 class="variant-card-title">Card Básica</h3>
+      <dln-card>
+        <p style="margin:0;line-height:1.6;">Contenido básico sin header ni footer.</p>
+      </dln-card>
+      <div class="variant-divider">
+        <app-code-block code='<dln-card>
+  <p>Contenido básico sin header ni footer.</p>
+</dln-card>'></app-code-block>
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <h3 class="variant-card-title">Card con Header y Footer</h3>
+      <dln-card>
+        <span card-header>Configuración</span>
+        <p style="margin:0;line-height:1.6;">Utiliza las proyecciones <code>[card-header]</code> y <code>[card-footer]</code> para estructurar el contenido.</p>
+        <dln-button card-footer size="sm" color="default">Guardar</dln-button>
+        <dln-button card-footer size="sm" color="error">Cancelar</dln-button>
+      </dln-card>
+      <div class="variant-divider">
+        <app-code-block code='<dln-card>
+  <span card-header>Configuración</span>
+  <p>Contenido de la tarjeta.</p>
+  <dln-button card-footer size="sm">Guardar</dln-button>
+  <dln-button card-footer size="sm" color="error">Cancelar</dln-button>
+</dln-card>'></app-code-block>
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <h3 class="variant-card-title">Card Hoverable</h3>
+      <dln-card [hoverable]="true">
+        <span card-header>Interactiva</span>
+        <p style="margin:0;line-height:1.6;">Pasa el cursor por encima para ver el efecto de elevación.</p>
+      </dln-card>
+      <div class="variant-divider">
+        <app-code-block code='<dln-card [hoverable]="true">
+  <span card-header>Interactiva</span>
+  <p>Pasa el cursor por encima.</p>
+</dln-card>'></app-code-block>
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <h3 class="variant-card-title">Card sin Sombra</h3>
+      <dln-card [shadow]="false">
+        <span card-header>Plana</span>
+        <p style="margin:0;line-height:1.6;">Una variante plana sin sombra, ideal para paneles internos.</p>
+      </dln-card>
+      <div class="variant-divider">
+        <app-code-block code='<dln-card [shadow]="false">
+  <span card-header>Plana</span>
+  <p>Sin sombra, para paneles internos.</p>
+</dln-card>'></app-code-block>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="docs-section" id="api">
+  <h2 class="section-title">API Reference</h2>
+  <p class="section-desc">Estructura técnica de Inputs y selectores para desarrollo en Angular.</p>
+
+  <app-api-table title="@Input() Properties" [rows]="inputProps"></app-api-table>
+</section>
+
+<section class="docs-section" id="use-cases">
+  <h2 class="section-title">Casos de Uso Comunes</h2>
+  <p class="section-desc">Snippets listos para copiar e implementar en tus proyectos.</p>
+
+  <div class="use-cases">
+    <div class="use-case-card">
+      <div class="use-case-label">Panel de Configuración</div>
+      <app-code-block code='<dln-card [hoverable]="true">
+  <span card-header>Preferencias</span>
+  <p>Ajusta tus preferencias de usuario.</p>
+  <dln-button card-footer size="sm">Guardar</dln-button>
+</dln-card>'></app-code-block>
+    </div>
+
+    <div class="use-case-card">
+      <div class="use-case-label">Dashboard / Widget</div>
+      <app-code-block code='<dln-card padding="1rem" [shadow]="false">
+  <span card-header>Estadísticas</span>
+  <p style="font-size:2rem;font-weight:700;">1,234</p>
+  <span style="font-size:0.75rem;color:var(--dl-text-secondary);">Usuarios activos</span>
+</dln-card>'></app-code-block>
+    </div>
+  </div>
+</section>

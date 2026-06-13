@@ -1,0 +1,125 @@
+<header class="page-header">
+  <div class="page-breadcrumb">
+    <span class="page-breadcrumb-text">Componentes</span>
+  </div>
+  <h1 class="page-title">File Upload</h1>
+  <p class="page-subtitle">Componente de carga de archivos con soporte para arrastrar y soltar, selección desde el explorador, previsualización de imágenes y eliminación.</p>
+
+  <div class="import-block">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+      <span class="import-label">Importación Standalone Angular</span>
+      <button (click)="copyImport()" class="import-copy-btn">
+        {{ importCopied() ? '✓ Copiado' : 'Copiar' }}
+      </button>
+    </div>
+    <pre class="import-code"><code><span style="color:#c792ea;">import</span> <span style="color:#82aaff;">&#123; FileUpload &#125;</span> <span style="color:#c792ea;">from</span> <span class="hljs-string">'deline-core'</span>;</code></pre>
+  </div>
+</header>
+
+<section class="docs-section" id="playground">
+  <h2 class="section-title">Playground Interactivo</h2>
+
+  <div class="playground">
+    <div class="playground-header">
+      <div class="playground-tabs">
+        <button class="playground-tab" [class.playground-tab--active]="!showCode()" (click)="showCode.set(false);$event.preventDefault()">Vista Previa</button>
+        <button class="playground-tab" [class.playground-tab--active]="showCode()" (click)="showCode.set(true);$event.preventDefault()">Código Angular generado</button>
+      </div>
+    </div>
+
+    <div class="playground-switcher">
+      <div class="playground-preview" [class.is-hidden]="showCode()" style="flex-direction:column;gap:24px;">
+        <dln-file-upload (fileSelected)="onFile($event)"></dln-file-upload>
+        @if (uploadedFile()) {
+          <div class="selected-file-info">
+            <span>Archivo seleccionado: <strong>{{ uploadedFile() }}</strong></span>
+          </div>
+        }
+      </div>
+      <div class="playground-code" [class.is-visible]="showCode()">
+        <app-code-block [code]="genCode()"></app-code-block>
+      </div>
+    </div>
+
+    <div class="playground-controls">
+      <div class="control-group">
+        <span class="control-label" style="font-size:14px;color:#8b949e;">Selecciona un archivo desde el componente o arrastra uno aquí.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="docs-section" id="variants">
+  <h2 class="section-title">Variantes y Configuraciones</h2>
+  <p class="section-desc">Diferentes formas de utilizar el componente File Upload.</p>
+
+  <div class="variants-list">
+    <div class="variant-card">
+      <h3 class="variant-card-title">Carga básica</h3>
+      <div class="variant-row">
+        <dln-file-upload></dln-file-upload>
+      </div>
+      <div class="variant-divider">
+        <app-code-block code='<dln-file-upload></dln-file-upload>'></app-code-block>
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <h3 class="variant-card-title">Con previsualización de imagen</h3>
+      <div class="variant-row">
+        <dln-file-upload (fileSelected)="onFile($event)"></dln-file-upload>
+      </div>
+      <div class="variant-divider">
+        <app-code-block code='<dln-file-upload (fileSelected)="onFile($event)"></dln-file-upload>'></app-code-block>
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <h3 class="variant-card-title">Después de seleccionar archivo</h3>
+      <div class="variant-row">
+        @if (uploadedFile()) {
+          <div class="selected-file-info" style="padding:16px;background:var(--color-surface-2);border-radius:8px;">
+            Archivo: {{ uploadedFile() }}
+          </div>
+        } @else {
+          <dln-file-upload (fileSelected)="onFile($event)"></dln-file-upload>
+        }
+      </div>
+      <div class="variant-divider">
+        <app-code-block code='@if (uploadedFile()) {
+  <div>Archivo: {{ uploadedFile() }}</div>
+} @else {
+  <dln-file-upload (fileSelected)="onFile($event)"></dln-file-upload>
+}'></app-code-block>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="docs-section" id="api">
+  <h2 class="section-title">API Reference</h2>
+  <p class="section-desc">Estructura técnica de Outputs y selectores para desarrollo en Angular.</p>
+
+  <app-api-table title="@Output() Events" [rows]="outputProps" typeLabel="Tipo de Emisión" defaultLabel="Valor"></app-api-table>
+</section>
+
+<section class="docs-section" id="use-cases">
+  <h2 class="section-title">Casos de Uso Comunes</h2>
+  <p class="section-desc">Snippets listos para copiar e implementar en tus proyectos.</p>
+
+  <div class="use-cases">
+    <div class="use-case-card">
+      <div class="use-case-label">Foto de perfil</div>
+      <app-code-block code='<dln-file-upload
+  (fileSelected)="uploadAvatar($event)">
+</dln-file-upload>'></app-code-block>
+    </div>
+
+    <div class="use-case-card">
+      <div class="use-case-label">Subida de documentos</div>
+      <app-code-block code='<dln-file-upload
+  (fileSelected)="uploadDocument($event)">
+</dln-file-upload>'></app-code-block>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,9 @@
+<div class="code-block">
+  <div class="code-header">
+    <span class="code-lang">{{ language() }}</span>
+    <button (click)="copy()" class="code-copy">
+      {{ copied ? '✓ Copiado' : 'Copiar' }}
+    </button>
+  </div>
+  <pre><code #codeEl class="hljs language-html"></code></pre>
+</div>

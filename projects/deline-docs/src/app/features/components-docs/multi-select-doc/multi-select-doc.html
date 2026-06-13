@@ -1,0 +1,133 @@
+<header class="page-header">
+  <div class="page-breadcrumb">
+    <span class="page-breadcrumb-text">Componentes</span>
+  </div>
+  <h1 class="page-title">MultiSelect</h1>
+  <p class="page-subtitle">Componente de selección múltiple que permite elegir varias opciones de una lista desplegable. Soporta agrupación de opciones, modelo bidireccional y etiqueta descriptiva.</p>
+
+  <div class="import-block">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+      <span class="import-label">Importación Standalone Angular</span>
+      <button (click)="copyImport()" class="import-copy-btn">
+        {{ importCopied() ? '✓ Copiado' : 'Copiar' }}
+      </button>
+    </div>
+    <pre class="import-code"><code><span style="color:#c792ea;">import</span> <span style="color:#82aaff;">&#123; MultiSelect &#125;</span> <span style="color:#c792ea;">from</span> <span class="hljs-string">'deline-core'</span>;</code></pre>
+  </div>
+</header>
+
+<section class="docs-section" id="playground">
+  <h2 class="section-title">Playground Interactivo</h2>
+
+  <div class="playground">
+    <div class="playground-header">
+      <div class="playground-tabs">
+        <button class="playground-tab" [class.playground-tab--active]="!showCode()" (click)="showCode.set(false);$event.preventDefault()">Vista Previa</button>
+        <button class="playground-tab" [class.playground-tab--active]="showCode()" (click)="showCode.set(true);$event.preventDefault()">Código Angular generado</button>
+      </div>
+    </div>
+
+    <div class="playground-switcher">
+      <div class="playground-preview" [class.is-hidden]="showCode()" style="flex-direction:column;gap:24px;">
+        <dln-multi-select label="Roles" [options]="sampleOptions" [(value)]="playValue" [disabled]="playDisabled()" [required]="playRequired()"></dln-multi-select>
+      </div>
+      <div class="playground-code" [class.is-visible]="showCode()">
+        <app-code-block [code]="genCode()"></app-code-block>
+      </div>
+    </div>
+
+    <div class="playground-controls">
+      <div class="control-group" style="justify-content:flex-end;gap:16px;">
+        <label class="control-checkbox">
+          <input type="checkbox" (change)="playDisabled.set($any($event.target).checked)">
+          <span>Disabled</span>
+        </label>
+        <label class="control-checkbox">
+          <input type="checkbox" (change)="playRequired.set($any($event.target).checked)">
+          <span>Required</span>
+        </label>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="docs-section" id="variants">
+  <h2 class="section-title">Variantes y Configuraciones</h2>
+  <p class="section-desc">Diferentes estados y usos del componente MultiSelect.</p>
+
+  <div class="variants-list">
+    <div class="variant-card">
+      <h3 class="variant-card-title">MultiSelect básico</h3>
+      <div class="variant-row">
+        <dln-multi-select label="Habilidades" [options]="sampleOptions"></dln-multi-select>
+      </div>
+      <div class="variant-divider">
+        <app-code-block code='<dln-multi-select label="Habilidades" [options]="habilidades"></dln-multi-select>'></app-code-block>
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <h3 class="variant-card-title">MultiSelect deshabilitado</h3>
+      <div class="variant-row">
+        <dln-multi-select label="Roles" [options]="sampleOptions" [disabled]="true"></dln-multi-select>
+      </div>
+      <div class="variant-divider">
+        <app-code-block code='<dln-multi-select label="Roles" [options]="roles" [disabled]="true"></dln-multi-select>'></app-code-block>
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <h3 class="variant-card-title">MultiSelect con opciones agrupadas</h3>
+      <div class="variant-row">
+        <dln-multi-select label="Área" [options]="groupedOptions"></dln-multi-select>
+      </div>
+      <div class="variant-divider">
+        <app-code-block code='<dln-multi-select label="Área" [options]="areas"></dln-multi-select>'></app-code-block>
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <h3 class="variant-card-title">MultiSelect con valores preseleccionados</h3>
+      <div class="variant-row">
+        <dln-multi-select label="Roles" [options]="sampleOptions" [(value)]="selectedCountValue"></dln-multi-select>
+      </div>
+      <div class="variant-divider">
+        <app-code-block code='<dln-multi-select label="Roles" [options]="roles" [(value)]="selectedRoles"></dln-multi-select>'></app-code-block>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="docs-section" id="api">
+  <h2 class="section-title">API Reference</h2>
+  <p class="section-desc">Estructura técnica de Inputs, Outputs y selectores para desarrollo en Angular.</p>
+
+  <app-api-table title="@Input() Properties" [rows]="inputProps"></app-api-table>
+  <app-api-table title="@Output() Events" [rows]="outputProps" typeLabel="Tipo de Emisión" defaultLabel="Valor"></app-api-table>
+</section>
+
+<section class="docs-section" id="use-cases">
+  <h2 class="section-title">Casos de Uso Comunes</h2>
+  <p class="section-desc">Snippets listos para copiar e implementar en tus proyectos.</p>
+
+  <div class="use-cases">
+    <div class="use-case-card">
+      <div class="use-case-label">Selección de roles de usuario</div>
+      <app-code-block code='<dln-multi-select
+  label="Roles del usuario"
+  [options]="roles"
+  [(value)]="usuario.roles">
+</dln-multi-select>'></app-code-block>
+    </div>
+
+    <div class="use-case-card">
+      <div class="use-case-label">Filtro de categorías</div>
+      <app-code-block code='<dln-multi-select
+  label="Categorías"
+  [options]="categorias"
+  placeholder="Selecciona categorías"
+  [(value)]="filtro.categorias">
+</dln-multi-select>'></app-code-block>
+    </div>
+  </div>
+</section>
