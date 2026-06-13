@@ -5,8 +5,12 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "deline-core": ["projects/deline-core/src/public-api.ts"],
-      "deline-theme-default": ["projects/deline-theme-default/src/public-api.ts"]
+      "deline-core": [
+        "projects/deline-core/src/public-api.ts"
+      ],
+      "deline-icons": [
+        "./dist/deline-icons"
+      ]
     },
     "strict": true,
     "noImplicitOverride": true,
@@ -36,16 +40,16 @@
       "path": "./projects/deline-core/tsconfig.spec.json"
     },
     {
-      "path": "./projects/deline-theme-default/tsconfig.lib.json"
+      "path": "./projects/deline-docs/tsconfig.app.json"
     },
     {
-      "path": "./projects/deline-theme-default/tsconfig.spec.json"
+      "path": "./projects/deline-docs/tsconfig.spec.json"
     },
     {
-      "path": "./projects/demo-app/tsconfig.app.json"
+      "path": "./projects/deline-icons/tsconfig.lib.json"
     },
     {
-      "path": "./projects/demo-app/tsconfig.spec.json"
+      "path": "./projects/deline-icons/tsconfig.spec.json"
     }
   ]
 }

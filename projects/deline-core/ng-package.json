@@ -3,5 +3,8 @@
   "dest": "../../dist/deline-core",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "assets": [
+    "src/lib/styles/_tokens.css"
+  ]
 }
