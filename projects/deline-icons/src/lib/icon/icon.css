@@ -1,0 +1,40 @@
+:host {
+  display: inline-block;
+  line-height: 0;
+}
+
+.deline-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  width: 100%;
+  height: 100%;
+}
+
+/* Importante: ::ng-deep permite dar estilo al HTML inyectado */
+.deline-icon ::ng-deep svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.deline-icon-small {
+  width: 16px;
+  height: 16px;
+}
+
+.deline-icon-medium {
+  width: 24px;
+  height: 24px;
+}
+
+.deline-icon-large {
+  width: 32px;
+  height: 32px;
+}
+
+.deline-icon-xlarge {
+  width: 48px;
+  height: 48px;
+}

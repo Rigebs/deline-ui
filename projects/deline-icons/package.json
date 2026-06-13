@@ -1,0 +1,15 @@
+{
+  "name": "deline-icons",
+  "version": "0.0.1",
+  "scripts": {
+    "generate": "node scripts/svg-to-ts.js"
+  },
+  "peerDependencies": {
+    "@angular/common": "^20.2.0",
+    "@angular/core": "^20.2.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false
+}
