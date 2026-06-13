@@ -1,0 +1,21 @@
+<div class="empty-state-container">
+    @if (iconContent() || iconPath()) {
+    <div class="icon-wrapper">
+        @if (iconContent()) {
+        <ng-container *ngTemplateOutlet="iconContent()"></ng-container>
+        } @else {
+        <img [src]="iconPath()" alt="" class="empty-icon" aria-hidden="true" />
+        }
+    </div>
+    }
+
+    <div class="content">
+        <h3 class="title">{{ title() }}</h3>
+
+        @if (description()) {
+        <p class="description">{{ description() }}</p>
+        }
+    </div>
+
+    <ng-content></ng-content>
+</div>

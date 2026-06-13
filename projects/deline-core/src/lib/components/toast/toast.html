@@ -1,0 +1,19 @@
+@if (state().isVisible) {
+<div class="toast" [class]="'toast toast-' + state().type" role="status" aria-live="polite">
+    <div class="toast-icon">
+        <dln-icon [name]="
+          state().type === 'success'
+            ? 'check'
+            : state().type === 'error'
+            ? 'close'
+            : 'info'
+        " size="small" />
+    </div>
+
+    <p class="toast-message">{{ state().message }}</p>
+
+    <button class="toast-close" (click)="close()" aria-label="Cerrar">
+        <dln-icon name="close" size="small" />
+    </button>
+</div>
+}

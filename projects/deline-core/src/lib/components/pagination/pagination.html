@@ -1,0 +1,26 @@
+<div class="pagination-container">
+    <button class="page-btn nav-btn" [disabled]="currentPage() === 1" (click)="goToPage(currentPage() - 1)"
+        aria-label="Previous page">
+        <dln-icon name="chevron-left" size="small" />
+    </button>
+
+    <div class="page-numbers desktop-only">
+        @for (page of pages(); track page) {
+        <button class="page-btn number-btn" [class.active]="page === currentPage()" (click)="goToPage(page)"
+            [attr.aria-current]="page === currentPage() ? 'page' : null">
+            {{ page }}
+        </button>
+        }
+    </div>
+
+    <div class="mobile-only">
+        <span class="page-info">
+            {{ currentPage() }} / {{ totalPages() }}
+        </span>
+    </div>
+
+    <button class="page-btn nav-btn" [disabled]="currentPage() === totalPages()" (click)="goToPage(currentPage() + 1)"
+        aria-label="Next page">
+        <dln-icon name="chevron-right" size="small" />
+    </button>
+</div>

@@ -1,0 +1,24 @@
+<dialog #modalElement (close)="handleClose()" (click)="onBackdropClick($event)">
+    @if (isOpen()) {
+    <div class="modal-container" role="dialog" aria-modal="true" [attr.aria-labelledby]="title() ? 'modal-title' : null">
+
+        @if (title()) {
+        <header class="modal-header">
+            <h2 class="modal-title" id="modal-title">{{ title() }}</h2>
+            <button class="close-icon" (click)="handleClose()" aria-label="Cerrar modal">&times;</button>
+        </header>
+        }
+
+        <section class="modal-body">
+            <ng-content></ng-content>
+        </section>
+
+        @if (footerContent()) {
+        <footer class="modal-footer">
+            <ng-container [ngTemplateOutlet]="footerContent()"></ng-container>
+        </footer>
+        }
+
+    </div>
+    }
+</dialog>

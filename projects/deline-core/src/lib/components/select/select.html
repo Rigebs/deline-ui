@@ -1,0 +1,70 @@
+<div class="select-wrapper">
+    <label class="field-label" [attr.for]="selectId()">{{ label() }}</label>
+
+    <div 
+      class="input-container" 
+      (click)="toggle()"
+      [id]="selectId()"
+      role="combobox"
+      [attr.aria-expanded]="isOpen()"
+      [attr.aria-haspopup]="'listbox'"
+      [attr.aria-disabled]="disabled()"
+      [attr.aria-required]="required()"
+      [attr.aria-label]="ariaLabel()"
+      [attr.aria-describedby]="ariaDescribedBy()"
+      tabindex="0"
+      (keydown)="onKeyDown($event)">
+      <span class="display-text" [class.has-value]="selectedOption()">
+          {{ displayText() }}
+      </span>
+
+      <dln-icon [name]="isOpen() ? 'arrow-up' : 'arrow-down'" size="small" />
+    </div>
+
+    @if (isOpen()) {
+    <ul class="dropdown-list" role="listbox">
+      @for (group of options(); track $index) {
+        @if ('options' in group) {
+          <li class="option-group" role="group" [attr.aria-label]="group.label">
+            <span class="group-label">{{ group.label }}</span>
+            @for (option of group.options; track option.value) {
+              <button 
+                type="button"
+                class="option-item" 
+                role="option"
+                [class.selected]="selectedOption()?.value === option.value"
+                [class.disabled]="option.disabled"
+                [attr.aria-selected]="selectedOption()?.value === option.value"
+                [attr.aria-disabled]="option.disabled"
+                (click)="select(option)"
+                (mousedown)="$event.preventDefault()">
+                {{ option.label }}
+
+                @if (selectedOption()?.value === option.value && !option.disabled) {
+                <dln-icon name="check" size="small" />
+                }
+              </button>
+            }
+          </li>
+        } @else {
+          <button 
+            type="button"
+            class="option-item" 
+            role="option"
+            [class.selected]="selectedOption()?.value === group.value"
+            [class.disabled]="group.disabled"
+            [attr.aria-selected]="selectedOption()?.value === group.value"
+            [attr.aria-disabled]="group.disabled"
+            (click)="select(group)"
+            (mousedown)="$event.preventDefault()">
+            {{ group.label }}
+
+            @if (selectedOption()?.value === group.value && !group.disabled) {
+            <dln-icon name="check" size="small" />
+            }
+          </button>
+        }
+      }
+    </ul>
+    }
+</div>

@@ -1,0 +1,61 @@
+<aside class="sidebar" [class.collapsed]="isCollapsed()">
+
+    <!-- Header -->
+    <div class="sidebar-header" [class.collapsed]="isCollapsed()">
+
+        <div class="logo-container">
+            <div class="logo-icon">G</div>
+
+            @if (!isCollapsed()) {
+            <span class="logo-text">Gemini UI</span>
+            }
+        </div>
+
+        <button class="toggle-btn" (click)="toggleSidebar()">
+            <dln-icon [name]="isCollapsed() ? 'chevron-right' : 'chevron-left'" size="small" />
+        </button>
+
+    </div>
+
+    <!-- Navigation -->
+    <nav class="sidebar-nav">
+        <ul class="nav-list">
+            @for (item of menuItems; track item.route) {
+            <li>
+                <button class="nav-item" [class.collapsed]="isCollapsed()" [class.active]="activeRoute() === item.route"
+                    (click)="handleNavigation(item.route)">
+
+                    <dln-icon class="nav-icon" [name]="item.icon" size="medium" />
+
+                    @if (!isCollapsed()) {
+                    <span class="nav-label">{{ item.label }}</span>
+                    } @else {
+                    <div class="tooltip">{{ item.label }}</div>
+                    }
+
+                </button>
+            </li>
+            }
+        </ul>
+    </nav>
+
+    <!-- Footer -->
+    <div class="sidebar-footer" [class.collapsed]="isCollapsed()">
+
+        @if (!isCollapsed()) {
+        <div class="user-info">
+            <div class="user-avatar">AD</div>
+            <div class="user-details">
+                <p class="user-name">Admin User</p>
+                <p class="user-role">Super Admin</p>
+            </div>
+        </div>
+        }
+
+        <button class="logout-btn">
+            <dln-icon name="logout" size="medium" />
+        </button>
+
+    </div>
+
+</aside>

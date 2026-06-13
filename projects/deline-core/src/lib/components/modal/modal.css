@@ -1,0 +1,107 @@
+:host {
+  display: contents;
+  --modal-width: min(500px, calc(100vw - 2rem));
+  --modal-min-height: auto;
+  --modal-max-height: 85vh;
+  --modal-radius: 24px;
+}
+
+:host(.modal-sm) {
+  --modal-width: min(320px, calc(100vw - 2rem));
+}
+
+:host(.modal-lg) {
+  --modal-width: min(720px, calc(100vw - 2rem));
+}
+
+:host(.modal-xl) {
+  --modal-width: min(960px, calc(100vw - 2rem));
+}
+
+:host(.modal-full) {
+  --modal-width: 100%;
+  --modal-max-height: 100%;
+  --modal-radius: 0;
+}
+
+dialog {
+  margin: auto;
+  border: none;
+  border-radius: var(--modal-radius);
+  padding: 0;
+  background: var(--dl-bg);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  max-height: var(--modal-max-height);
+  width: var(--modal-width);
+  overflow: hidden;
+}
+
+dialog::backdrop {
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.modal-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  animation: modal-in 0.2s ease-out;
+}
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+}
+.modal-title {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--dl-text);
+}
+.close-icon {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--dl-text-secondary);
+  cursor: pointer;
+  padding: 0.25rem;
+  line-height: 1;
+  border-radius: var(--dl-radius);
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+.close-icon:hover {
+  background: var(--dl-ghost-hover-bg);
+  color: var(--dl-text);
+}
+.close-icon:focus-visible {
+  outline: 2px solid var(--dl-primary);
+  outline-offset: 2px;
+}
+.modal-body {
+  padding: 0 1.5rem 1.5rem;
+  color: var(--dl-text-secondary);
+  font-size: 0.9375rem;
+  overflow-y: auto;
+}
+.modal-header + .modal-body {
+  padding-top: 1.5rem;
+}
+.modal-footer {
+  padding: 1rem 1.5rem 1.25rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}

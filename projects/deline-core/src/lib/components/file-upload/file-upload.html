@@ -1,0 +1,24 @@
+<div class="upload-zone" [class.is-dragging]="isDragging()" (dragover)="onDragOver($event)" (dragleave)="onDragLeave()"
+    (drop)="onDrop($event)" (click)="triggerSelect()">
+    <input #fileInput type="file" class="hidden-input" (change)="onFileChange($event)" accept="image/*">
+
+    <div class="content">
+        @if (!fileName()) {
+        <img src="/icons/upload.svg" alt="Upload" class="upload-icon">
+        <p class="main-text">Arrastra un archivo o <span>haz clic aquí</span></p>
+        <p class="sub-text">PNG, JPG hasta 10MB</p>
+        } @else {
+        <div class="preview-container">
+            @if (previewUrl()) {
+            <img [src]="previewUrl()" class="img-preview" alt="Preview">
+            } @else {
+            <div class="file-icon-placeholder">📄</div>
+            }
+            <div class="file-info">
+                <span class="name">{{ fileName() }}</span>
+                <button class="remove-btn" (click)="removeFile($event)">Eliminar</button>
+            </div>
+        </div>
+        }
+    </div>
+</div>

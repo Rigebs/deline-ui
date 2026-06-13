@@ -1,0 +1,202 @@
+/* ========================= */
+/* Base */
+/* ========================= */
+
+:host {
+  display: inline-flex;
+  width: auto;
+
+  --btn-bg: transparent;
+  --btn-color: var(--dl-primary);
+  --btn-border: transparent;
+}
+
+:host(.btn-full-width) {
+  width: 100%;
+}
+
+.btn-inner {
+  all: unset;
+  box-sizing: border-box;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  width: 100%;
+  border-radius: var(--dl-radius);
+
+  font-family: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+
+  background-color: var(--btn-bg);
+  color: var(--btn-color);
+  border: 1px solid var(--btn-border);
+
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    box-shadow 0.15s ease,
+    filter 0.15s ease;
+}
+
+.btn-inner:focus-visible {
+  outline: 2px solid var(--dl-primary);
+  outline-offset: 2px;
+}
+
+/* ========================= */
+/* VARIANTS (FORMA) */
+/* ========================= */
+
+/* SOLID */
+:host(.btn-solid) {
+  --btn-bg: var(--btn-solid-bg);
+  --btn-color: var(--btn-solid-color);
+}
+
+/* OUTLINE */
+:host(.btn-outline) {
+  --btn-bg: transparent;
+  --btn-color: var(--btn-outline-color);
+  --btn-border: var(--btn-outline-color);
+}
+
+/* GHOST */
+:host(.btn-ghost) {
+  --btn-bg: transparent;
+  --btn-color: var(--btn-ghost-color);
+  --btn-border: transparent;
+}
+
+/* ========================= */
+/* COLORS (INTENT) */
+/* ========================= */
+
+:host(.btn-default) {
+  --btn-solid-bg: var(--dl-primary);
+  --btn-solid-color: var(--dl-primary-contrast);
+
+  --btn-outline-color: var(--dl-primary);
+  --btn-ghost-color: var(--dl-primary);
+}
+
+:host(.btn-success) {
+  --btn-solid-bg: var(--dl-success);
+  --btn-solid-color: var(--dl-success-contrast);
+
+  --btn-outline-color: var(--dl-success);
+  --btn-ghost-color: var(--dl-success);
+}
+
+:host(.btn-info) {
+  --btn-solid-bg: var(--dl-info);
+  --btn-solid-color: var(--dl-info-contrast);
+
+  --btn-outline-color: var(--dl-info);
+  --btn-ghost-color: var(--dl-info);
+}
+
+:host(.btn-warning) {
+  --btn-solid-bg: var(--dl-warning);
+  --btn-solid-color: var(--dl-warning-contrast);
+
+  --btn-outline-color: var(--dl-warning);
+  --btn-ghost-color: var(--dl-warning);
+}
+
+:host(.btn-error) {
+  --btn-solid-bg: var(--dl-error);
+  --btn-solid-color: var(--dl-error-contrast);
+
+  --btn-outline-color: var(--dl-error);
+  --btn-ghost-color: var(--dl-error);
+}
+
+/* ========================= */
+/* Sizes */
+/* ========================= */
+
+:host(.btn-sm) .btn-inner {
+  padding: 6px 12px;
+  font-size: 0.75rem;
+}
+
+:host(.btn-md) .btn-inner {
+  padding: 10px 20px;
+  font-size: 0.875rem;
+}
+
+:host(.btn-lg) .btn-inner {
+  padding: 14px 24px;
+  font-size: 1rem;
+}
+
+/* ========================= */
+/* Icon only */
+/* ========================= */
+
+:host(.btn-icon-only.btn-sm) .btn-inner {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+}
+
+:host(.btn-icon-only.btn-md) .btn-inner {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+}
+
+:host(.btn-icon-only.btn-lg) .btn-inner {
+  width: 48px;
+  height: 48px;
+  padding: 0;
+}
+
+/* ========================= */
+/* States */
+/* ========================= */
+
+:host(:hover:not([disabled='true'])) .btn-inner {
+  filter: brightness(1.05);
+}
+
+:host(.btn-solid:hover:not([disabled='true'])) .btn-inner {
+  box-shadow: 0 4px 6px -1px var(--dl-shadow-medium);
+}
+
+:host(.btn-outline:hover:not([disabled='true'])) .btn-inner {
+  background-color: var(--dl-primary-bg-light);
+}
+
+:host(.btn-ghost:hover:not([disabled='true'])) .btn-inner {
+  background-color: var(--dl-ghost-hover-bg);
+}
+
+:host([disabled='true']) {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ========================= */
+/* Loading */
+/* ========================= */
+
+.spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.75s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

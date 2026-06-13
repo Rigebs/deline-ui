@@ -1,0 +1,19 @@
+<div class="stepper-container">
+    @for (step of steps(); track $index) {
+    <div class="step-item" [class]="getStepState($index)">
+        <div class="step-node">
+            @if (getStepState($index) === 'is-completed') {
+            <dln-icon name="check" size="small" />
+            } @else {
+            <span class="step-number">{{ $index + 1 }}</span>
+            }
+        </div>
+
+        <span class="step-label">{{ step }}</span>
+
+        @if ($index < steps().length - 1) { <div class="step-line">
+    </div>
+    }
+</div>
+}
+</div>

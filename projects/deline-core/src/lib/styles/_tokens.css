@@ -1,0 +1,163 @@
+/* Tokens Globales (Valores por defecto) */
+:root {
+  /* Colors */
+  --dl-primary: #3b82f6;
+  --dl-primary-contrast: #ffffff;
+  --dl-primary-bg-light: #eff6ff;
+
+  --dl-secondary: #f3f4f6;
+  --dl-secondary-contrast: #1f2937;
+
+  --dl-success: #166534;
+  --dl-success-bg: #dcfce7;
+  --dl-success-contrast: #ffffff;
+
+  --dl-error: #991b1b;
+  --dl-error-bg: #fee2e2;
+  --dl-error-contrast: #ffffff;
+
+  --dl-warning: #f59e0b;
+  --dl-warning-bg: #fef9c3;
+  --dl-warning-contrast: #ffffff;
+
+  --dl-info: #0ea5e9;
+  --dl-info-bg: #e0f2fe;
+  --dl-info-contrast: #ffffff;
+
+  --dl-neutral: #374151;
+  --dl-neutral-bg: #e2e8f0;
+  --dl-neutral-contrast: #ffffff;
+
+  --dl-outline-border: #e5e7eb;
+  --dl-outline-bg: transparent;
+  --dl-outline-contrast: #1f2937;
+
+  --dl-ghost: #64748b;
+  --dl-ghost-bg: transparent;
+  --dl-ghost-contrast: #64748b;
+  --dl-ghost-hover-bg: #f1f5f9;
+
+  --dl-danger: #ef4444;
+  --dl-danger-contrast: #ffffff;
+
+  /* Surfaces & Borders */
+  --dl-border-color: #cbd5e1;
+  --dl-radius: 8px;
+  --dl-font-family: inherit;
+
+  /* Background and Text */
+  --dl-bg: #ffffff;
+  --dl-text: #000000;
+  --dl-text-secondary: #4b5563;
+  --dl-bg-secondary: #f9fafb;
+  --dl-input-focus-bg: #f1f5f9;
+
+  /* Avatar colors */
+  --dl-avatar-bg-1: #dcfce7;
+  --dl-avatar-bg-2: #fee2e2;
+  --dl-avatar-bg-3: #fef9c3;
+  --dl-avatar-bg-4: #e0f2fe;
+  --dl-avatar-bg-5: #f3e8ff;
+  --dl-avatar-bg-6: #ffedd5;
+  --dl-avatar-color-1: #166534;
+  --dl-avatar-color-2: #991b1b;
+  --dl-avatar-color-3: #854d0e;
+  --dl-avatar-color-4: #075985;
+  --dl-avatar-color-5: #6b21a8;
+  --dl-avatar-color-6: #9a3412;
+
+  /* Shadows */
+  --dl-shadow-light: rgba(0, 0, 0, 0.05);
+  --dl-shadow-medium: rgba(0, 0, 0, 0.1);
+
+  /* Toggle */
+  --dl-toggle-handle-bg: #ffffff;
+
+  /* Skeleton */
+  --dl-skeleton-bg: #e5e7eb;
+  --dl-skeleton-shimmer: #f3f4f6;
+}
+
+/* Dark Mode Overrides */
+.dark {
+  /* Core Background & Text */
+  --dl-bg: #0f172a;
+  --dl-bg-secondary: #0f172a;
+  --dl-text: #f8fafc;
+  --dl-text-secondary: #94a3b8;
+  --dl-border-color: #182c48;
+
+  /* Brand & Status Tokens */
+  --dl-primary: #60a5fa;
+  --dl-primary-contrast: #0f172a;
+  --dl-primary-bg-light: rgba(96, 165, 250, 0.1); /* Hover sutil en items */
+  --dl-secondary: #1f2937;
+  --dl-secondary-contrast: #f3f4f6;
+  --dl-neutral: #f3f4f6;
+  --dl-neutral-bg: #334155;
+
+  /* Componente SELECT (Tokens específicos corregidos) */
+  --dl-select-bg: #1e293b; /* Base del select (Slate 800) */
+  --dl-select-border: #334155; /* Borde sutil integrado (Slate 700) */
+  --dl-select-dropdown-bg: #1e293b; /* Fondo de la lista desplegable */
+  --dl-select-group-bg: #0f172a; /* Encabezados de grupo */
+  --dl-input-focus-bg: #0f172a; /* Evita el salto a gris claro al abrir */
+
+  /* Shadows (Sombras reales oscuras, no resplandores claros) */
+  --dl-shadow-light: rgba(0, 0, 0, 0.2);
+  --dl-shadow-medium: rgba(0, 0, 0, 0.4);
+
+  /* Otros componentes */
+  --dl-outline-border: #374151;
+  --dl-outline-contrast: #f3f4f6;
+  --dl-ghost: #9ca3af;
+  --dl-ghost-contrast: #9ca3af;
+  --dl-ghost-hover-bg: #374151;
+  --dl-toggle-handle-bg: #ffffff;
+  --dl-skeleton-bg: #334155;
+  --dl-skeleton-shimmer: #475569;
+
+  /* Avatar colors dark */
+  --dl-avatar-bg-1: #166534;
+  --dl-avatar-bg-2: #991b1b;
+  --dl-avatar-bg-3: #854d0e;
+  --dl-avatar-bg-4: #075985;
+  --dl-avatar-bg-5: #6b21a8;
+  --dl-avatar-bg-6: #9a3412;
+  --dl-avatar-color-1: #dcfce7;
+  --dl-avatar-color-2: #fee2e2;
+  --dl-avatar-color-3: #fef9c3;
+  --dl-avatar-color-4: #e0f2fe;
+  --dl-avatar-color-5: #f3e8ff;
+  --dl-avatar-color-6: #ffedd5;
+}
+
+/* Theme: Red */
+.theme-red {
+  --dl-primary: #ef4444;
+  --dl-primary-contrast: #ffffff;
+}
+
+/* Theme: Green */
+.theme-green {
+  --dl-primary: #10b981;
+  --dl-primary-contrast: #ffffff;
+}
+
+/* Theme: Purple */
+.theme-purple {
+  --dl-primary: #8b5cf6;
+  --dl-primary-contrast: #ffffff;
+}
+
+/* Theme: Orange */
+.theme-orange {
+  --dl-primary: #f97316;
+  --dl-primary-contrast: #ffffff;
+}
+
+/* Theme: Blue */
+.theme-blue {
+  --dl-primary: #3b82f6;
+  --dl-primary-contrast: #ffffff;
+}

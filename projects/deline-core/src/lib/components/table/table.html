@@ -1,0 +1,37 @@
+<table class="minimal-table">
+    <thead>
+        <tr>
+            @for (col of columns(); track col.key) {
+            <th [style.width]="col.width">
+                {{ col.header }}
+            </th>
+            }
+        </tr>
+    </thead>
+
+    <tbody>
+        @for (row of data(); track row['id'] || $index) {
+        <tr>
+            @for (col of columns(); track col.key) {
+            <td>
+                @if (cellTemplate()) {
+                <ng-container [ngTemplateOutlet]="cellTemplate()!"
+                    [ngTemplateOutletContext]="{ $implicit: row, key: col.key }" />
+                } @else {
+                {{ row[col.key] }}
+                }
+            </td>
+            }
+        </tr>
+        } @empty {
+        <tr>
+            <td class="empty-state" [attr.colspan]="columns().length">
+                <div class="empty-content">
+                    <dln-icon name="alert" size="medium" />
+                    <p>No hay datos disponibles para mostrar.</p>
+                </div>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

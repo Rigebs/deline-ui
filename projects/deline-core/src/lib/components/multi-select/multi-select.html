@@ -1,0 +1,84 @@
+<div class="multi-select-wrapper">
+    <label class="field-label" [attr.for]="selectId()">{{ label() }}</label>
+
+    <div 
+      class="input-container" 
+      [class.is-open]="isOpen()"
+      [id]="selectId()"
+      role="combobox"
+      [attr.aria-expanded]="isOpen()"
+      [attr.aria-haspopup]="'listbox'"
+      [attr.aria-disabled]="disabled()"
+      [attr.aria-required]="required()"
+      [attr.aria-label]="ariaLabel()"
+      [attr.aria-describedby]="ariaDescribedBy()"
+      tabindex="0"
+      (click)="toggle()"
+      (keydown)="onKeyDown($event)">
+      <div class="chips-area">
+          @for (item of selectedItems(); track item.value) {
+          <span class="chip">
+              {{ item.label }}
+              <button 
+                type="button"
+                class="remove-chip" 
+                (click)="remove(item.value, $event)" 
+                [attr.aria-label]="'Quitar ' + item.label">
+                  <dln-icon name="close" size="small" />
+              </button>
+          </span>
+          }
+
+          @if (selectedItems().length === 0) {
+          <span class="placeholder">{{ placeholder() }}</span>
+          }
+      </div>
+
+      <dln-icon [name]="isOpen() ? 'arrow-up' : 'arrow-down'" size="small" />
+    </div>
+
+    @if (isOpen()) {
+    <ul class="dropdown-list" role="listbox">
+      @for (group of options(); track $index) {
+        @if ('options' in group) {
+          <li class="option-group" role="group" [attr.aria-label]="group.label">
+            <span class="group-label">{{ group.label }}</span>
+            @for (option of group.options; track option.value) {
+              @if (!isOptionSelected(option.value)) {
+                <button 
+                  type="button"
+                  class="option-item" 
+                  role="option"
+                  [class.focused]="focusedIndex() === $index"
+                  [class.disabled]="option.disabled"
+                  [attr.aria-selected]="false"
+                  [attr.aria-disabled]="option.disabled"
+                  (click)="select(option)"
+                  (mousedown)="$event.preventDefault()">
+                  {{ option.label }}
+                </button>
+              }
+            }
+          </li>
+        } @else {
+          @if (!isOptionSelected(group.value)) {
+            <button 
+              type="button"
+              class="option-item" 
+              role="option"
+              [class.focused]="focusedIndex() === $index"
+              [class.disabled]="group.disabled"
+              [attr.aria-selected]="false"
+              [attr.aria-disabled]="group.disabled"
+              (click)="select(group)"
+              (mousedown)="$event.preventDefault()">
+              {{ group.label }}
+            </button>
+          }
+        }
+      } @empty {
+        <li class="option-empty" role="option" aria-disabled="true">No hay más opciones</li>
+      }
+    </ul>
+    }
+</div>

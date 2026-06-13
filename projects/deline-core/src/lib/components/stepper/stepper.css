@@ -1,0 +1,78 @@
+:host {
+  display: block;
+  width: 100%;
+  padding: 1rem 0;
+  font-family: var(--dl-font-family);
+}
+
+.stepper-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.step-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+/* Node */
+.step-node {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+
+  background: var(--dl-bg);
+  border: 2px solid var(--dl-border-color);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+
+  color: var(--dl-text);
+  transition: all 0.3s ease;
+}
+
+/* Line */
+.step-line {
+  position: absolute;
+  top: 16px;
+  left: calc(50% + 16px);
+  right: calc(-50% + 16px);
+  height: 2px;
+
+  background: var(--dl-border-color);
+  z-index: 1;
+}
+
+/* Completed */
+.step-item.is-completed .step-node {
+  background: var(--dl-primary);
+  border-color: var(--dl-primary);
+  color: var(--dl-primary-contrast);
+}
+
+.step-item.is-completed .step-line {
+  background: var(--dl-primary);
+}
+
+/* Active */
+.step-item.is-active .step-node {
+  border-color: var(--dl-primary);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--dl-primary) 25%, transparent);
+}
+
+.step-label {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--dl-text-secondary);
+}
+
+.step-item.is-active .step-label {
+  color: var(--dl-text);
+  font-weight: 600;
+}

@@ -1,0 +1,9 @@
+<div class="avatar-circle">
+    @if (src() && !imageError()) {
+    <img [src]="src()" [alt]="name()" (error)="handleImageError()" class="avatar-img" />
+    } @else {
+    <span class="avatar-initials">
+        {{ initials() }}
+    </span>
+    }
+</div>

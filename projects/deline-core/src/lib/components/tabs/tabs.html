@@ -1,0 +1,13 @@
+<nav class="tabs-container">
+    <div class="tabs-list">
+        @for (label of labels(); track $index) {
+        <button type="button" class="tab-item" [class.is-active]="activeIndex() === $index" (click)="selectTab($index)">
+            {{ label }}
+
+            @if (activeIndex() === $index) {
+            <div class="active-indicator"></div>
+            }
+        </button>
+        }
+    </div>
+</nav>

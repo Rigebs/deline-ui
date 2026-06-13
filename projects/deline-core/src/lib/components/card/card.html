@@ -1,0 +1,13 @@
+<div class="card-wrapper" [style.padding]="padding()">
+    <header class="card-header">
+        <ng-content select="[card-header]"></ng-content>
+    </header>
+
+    <main class="card-body">
+        <ng-content></ng-content>
+    </main>
+
+    <footer class="card-footer">
+        <ng-content select="[card-footer]"></ng-content>
+    </footer>
+</div>
