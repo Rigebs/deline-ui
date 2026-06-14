@@ -46,6 +46,9 @@
   flex: 1;
   font-size: 0.875rem;
   color: var(--dl-text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .display-text.has-value {
@@ -71,7 +74,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .month-label {
@@ -97,6 +100,15 @@
 .nav-btn:hover {
   background: var(--dl-ghost-hover-bg);
   color: var(--dl-text);
+}
+
+/* Selecting hint */
+.selecting-hint {
+  font-size: 0.75rem;
+  color: var(--dl-primary);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  padding: 4px 0;
 }
 
 /* Day name headers */
@@ -142,13 +154,41 @@
   color: var(--dl-primary);
 }
 
-.calendar-day.selected {
+.calendar-day.in-range {
+  background: var(--dl-range-bg);
+  border-radius: 0;
+}
+
+.calendar-day.in-range:hover {
+  background: var(--dl-range-bg);
+}
+
+.calendar-day.selected-start,
+.calendar-day.selected-end {
   background: var(--dl-primary);
   color: var(--dl-primary-contrast);
   font-weight: 600;
 }
 
-.calendar-day.today:not(.selected) {
+.calendar-day.selected-start {
+  border-radius: 6px 0 0 6px;
+}
+
+.calendar-day.selected-end {
+  border-radius: 0 6px 6px 0;
+}
+
+.calendar-day.selected-start.selected-end {
+  border-radius: 6px;
+}
+
+.calendar-day.selected-start:hover,
+.calendar-day.selected-end:hover {
+  background: var(--dl-primary);
+  color: var(--dl-primary-contrast);
+}
+
+.calendar-day.today:not(.selected-start):not(.selected-end) {
   outline: 1px solid var(--dl-primary);
   outline-offset: -1px;
 }

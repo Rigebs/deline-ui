@@ -1,4 +1,14 @@
-import { Component, input, output, signal, contentChildren, OnInit, effect, DestroyRef, inject } from '@angular/core';
+import {
+  Component,
+  input,
+  output,
+  signal,
+  contentChildren,
+  OnInit,
+  effect,
+  DestroyRef,
+  inject,
+} from '@angular/core';
 import { IconComponent } from 'deline-icons';
 
 @Component({
@@ -35,25 +45,27 @@ export class AccordionPanel implements OnInit {
 
 @Component({
   selector: 'dln-accordion',
-  imports: [AccordionPanel],
+  imports: [],
   host: {
     '[class.is-multi]': 'multi()',
   },
   template: '<div class="accordion-wrapper"><ng-content></ng-content></div>',
-  styles: [`
-    :host {
+  styles: [
+    `
+      :host {
         display: block;
         width: 100%;
-    }
-    .accordion-wrapper {
+      }
+      .accordion-wrapper {
         display: flex;
         flex-direction: column;
         border: 1px solid var(--dl-border-color);
         border-radius: var(--dl-radius);
         overflow: hidden;
         width: 100%;
-    }
-  `],
+      }
+    `,
+  ],
 })
 export class Accordion {
   multi = input<boolean>(false);
@@ -64,13 +76,13 @@ export class Accordion {
     let subs: (() => void)[] = [];
 
     this.#destroyRef.onDestroy(() => {
-      subs.forEach(fn => fn());
+      subs.forEach((fn) => fn());
       subs = [];
     });
 
     effect(() => {
       const currentPanels = this.panels();
-      subs.forEach(fn => fn());
+      subs.forEach((fn) => fn());
       subs = [];
 
       currentPanels.forEach((panel) => {

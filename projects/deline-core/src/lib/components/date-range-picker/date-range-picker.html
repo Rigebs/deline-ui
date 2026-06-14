@@ -10,14 +10,14 @@
         [attr.aria-expanded]="isOpen()"
         [attr.aria-label]="ariaLabel() || label()"
         tabindex="0">
-        <span class="display-text" [class.has-value]="!!value()">
+        <span class="display-text" [class.has-value]="!!value().start || !!value().end">
             {{ displayValue() || placeholder() }}
         </span>
         <dln-icon name="calendar" size="small" />
     </div>
 
     @if (isOpen()) {
-    <div class="calendar-dropdown" role="dialog" aria-label="Selector de fecha">
+    <div class="calendar-dropdown" role="dialog" aria-label="Selector de rango de fechas">
         <div class="calendar-header">
             <button type="button" class="nav-btn" (click)="prevMonth()" aria-label="Mes anterior">
                 <dln-icon name="chevron-left" size="small" />
@@ -27,6 +27,8 @@
                 <dln-icon name="chevron-right" size="small" />
             </button>
         </div>
+
+        <div class="selecting-hint">{{ selectingLabel() }}</div>
 
         <div class="calendar-day-names">
             @for (name of dayNames; track name) {
@@ -41,7 +43,9 @@
                     <button
                         type="button"
                         class="calendar-day"
-                        [class.selected]="isSelected(day)"
+                        [class.selected-start]="isSelectedStart(day)"
+                        [class.selected-end]="isSelectedEnd(day)"
+                        [class.in-range]="isInRange(day)"
                         [class.today]="isToday(day)"
                         [class.disabled]="isDisabled(day)"
                         [disabled]="isDisabled(day)"

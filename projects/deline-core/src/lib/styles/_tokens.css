@@ -76,6 +76,9 @@
   /* Skeleton */
   --dl-skeleton-bg: #e5e7eb;
   --dl-skeleton-shimmer: #f3f4f6;
+
+  /* Range */
+  --dl-range-bg: #dbeafe;
 }
 
 /* Dark Mode Overrides */
@@ -116,6 +119,9 @@
   --dl-toggle-handle-bg: #ffffff;
   --dl-skeleton-bg: #334155;
   --dl-skeleton-shimmer: #475569;
+
+  /* Range */
+  --dl-range-bg: rgba(96, 165, 250, 0.2);
 
   /* Avatar colors dark */
   --dl-avatar-bg-1: #166534;

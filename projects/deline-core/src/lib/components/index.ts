@@ -20,6 +20,7 @@ export * from './checkbox/checkbox';
 export * from './radio/radio';
 export * from './textarea/textarea';
 export * from './date-picker/date-picker';
+export * from './date-range-picker/date-range-picker';
 export * from './alert/alert';
 export * from './progress-bar/progress-bar';
 export * from './tooltip/tooltip';

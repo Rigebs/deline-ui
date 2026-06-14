@@ -2,8 +2,13 @@ import { Component, input, model, signal, computed, inject, ElementRef, effect }
 import { CommonModule } from '@angular/common';
 import { IconComponent } from 'deline-icons';
 
+export interface DateRange {
+  start: string;
+  end: string;
+}
+
 @Component({
-  selector: 'dln-date-picker',
+  selector: 'dln-date-range-picker',
   imports: [CommonModule, IconComponent],
   host: {
     '[class.is-open]': 'isOpen()',
@@ -11,15 +16,15 @@ import { IconComponent } from 'deline-icons';
     '(document:click)': 'onClickOutside($event)',
     '(keydown)': 'onKeyDown($event)',
   },
-  templateUrl: './date-picker.html',
-  styleUrl: './date-picker.css',
+  templateUrl: './date-range-picker.html',
+  styleUrl: './date-range-picker.css',
 })
-export class DatePicker {
+export class DateRangePicker {
   private elementRef = inject(ElementRef);
 
-  value = model<string>('');
+  value = model<DateRange>({ start: '', end: '' });
   label = input<string>('');
-  placeholder = input<string>('Seleccionar fecha');
+  placeholder = input<string>('Seleccionar rango');
   min = input<string>('');
   max = input<string>('');
   disabled = input<boolean>(false);
@@ -28,6 +33,7 @@ export class DatePicker {
   isOpen = signal(false);
   currentMonth = signal(0);
   currentYear = signal(0);
+  selecting = signal<'start' | 'end'>('start');
 
   protected dayNames = ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá', 'Do'];
   protected monthNames = [
@@ -37,10 +43,25 @@ export class DatePicker {
 
   protected displayValue = computed(() => {
     const v = this.value();
-    if (!v) return '';
-    const [y, m, d] = v.split('-').map(Number);
-    const date = new Date(y, m - 1, d);
-    return date.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
+    if (!v.start && !v.end) return '';
+
+    const fmt = (iso: string) => {
+      const [y, m, d] = iso.split('-').map(Number);
+      return new Date(y, m - 1, d).toLocaleDateString('es-ES', {
+        day: '2-digit', month: '2-digit', year: 'numeric',
+      });
+    };
+
+    if (v.start && v.end) return `${fmt(v.start)} - ${fmt(v.end)}`;
+    if (v.start) return `Desde: ${fmt(v.start)}`;
+    return '';
+  });
+
+  protected selectingLabel = computed(() => {
+    const v = this.value();
+    if (v.start && this.selecting() === 'start') return 'Toca una fecha para cambiar el rango';
+    if (this.selecting() === 'start') return 'Selecciona fecha inicial';
+    return 'Selecciona fecha final';
   });
 
   protected calendarGrid = computed(() => {
@@ -76,14 +97,7 @@ export class DatePicker {
       weeks.push(days);
     }
 
-    return { weeks, daysInMonth, year, month };
-  });
-
-  protected selectedDate = computed(() => {
-    const v = this.value();
-    if (!v) return null;
-    const [y, m, d] = v.split('-').map(Number);
-    return { year: y, month: m, day: d };
+    return { weeks, year, month };
   });
 
   protected today = computed(() => {
@@ -94,8 +108,8 @@ export class DatePicker {
   constructor() {
     effect(() => {
       const v = this.value();
-      if (v) {
-        const [y, m] = v.split('-').map(Number);
+      if (v.start) {
+        const [y, m] = v.start.split('-').map(Number);
         this.currentMonth.set(m - 1);
         this.currentYear.set(y);
         return;
@@ -124,6 +138,9 @@ export class DatePicker {
   protected toggleCalendar(): void {
     if (this.disabled()) return;
     this.isOpen.update(v => !v);
+    if (this.isOpen()) {
+      this.selecting.set('start');
+    }
   }
 
   protected prevMonth(): void {
@@ -153,14 +170,47 @@ export class DatePicker {
     if (this.min() && dateStr < this.min()) return;
     if (this.max() && dateStr > this.max()) return;
 
-    this.value.set(dateStr);
-    this.isOpen.set(false);
+    const current = this.value();
+
+    if (this.selecting() === 'start') {
+      this.value.set({ start: dateStr, end: '' });
+      this.selecting.set('end');
+    } else {
+      if (!current.start) return;
+      if (dateStr < current.start) {
+        this.value.set({ start: dateStr, end: current.start });
+      } else {
+        this.value.set({ start: current.start, end: dateStr });
+      }
+      this.selecting.set('start');
+      this.isOpen.set(false);
+    }
   }
 
-  protected isSelected(day: number): boolean {
+  protected isSelectedStart(day: number): boolean {
     if (day <= 0) return false;
-    const sel = this.selectedDate();
-    return sel !== null && sel.year === this.currentYear() && sel.month === this.currentMonth() + 1 && sel.day === day;
+    const v = this.value();
+    if (!v.start) return false;
+    const [y, m, d] = v.start.split('-').map(Number);
+    return y === this.currentYear() && m === this.currentMonth() + 1 && d === day;
+  }
+
+  protected isSelectedEnd(day: number): boolean {
+    if (day <= 0) return false;
+    const v = this.value();
+    if (!v.end) return false;
+    const [y, m, d] = v.end.split('-').map(Number);
+    return y === this.currentYear() && m === this.currentMonth() + 1 && d === day;
+  }
+
+  protected isInRange(day: number): boolean {
+    if (day <= 0) return false;
+    const v = this.value();
+    if (!v.start || !v.end) return false;
+    const date = new Date(this.currentYear(), this.currentMonth(), day);
+    const s = new Date(v.start + 'T12:00:00');
+    const e = new Date(v.end + 'T12:00:00');
+    return date > s && date < e;
   }
 
   protected isToday(day: number): boolean {

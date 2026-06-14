@@ -413,6 +413,7 @@ app-root {
   opacity: 0;
   pointer-events: none;
   border-top: 1px solid var(--doc-code-border);
+  background: var(--doc-code-bg);
   min-height: 160px;
 }
 .playground-code.is-visible {
@@ -617,6 +618,7 @@ app-root {
 .code-block .hljs {
   background: transparent;
   padding: 0;
+  color: var(--doc-code-text);
 }
 
 .code-block .hljs-selector-class { color: #7c3aed; }
