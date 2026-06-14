@@ -1,0 +1,39 @@
+<div class="dropdown-wrapper">
+    <button
+        class="dropdown-trigger"
+        (click)="toggle()"
+        [attr.aria-haspopup]="'true'"
+        [attr.aria-expanded]="isOpen()"
+        type="button"
+    >
+        @if (iconOnly()) {
+        <dln-icon [name]="iconName()" size="small" />
+        } @else {
+        <span>{{ label() }}</span>
+        <dln-icon name="chevron-down" size="small" />
+        }
+    </button>
+    @if (isOpen()) {
+    <div class="dropdown-menu" role="menu">
+        @for (item of items(); track item.value) {
+            @if (item.divider) {
+            <div class="dropdown-divider"></div>
+            } @else {
+            <button
+                class="dropdown-item"
+                [class.is-disabled]="item.disabled"
+                [disabled]="item.disabled"
+                (click)="select(item)"
+                role="menuitem"
+                type="button"
+            >
+                @if (item.icon) {
+                <dln-icon [name]="item.icon" size="small" class="dropdown-item-icon" />
+                }
+                <span>{{ item.label }}</span>
+            </button>
+            }
+        }
+    </div>
+    }
+</div>

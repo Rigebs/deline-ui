@@ -1,0 +1,65 @@
+:host {
+    display: block;
+    width: 100%;
+    font-family: var(--dl-font-family);
+}
+
+.date-picker-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+}
+
+.field-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--dl-text-secondary);
+    letter-spacing: 0.02em;
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    height: 45px;
+    padding: 0 0.875rem;
+    background: var(--dl-bg);
+    border: 1px solid var(--dl-border-color);
+    border-radius: var(--dl-radius);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    color: var(--dl-text-secondary);
+}
+
+:host(.is-open) .input-container,
+.input-container:focus-within {
+    border-color: var(--dl-primary);
+}
+
+:host(.is-disabled) .input-container {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.display-text {
+    flex: 1;
+    font-size: 0.875rem;
+    color: var(--dl-text-secondary);
+}
+
+.display-text.has-value {
+    color: var(--dl-text);
+}
+
+.native-input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.native-input:disabled {
+    cursor: not-allowed;
+}

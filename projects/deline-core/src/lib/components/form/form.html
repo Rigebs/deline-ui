@@ -1,0 +1,24 @@
+<form [formGroup]="formGroup()" (ngSubmit)="onSubmit($event)" novalidate>
+    @if (successMessage()) {
+    <dln-alert variant="success" class="form-alert">{{ successMessage() }}</dln-alert>
+    }
+    @if (errorMessage()) {
+    <dln-alert variant="error" class="form-alert">{{ errorMessage() }}</dln-alert>
+    }
+    <div class="form-fields">
+        <ng-content></ng-content>
+    </div>
+    <div class="form-actions">
+        @if (showCancel()) {
+        <button type="button" class="form-btn form-btn-cancel" (click)="onCancel()" [disabled]="loading()">
+            {{ cancelLabel() }}
+        </button>
+        }
+        <button type="submit" class="form-btn form-btn-submit" [disabled]="loading() || disabled()">
+            @if (loading()) {
+            <span class="form-spinner"></span>
+            }
+            {{ submitLabel() }}
+        </button>
+    </div>
+</form>

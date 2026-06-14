@@ -1,0 +1,33 @@
+<div class="textarea-wrapper">
+    @if (label()) {
+    <label class="field-label" [for]="label()">{{ label() }}</label>
+    }
+    <div class="input-container">
+        <textarea
+            [id]="label()"
+            [formControl]="control()"
+            [placeholder]="placeholder()"
+            [rows]="rows()"
+            [maxLength]="maxLength() || undefined"
+            [disabled]="disabled()"
+            [readonly]="readonly()"
+            [attr.aria-describedby]="describedByIds()"
+            [attr.aria-invalid]="hasError || null"
+            (focus)="onFocus()"
+            (blur)="onBlur()"
+            class="textarea-element"
+        ></textarea>
+    </div>
+    <div class="field-footer">
+        @if (showHelperOrError) {
+        <span
+            class="helper-text"
+            [class.error-text]="hasError"
+            [id]="hasError ? errorId() : helperId()"
+        >{{ showHelperOrError }}</span>
+        }
+        @if (showCharCount() && maxLength()) {
+        <span class="char-count">{{ charCount() }} / {{ maxLength() }}</span>
+        }
+    </div>
+</div>

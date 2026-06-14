@@ -1,0 +1,16 @@
+<div class="checkbox-wrapper">
+    <div class="checkbox-box">
+        @if (indeterminate()) {
+        <svg class="checkbox-icon" viewBox="0 0 12 2" width="12" height="2">
+            <rect x="0" y="0" width="12" height="2" rx="1" fill="currentColor"/>
+        </svg>
+        } @else if (checked()) {
+        <svg class="checkbox-icon" viewBox="0 0 12 10" width="12" height="10">
+            <path d="M1 5.5L4.5 9L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+        }
+    </div>
+    @if (label()) {
+    <span class="checkbox-label">{{ label() }}</span>
+    }
+</div>

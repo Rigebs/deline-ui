@@ -1,8 +1,3 @@
-/*
- * Components barrel export
- * Re-exports all components from deline-core
- */
-
 export * from './avatar/avatar';
 export * from './badge/badge';
 export * from './button/button';
@@ -21,3 +16,15 @@ export * from './text-field/text-field';
 export * from './toast/toast';
 export * from './toggle/toggle';
 export * from './sidebar/sidebar';
+export * from './checkbox/checkbox';
+export * from './radio/radio';
+export * from './textarea/textarea';
+export * from './date-picker/date-picker';
+export * from './alert/alert';
+export * from './progress-bar/progress-bar';
+export * from './tooltip/tooltip';
+export * from './accordion/accordion';
+export * from './dropdown-menu/dropdown-menu';
+export * from './breadcrumb/breadcrumb';
+export * from './search/search';
+export * from './form/form';

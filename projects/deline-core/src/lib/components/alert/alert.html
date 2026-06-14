@@ -1,0 +1,15 @@
+@if (isVisible) {
+<div class="alert-wrapper">
+    @if (showIcon()) {
+    <dln-icon [name]="iconName" size="medium" class="alert-icon" />
+    }
+    <div class="alert-content">
+        <ng-content></ng-content>
+    </div>
+    @if (dismissible()) {
+    <button class="alert-close" (click)="dismiss()" aria-label="Cerrar alerta" type="button">
+        <dln-icon name="close" size="small" />
+    </button>
+    }
+</div>
+}

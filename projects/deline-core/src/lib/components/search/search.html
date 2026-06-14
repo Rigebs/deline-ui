@@ -1,0 +1,20 @@
+<form class="search-wrapper" (submit)="onSubmit($event)">
+    <dln-icon name="search" size="small" class="search-icon" />
+    <input
+        #searchInput
+        class="search-input"
+        type="search"
+        [value]="value()"
+        [placeholder]="placeholder()"
+        [disabled]="disabled()"
+        [attr.aria-label]="ariaLabel()"
+        (input)="onInput($event)"
+        (focus)="onFocus()"
+        (blur)="onBlur()"
+    />
+    @if (value()) {
+    <button class="search-clear" (click)="clear()" type="button" aria-label="Limpiar búsqueda">
+        <dln-icon name="close" size="small" />
+    </button>
+    }
+</form>

@@ -1,0 +1,81 @@
+:host {
+    display: block;
+    width: 100%;
+    font-family: var(--dl-font-family);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.form-alert {
+    margin-bottom: 0.5rem;
+}
+
+.form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    padding-top: 0.5rem;
+}
+
+.form-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.25rem;
+    border-radius: var(--dl-radius);
+    font: inherit;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.form-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.form-btn-submit {
+    background: var(--dl-primary);
+    color: var(--dl-primary-contrast);
+    border-color: var(--dl-primary);
+}
+
+.form-btn-submit:hover:not(:disabled) {
+    filter: brightness(1.1);
+}
+
+.form-btn-cancel {
+    background: transparent;
+    color: var(--dl-text-secondary);
+    border-color: var(--dl-border-color);
+}
+
+.form-btn-cancel:hover:not(:disabled) {
+    background: var(--dl-bg-secondary);
+}
+
+.form-spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid currentColor;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: form-spin 0.6s linear infinite;
+}
+
+@keyframes form-spin {
+    to { transform: rotate(360deg); }
+}

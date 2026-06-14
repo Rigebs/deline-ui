@@ -1,0 +1,26 @@
+<div class="accordion-panel">
+    <button
+        class="accordion-header"
+        [id]="headerId"
+        [attr.aria-controls]="bodyId"
+        [attr.aria-expanded]="isOpen()"
+        [disabled]="disabled()"
+        (click)="toggle()"
+        type="button"
+    >
+        <span class="accordion-header-text">{{ header() }}</span>
+        <dln-icon [name]="isOpen() ? 'chevron-up' : 'chevron-down'" size="small" />
+    </button>
+    @if (isOpen()) {
+    <div
+        class="accordion-body"
+        [id]="bodyId"
+        [attr.aria-labelledby]="headerId"
+        role="region"
+    >
+        <div class="accordion-body-inner">
+            <ng-content></ng-content>
+        </div>
+    </div>
+    }
+</div>

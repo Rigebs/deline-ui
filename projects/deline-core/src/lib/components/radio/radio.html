@@ -1,0 +1,10 @@
+<div class="radio-wrapper">
+    <div class="radio-circle">
+        @if (isChecked()) {
+        <div class="radio-dot"></div>
+        }
+    </div>
+    @if (label()) {
+    <span class="radio-label">{{ label() }}</span>
+    }
+</div>

@@ -1,0 +1,22 @@
+<div class="date-picker-wrapper">
+    @if (label()) {
+    <label class="field-label">{{ label() }}</label>
+    }
+    <div class="input-container" (click)="toggleCalendar()" (keydown.escape)="closeCalendar()">
+        <span class="display-text" [class.has-value]="!!value()">
+            {{ displayValue() || placeholder() }}
+        </span>
+        <dln-icon name="calendar" size="small" />
+        <input
+            type="date"
+            class="native-input"
+            [value]="value()"
+            [min]="min()"
+            [max]="max()"
+            [disabled]="disabled()"
+            [attr.aria-label]="ariaLabel() || label()"
+            (input)="onInput($event)"
+            (blur)="closeCalendar()"
+        />
+    </div>
+</div>
