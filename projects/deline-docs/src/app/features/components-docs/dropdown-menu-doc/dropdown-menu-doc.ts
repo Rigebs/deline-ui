@@ -25,6 +25,14 @@ export class DropdownMenuDoc {
     { label: 'Copiar', value: 'copy', icon: 'copy' },
     { label: 'Mover', value: 'move', icon: 'folder' },
     { divider: true, label: '', value: '' },
+    { label: 'Eliminar', value: 'delete', icon: 'delete' },
+  ];
+
+  itemsDisabled: DropdownItem[] = [
+    { label: 'Editar', value: 'edit', icon: 'edit' },
+    { label: 'Copiar', value: 'copy', icon: 'copy' },
+    { label: 'Mover', value: 'move', icon: 'folder' },
+    { divider: true, label: '', value: '' },
     { label: 'Eliminar', value: 'delete', icon: 'delete', disabled: true },
   ];
 

@@ -19,6 +19,7 @@ export class CodeBlock {
       const el = this.codeEl();
       if (el && code) {
         el.nativeElement.textContent = code;
+        delete el.nativeElement.dataset['highlighted'];
         hljs.highlightElement(el.nativeElement);
       }
     });
