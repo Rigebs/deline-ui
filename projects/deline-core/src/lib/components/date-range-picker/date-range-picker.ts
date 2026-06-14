@@ -1,6 +1,10 @@
-import { Component, input, model, signal, computed, inject, ElementRef, effect } from '@angular/core';
+import { Component, input, model, signal, computed, inject, ElementRef, effect, forwardRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormControl } from '@angular/forms';
+import { Subject } from 'rxjs';
 import { IconComponent } from 'deline-icons';
+import { DlnControl, DLN_CONTROL } from '../../core/control';
+import { FormField } from '../form-field/form-field';
 
 export interface DateRange {
   start: string;
@@ -10,17 +14,20 @@ export interface DateRange {
 @Component({
   selector: 'dln-date-range-picker',
   imports: [CommonModule, IconComponent],
+  providers: [{ provide: DLN_CONTROL, useExisting: forwardRef(() => DateRangePicker) }],
   host: {
     '[class.is-open]': 'isOpen()',
     '[class.is-disabled]': 'disabled()',
+    '[class.is-focused]': 'isFocused()',
     '(document:click)': 'onClickOutside($event)',
     '(keydown)': 'onKeyDown($event)',
   },
   templateUrl: './date-range-picker.html',
   styleUrl: './date-range-picker.css',
 })
-export class DateRangePicker {
+export class DateRangePicker implements DlnControl {
   private elementRef = inject(ElementRef);
+  private parentFormField = inject(FormField, { optional: true, skipSelf: true });
 
   value = model<DateRange>({ start: '', end: '' });
   label = input<string>('');
@@ -34,6 +41,23 @@ export class DateRangePicker {
   currentMonth = signal(0);
   currentYear = signal(0);
   selecting = signal<'start' | 'end'>('start');
+  protected isFocused = signal(false);
+
+  readonly focused = this.isFocused.asReadonly();
+  readonly id = `dln-date-range-${Math.random().toString(36).slice(2, 9)}`;
+
+  private _stateChanges = new Subject<void>();
+  readonly stateChanges = this._stateChanges.asObservable();
+
+  get hasError(): boolean {
+    return false;
+  }
+
+  get formControl(): FormControl | null {
+    return null;
+  }
+
+  protected hasParentFormField = computed(() => !!this.parentFormField);
 
   protected dayNames = ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá', 'Do'];
   protected monthNames = [
@@ -240,5 +264,17 @@ export class DateRangePicker {
     if (event.key === 'Escape') {
       this.isOpen.set(false);
     }
+  }
+
+  protected onFocus(): void {
+    if (!this.disabled()) {
+      this.isFocused.set(true);
+    }
+    this._stateChanges.next();
+  }
+
+  protected onBlur(): void {
+    this.isFocused.set(false);
+    this._stateChanges.next();
   }
 }

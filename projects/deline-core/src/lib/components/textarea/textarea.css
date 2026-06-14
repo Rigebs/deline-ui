@@ -2,6 +2,11 @@
     display: block;
     width: 100%;
     font-family: var(--dl-font-family);
+    --field-error: color-mix(in srgb, var(--dl-error) 80%, white);
+}
+
+:host-context(.dark) {
+    --field-error: var(--dl-error);
 }
 
 .textarea-wrapper {
@@ -33,7 +38,11 @@
 }
 
 :host(.has-error) .input-container {
-    border-color: var(--dl-error);
+    border-color: var(--field-error);
+}
+
+:host(.has-error.is-focused) .input-container {
+    border-color: var(--field-error);
 }
 
 :host(.is-disabled) .input-container {
@@ -52,6 +61,17 @@
     resize: vertical;
     outline: none;
     line-height: 1.5;
+}
+
+.textarea-element:disabled {
+    color: var(--dl-text-secondary);
+    -webkit-text-fill-color: var(--dl-text-secondary);
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.textarea-element[readonly] {
+    cursor: not-allowed;
 }
 
 .textarea-element::placeholder {
@@ -76,12 +96,12 @@
 }
 
 .helper-text.error-text {
-    color: var(--dl-error);
+    color: var(--field-error);
 }
 
 .char-count {
     font-size: 0.75rem;
     color: var(--dl-text-secondary);
-    margin-left: auto;
     flex-shrink: 0;
+    margin-left: auto;
 }

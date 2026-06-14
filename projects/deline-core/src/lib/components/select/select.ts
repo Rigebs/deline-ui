@@ -7,17 +7,24 @@ import {
   input,
   output,
   signal,
+  forwardRef,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormControl } from '@angular/forms';
+import { Subject } from 'rxjs';
 import { SelectOption, SelectOptionGroup } from '../../models/select.models';
 import { IconComponent } from 'deline-icons';
+import { DlnControl, DLN_CONTROL } from '../../core/control';
+import { FormField } from '../form-field/form-field';
 
 @Component({
   selector: 'dln-select',
   imports: [CommonModule, IconComponent],
+  providers: [{ provide: DLN_CONTROL, useExisting: forwardRef(() => Select) }],
   host: {
     '[class.is-open]': 'isOpen()',
     '[class.is-disabled]': 'disabled()',
+    '[class.is-focused]': 'isFocused()',
     '[attr.aria-disabled]': 'disabled()',
     '[attr.aria-required]': 'required()',
     '(document:click)': 'onClickOutside($event)',
@@ -26,8 +33,9 @@ import { IconComponent } from 'deline-icons';
   templateUrl: './select.html',
   styleUrl: './select.css',
 })
-export class Select {
+export class Select implements DlnControl {
   private elementRef = inject(ElementRef);
+  private parentFormField = inject(FormField, { optional: true, skipSelf: true });
 
   label = input.required<string>();
   options = input.required<(SelectOption | SelectOptionGroup)[]>();
@@ -45,6 +53,21 @@ export class Select {
 
   selectedOption = signal<SelectOption | null>(null);
   isOpen = signal(false);
+  protected isFocused = signal(false);
+
+  readonly focused = this.isFocused.asReadonly();
+  readonly id = this._id();
+
+  private _stateChanges = new Subject<void>();
+  readonly stateChanges = this._stateChanges.asObservable();
+
+  get hasError(): boolean {
+    return false;
+  }
+
+  get formControl(): FormControl | null {
+    return null;
+  }
 
   displayText = computed(() => this.selectedOption()?.label || this.placeholder());
 
@@ -59,6 +82,8 @@ export class Select {
     }
     return opts;
   });
+
+  protected hasParentFormField = computed(() => !!this.parentFormField);
 
   constructor() {
     effect(() => {
@@ -111,5 +136,17 @@ export class Select {
         this.isOpen.set(false);
         break;
     }
+  }
+
+  protected onFocus(): void {
+    if (!this.disabled()) {
+      this.isFocused.set(true);
+    }
+    this._stateChanges.next();
+  }
+
+  protected onBlur(): void {
+    this.isFocused.set(false);
+    this._stateChanges.next();
   }
 }

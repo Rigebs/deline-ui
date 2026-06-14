@@ -1,12 +1,12 @@
 import { Component, signal } from '@angular/core';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Form, TextField } from 'deline-core';
+import { Form, Input } from 'deline-core';
 import { ApiTable, ApiTableRow } from '../../../shared/components/api-table/api-table';
 import { CodeBlock } from '../../../shared/components/code-block/code-block';
 
 @Component({
   selector: 'app-form-doc',
-  imports: [Form, TextField, ApiTable, CodeBlock, ReactiveFormsModule],
+  imports: [Form, Input, ApiTable, CodeBlock, ReactiveFormsModule],
   templateUrl: './form-doc.html',
 })
 export class FormDoc {

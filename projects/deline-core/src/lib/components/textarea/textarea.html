@@ -1,30 +1,34 @@
 <div class="textarea-wrapper">
-    @if (label()) {
-    <label class="field-label" [for]="label()">{{ label() }}</label>
+    @if (label() && !hasParentFormField()) {
+    <label class="field-label" [for]="id">{{ label() }}</label>
     }
     <div class="input-container">
         <textarea
-            [id]="label()"
+            [id]="id"
             [formControl]="control()"
             [placeholder]="placeholder()"
             [rows]="rows()"
             [maxLength]="maxLength() || undefined"
-            [disabled]="disabled()"
-            [readonly]="readonly()"
-            [attr.aria-describedby]="describedByIds()"
+            [attr.disabled]="disabled() ? '' : null"
+            [readOnly]="readonly()"
+            [attr.aria-describedby]="!hasParentFormField() ? describedByIds() : undefined"
             [attr.aria-invalid]="hasError || null"
             (focus)="onFocus()"
             (blur)="onBlur()"
+            (beforeinput)="readonly() ? $event.preventDefault() : null"
             class="textarea-element"
         ></textarea>
     </div>
     <div class="field-footer">
-        @if (showHelperOrError) {
-        <span
-            class="helper-text"
-            [class.error-text]="hasError"
-            [id]="hasError ? errorId() : helperId()"
-        >{{ showHelperOrError }}</span>
+        @if (!hasParentFormField()) {
+          @if (showHelperOrError(); as text) {
+          <span
+              class="helper-text"
+              [class.error-text]="hasError"
+              [id]="hasError ? errorId() : helperId()">
+              {{ text }}
+          </span>
+          }
         }
         @if (showCharCount() && maxLength()) {
         <span class="char-count">{{ charCount() }} / {{ maxLength() }}</span>

@@ -1,13 +1,13 @@
 import { Component, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormControl, Validators } from '@angular/forms';
-import { TextField, Button } from 'deline-core';
+import { Input, Button, FormField, Checkbox } from 'deline-core';
 import { ApiTable, ApiTableRow } from '../../../shared/components/api-table/api-table';
 import { CodeBlock } from '../../../shared/components/code-block/code-block';
 
 @Component({
   selector: 'app-input-doc',
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, TextField, Button, ApiTable, CodeBlock],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, Input, Button, FormField, Checkbox, ApiTable, CodeBlock],
   templateUrl: './input-doc.html',
 })
 export class InputDoc {
@@ -18,8 +18,17 @@ export class InputDoc {
   playPlaceholder = signal('ej: usuario@correo.com');
   playDisabled = signal(false);
   playReadonly = signal(false);
-  playMultiline = signal(false);
   playHelper = signal('Nunca compartiremos tu correo');
+
+  playLabelCtrl = new FormControl('Correo electrónico');
+  playPlaceholderCtrl = new FormControl('ej: usuario@correo.com');
+  playHelperCtrl = new FormControl('Nunca compartiremos tu correo');
+
+  constructor() {
+    this.playLabelCtrl.valueChanges.subscribe(v => this.playLabel.set(v ?? ''));
+    this.playPlaceholderCtrl.valueChanges.subscribe(v => this.playPlaceholder.set(v ?? ''));
+    this.playHelperCtrl.valueChanges.subscribe(v => this.playHelper.set(v ?? ''));
+  }
 
   playControl = new FormControl('', [Validators.required, Validators.email]);
   errorControl = new FormControl('', [Validators.required]);
@@ -39,7 +48,7 @@ export class InputDoc {
   }
 
   copyImport() {
-    navigator.clipboard.writeText(`import { TextField } from 'deline-core';`).then(() => {
+    navigator.clipboard.writeText(`import { Input, FormField } from 'deline-core';`).then(() => {
       this.importCopied.set(true);
       setTimeout(() => this.importCopied.set(false), 2000);
     });
@@ -47,28 +56,35 @@ export class InputDoc {
 
   genCode = computed(() => {
     const parts: string[] = [];
-    parts.push(`<dln-text-field`);
+    parts.push(`<dln-form-field`);
     parts.push(`  label="${this.playLabel()}"`);
-    parts.push(`  [control]="control"`);
-    if (this.playPlaceholder()) parts.push(`  placeholder="${this.playPlaceholder()}"`);
-    if (this.playMultiline()) parts.push(`  [multiline]="true"`);
-    if (this.playDisabled()) parts.push(`  [disabled]="true"`);
-    if (this.playReadonly()) parts.push(`  [readonly]="true"`);
     if (this.playHelper()) parts.push(`  helperText="${this.playHelper()}"`);
-    parts.push(`></dln-text-field>`);
+    parts.push(`>`);
+    parts.push(`  <dln-input`);
+    parts.push(`    [control]="control"`);
+    if (this.playPlaceholder()) parts.push(`    placeholder="${this.playPlaceholder()}"`);
+    if (this.playDisabled()) parts.push(`    [disabled]="true"`);
+    if (this.playReadonly()) parts.push(`    [readonly]="true"`);
+    parts.push(`  /></dln-input>`);
+    parts.push(`</dln-form-field>`);
     return parts.join('\n');
   });
 
   apiRows: ApiTableRow[] = [
-    { name: 'label', type: 'string', default: '— (requerido)', description: 'Etiqueta del campo, se muestra arriba del input.' },
+    { name: 'label', type: 'string', default: "''", description: 'Etiqueta del campo (se oculta dentro de dln-form-field).' },
     { name: 'control', type: 'FormControl', default: '— (requerido)', description: 'Control reactivo de Angular Forms.' },
     { name: 'placeholder', type: 'string', default: "''", description: 'Texto de placeholder dentro del input.' },
     { name: 'type', type: 'string', default: "'text'", description: 'Tipo de input HTML (text, email, password, etc.).' },
-    { name: 'multiline', type: 'boolean', default: 'false', description: 'Convierte el input en un textarea multilínea.' },
     { name: 'disabled', type: 'boolean', default: 'false', description: 'Deshabilita la interacción del campo.' },
     { name: 'readonly', type: 'boolean', default: 'false', description: 'Pone el campo en modo solo lectura.' },
+    { name: 'helperText', type: 'string', default: "''", description: 'Texto de ayuda debajo del campo (solo standalone).' },
+    { name: 'customError', type: 'string', default: "''", description: 'Mensaje de error personalizado (solo standalone).' },
+    { name: 'ariaDescribedBy', type: 'string', default: "''", description: 'ID para aria-describedby personalizado (solo standalone).' },
+  ];
+
+  formFieldRows: ApiTableRow[] = [
+    { name: 'label', type: 'string', default: "''", description: 'Etiqueta del campo (reemplaza la del control interno).' },
     { name: 'helperText', type: 'string', default: "''", description: 'Texto de ayuda debajo del campo.' },
     { name: 'customError', type: 'string', default: "''", description: 'Mensaje de error personalizado.' },
-    { name: 'ariaDescribedBy', type: 'string', default: "''", description: 'ID para aria-describedby personalizado.' },
   ];
 }

@@ -1,0 +1,43 @@
+<div class="field-wrapper">
+    @if (label() && !hasParentFormField()) {
+    <label class="field-label">{{ label() }}</label>
+    }
+
+    <div class="input-container" [attr.aria-describedby]="!hasParentFormField() ? describedByIds() : undefined">
+        @if (hasPrefix()) {
+        <span class="input-prefix">
+            <ng-container [ngTemplateOutlet]="prefixTemplate()!" />
+        </span>
+        }
+
+        <input
+          [type]="type()"
+          [formControl]="control()"
+          [placeholder]="placeholder()"
+          [attr.disabled]="disabled() ? '' : null"
+          [attr.readonly]="readonly() ? '' : null"
+          [attr.aria-invalid]="hasError"
+          [attr.aria-readonly]="readonly()"
+          (focus)="onFocus()"
+          (blur)="onBlur()"
+          (beforeinput)="readonly() ? $event.preventDefault() : null"
+          class="native-input" />
+
+        @if (hasSuffix()) {
+        <span class="input-suffix">
+            <ng-container [ngTemplateOutlet]="suffixTemplate()!" />
+        </span>
+        }
+    </div>
+
+    @if (!hasParentFormField()) {
+      @if (showHelperOrError(); as text) {
+      <span
+          class="helper-text"
+          [class.error-text]="hasError"
+          [id]="hasError ? errorId() : helperId()">
+          {{ text }}
+      </span>
+      }
+    }
+</div>

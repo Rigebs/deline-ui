@@ -27,7 +27,7 @@ export class CheckboxDoc {
     const parts = ['<dln-checkbox'];
     if (this.playChecked()) parts.push(`\n  [(checked)]="miValor"`);
     if (this.playDisabled()) parts.push(`\n  [disabled]="true"`);
-    if (this.playIndeterminate()) parts.push(`\n  [indeterminate]="true"`);
+    if (this.playIndeterminate()) parts.push(`\n  [(indeterminate)]="miValor"`);
     parts.push(`\n  label="Acepto términos"`);
     parts.push(`\n></dln-checkbox>`);
     return parts.join('');
@@ -37,7 +37,7 @@ export class CheckboxDoc {
     { name: 'checked', type: 'boolean', default: 'false', description: 'Estado del checkbox (modelo bidireccional).' },
     { name: 'label', type: 'string', default: "''", description: 'Texto mostrado junto al checkbox.' },
     { name: 'disabled', type: 'boolean', default: 'false', description: 'Deshabilita la interacción.' },
-    { name: 'indeterminate', type: 'boolean', default: 'false', description: 'Estado indeterminado (visual).' },
+    { name: 'indeterminate', type: 'boolean', default: 'false', description: 'Estado indeterminado (modelo bidireccional). Al hacer clic se limpia automáticamente.' },
     { name: 'value', type: 'string', default: "''", description: 'Valor asociado al checkbox.' },
   ];
 

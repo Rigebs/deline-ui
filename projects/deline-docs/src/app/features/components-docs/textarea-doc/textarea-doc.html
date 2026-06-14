@@ -12,7 +12,7 @@
         {{ importCopied() ? '✓ Copiado' : 'Copiar' }}
       </button>
     </div>
-    <pre class="import-code"><code><span style="color:#c792ea;">import</span> <span style="color:#82aaff;">&#123; Textarea &#125;</span> <span style="color:#c792ea;">from</span> <span class="hljs-string">'deline-core'</span>;</code></pre>
+    <pre class="import-code"><code><span style="color:#c792ea;">import</span> <span style="color:#82aaff;">&#123; Textarea, FormField &#125;</span> <span style="color:#c792ea;">from</span> <span class="hljs-string">'deline-core'</span>;</code></pre>
   </div>
 </header>
 
@@ -71,7 +71,9 @@
     <div class="variant-card">
       <h3 class="variant-card-title">Con error</h3>
       <div class="variant-row">
-        <dln-textarea label="Obligatorio" [control]="errorControl" placeholder="Este campo es obligatorio" [helperText]="'Escribe algo'"></dln-textarea>
+        <dln-form-field label="Obligatorio" helperText="Escribe algo">
+          <dln-textarea [control]="errorControl" placeholder="Este campo es obligatorio" />
+        </dln-form-field>
       </div>
     </div>
 
@@ -95,7 +97,8 @@
   <h2 class="section-title">API Reference</h2>
   <p class="section-desc">Estructura técnica de Inputs, Outputs y selectores para desarrollo en Angular.</p>
 
-  <app-api-table title="input() Properties" [rows]="inputProps"></app-api-table>
+  <app-api-table title="input() Properties (dln-textarea)" [rows]="inputProps"></app-api-table>
+  <app-api-table title="input() Properties (dln-form-field)" [rows]="formFieldRows"></app-api-table>
 </section>
 
 <section class="docs-section" id="use-cases">

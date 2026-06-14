@@ -37,24 +37,10 @@
     </div>
 
     <div class="playground-controls">
-      <div class="control-group">
-        <label class="control-label">Checked</label>
-        <select (change)="playChecked.set($any($event.target).value === 'true')" class="control-select">
-          <option value="false">No</option>
-          <option value="true">Sí</option>
-        </select>
-      </div>
-      <div class="control-group">
-        <label class="control-checkbox">
-          <input type="checkbox" (change)="playDisabled.set($any($event.target).checked)">
-          <span>Disabled</span>
-        </label>
-      </div>
-      <div class="control-group" style="justify-content:flex-end;">
-        <label class="control-checkbox">
-          <input type="checkbox" (change)="playIndeterminate.set($any($event.target).checked)">
-          <span>Indeterminate</span>
-        </label>
+      <div style="display:flex;flex-direction:column;gap:10px;justify-content:flex-end;">
+        <dln-checkbox [(checked)]="playChecked" label="Checked" />
+        <dln-checkbox [(checked)]="playDisabled" label="Disabled" />
+        <dln-checkbox [(checked)]="playIndeterminate" label="Indeterminate" />
       </div>
     </div>
   </div>
@@ -87,11 +73,12 @@
 
     <div class="variant-card">
       <h3 class="variant-card-title">Indeterminado</h3>
+      <p class="section-desc" style="font-size:13px;color:var(--doc-text-secondary);">Estado visual para "selección parcial" (ej. algunos hijos seleccionados). Al hacer clic pasa a checked y limpia el indeterminate.</p>
       <div class="variant-row">
-        <dln-checkbox label="Seleccionar todo" [indeterminate]="true"></dln-checkbox>
+        <dln-checkbox label="Seleccionar todo" [(indeterminate)]="playIndeterminate" [(checked)]="playChecked"></dln-checkbox>
       </div>
       <div class="variant-divider">
-        <app-code-block code='<dln-checkbox label="Seleccionar todo" [indeterminate]="true"></dln-checkbox>'></app-code-block>
+        <app-code-block code='<dln-checkbox label="Seleccionar todo" [(indeterminate)]="variable" [(checked)]="variable"></dln-checkbox>'></app-code-block>
       </div>
     </div>
 

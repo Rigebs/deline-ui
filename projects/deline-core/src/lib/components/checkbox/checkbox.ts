@@ -20,13 +20,18 @@ export class Checkbox {
   checked = model<boolean>(false);
   label = input<string>('');
   disabled = input<boolean>(false);
-  indeterminate = input<boolean>(false);
+  indeterminate = model<boolean>(false);
   value = input<string>('');
   changed = output<boolean>();
 
   protected toggle(): void {
     if (this.disabled()) return;
-    this.checked.update((v) => !v);
+    if (this.indeterminate()) {
+      this.indeterminate.set(false);
+      this.checked.set(true);
+    } else {
+      this.checked.update((v) => !v);
+    }
     this.changed.emit(this.checked());
   }
 }

@@ -1,0 +1,15 @@
+<div class="form-field-wrapper">
+    @if (label()) {
+    <label class="field-label" [for]="controlId()">{{ label() }}</label>
+    }
+
+    <div class="input-container">
+        <ng-content></ng-content>
+    </div>
+
+    @if (hasError || helperText()) {
+    <span class="helper-text" [class.error-text]="hasError" [id]="hasError ? errorId() : helperId()">
+        {{ hasError ? errorComputed : helperText() }}
+    </span>
+    }
+</div>

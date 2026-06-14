@@ -30,15 +30,15 @@
     <div class="playground-switcher">
       <div class="playground-preview" [class.is-hidden]="showCode()" style="flex-direction:column;gap:24px;">
         <dln-form [formGroup]="playForm" (formSubmit)="onSubmit()">
-          <dln-text-field label="Nombre" [control]="$any(playForm.controls.nombre)" placeholder="Tu nombre"></dln-text-field>
-          <dln-text-field label="Email" [control]="$any(playForm.controls.email)" placeholder="tu@email.com" type="email"></dln-text-field>
+          <dln-input label="Nombre" [control]="$any(playForm.controls.nombre)" placeholder="Tu nombre"></dln-input>
+          <dln-input label="Email" [control]="$any(playForm.controls.email)" placeholder="tu@email.com" type="email"></dln-input>
         </dln-form>
         <p style="margin:0;font-size:14px;color:var(--text-secondary);">Envíos: <strong>{{ submitCount() }}</strong></p>
       </div>
       <div class="playground-code" [class.is-visible]="showCode()">
         <app-code-block code='<dln-form [formGroup]="miForm" (formSubmit)="onSubmit()">
-  <dln-text-field label="Nombre" [control]="miForm.controls.nombre"></dln-text-field>
-  <dln-text-field label="Email" [control]="miForm.controls.email"></dln-text-field>
+  <dln-input label="Nombre" [control]="miForm.controls.nombre"></dln-input>
+  <dln-input label="Email" [control]="miForm.controls.email"></dln-input>
 </dln-form>'></app-code-block>
       </div>
     </div>
@@ -108,8 +108,8 @@
   [loading]="cargando"
   errorMessage="Error al registrar"
   (formSubmit)="registrar()">
-  <dln-text-field label="Nombre" [control]="registroForm.controls.nombre"></dln-text-field>
-  <dln-text-field label="Email" [control]="registroForm.controls.email" type="email"></dln-text-field>
+  <dln-input label="Nombre" [control]="registroForm.controls.nombre"></dln-input>
+  <dln-input label="Email" [control]="registroForm.controls.email" type="email"></dln-input>
 </dln-form>'></app-code-block>
     </div>
   </div>

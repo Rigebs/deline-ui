@@ -38,7 +38,8 @@
   color: var(--dl-text-secondary);
 }
 
-:host(.is-open) .input-container {
+:host(.is-open) .input-container,
+:host(.is-focused) .input-container {
   border-color: var(--dl-primary);
 }
 

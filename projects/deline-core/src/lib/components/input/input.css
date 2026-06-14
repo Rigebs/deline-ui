@@ -1,11 +1,14 @@
 :host {
   display: block;
   width: 100%;
-  margin-bottom: 1.25rem;
   --field-primary: var(--dl-primary);
-  --field-error: var(--dl-error);
+  --field-error: color-mix(in srgb, var(--dl-error) 80%, white);
   --field-border: var(--dl-border-color);
   --field-bg: var(--dl-bg-secondary);
+}
+
+:host-context(.dark) {
+  --field-error: var(--dl-error);
 }
 
 :host(.is-disabled) .field-label {
@@ -19,10 +22,6 @@
   opacity: 0.6;
 }
 
-:host(.is-readonly) .input-container {
-  background: var(--dl-bg-secondary);
-}
-
 .field-wrapper {
   display: flex;
   flex-direction: column;
@@ -31,11 +30,10 @@
 
 .field-label {
   font-size: 0.75rem;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--dl-neutral);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  transition: color 0.2s;
 }
 
 .input-container {
@@ -47,32 +45,21 @@
   transition: all 0.2s ease;
 }
 
-:host(.has-prefix) .input-container {
-  border-radius: var(--dl-radius);
-}
-
-:host(.has-suffix) .input-container {
-  border-radius: var(--dl-radius);
-}
-
 .input-prefix,
 .input-suffix {
   display: flex;
   align-items: center;
   padding: 0 0.75rem;
   color: var(--dl-text-secondary);
-  background: var(--dl-bg-secondary);
-  border-bottom: 2px solid var(--field-border);
+  white-space: nowrap;
 }
 
 :host(.has-prefix) .input-prefix {
   border-radius: var(--dl-radius) 0 0 0;
-  border-right: none;
 }
 
 :host(.has-suffix) .input-suffix {
   border-radius: 0 var(--dl-radius) 0 0;
-  border-left: none;
 }
 
 .native-input {
@@ -89,17 +76,23 @@
   box-sizing: border-box;
 }
 
-.native-input:disabled,
-.native-input[readonly] {
+.native-input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.native-input[type="number"]::-webkit-outer-spin-button,
+.native-input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.native-input:disabled {
+  color: var(--dl-text-secondary);
+  -webkit-text-fill-color: var(--dl-text-secondary);
+  opacity: 0.6;
   cursor: not-allowed;
 }
 
-.textarea {
-  min-height: 100px;
-  resize: vertical;
-}
-
-/* Estados controlados por el Host */
 :host(.is-focused) .input-container {
   background: var(--dl-input-focus-bg);
   border-bottom-color: var(--field-primary);
@@ -109,21 +102,11 @@
   color: var(--field-primary);
 }
 
-:host(.is-focused) .input-prefix,
-:host(.is-focused) .input-suffix {
-  background: var(--dl-input-focus-bg);
-  border-bottom-color: var(--field-primary);
-}
-
 :host(.has-error) .input-container {
-  border-bottom-color: var(--field-error);
-}
-:host(.has-error) .field-label {
-  color: var(--field-error);
+  border-bottom-color: color-mix(in srgb, var(--field-error) 60%, transparent);
 }
 
-:host(.has-error) .input-prefix,
-:host(.has-error) .input-suffix {
+:host(.has-error.is-focused) .input-container {
   border-bottom-color: var(--field-error);
 }
 

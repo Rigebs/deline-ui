@@ -50,7 +50,8 @@
   outline-offset: 2px;
 }
 
-:host(.is-open) .input-container {
+:host(.is-open) .input-container,
+:host(.is-focused) .input-container {
   background: var(--dl-input-focus-bg);
   border-color: var(--dl-primary);
 }

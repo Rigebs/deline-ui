@@ -1,9 +1,13 @@
 <div class="select-wrapper">
+    @if (label() && !hasParentFormField()) {
     <label class="field-label" [attr.for]="selectId()">{{ label() }}</label>
+    }
 
-    <div 
-      class="input-container" 
+    <div
+      class="input-container"
       (click)="toggle()"
+      (focus)="onFocus()"
+      (blur)="onBlur()"
       [id]="selectId()"
       role="combobox"
       [attr.aria-expanded]="isOpen()"
@@ -28,9 +32,9 @@
           <li class="option-group" role="group" [attr.aria-label]="group.label">
             <span class="group-label">{{ group.label }}</span>
             @for (option of group.options; track option.value) {
-              <button 
+              <button
                 type="button"
-                class="option-item" 
+                class="option-item"
                 role="option"
                 [class.selected]="selectedOption()?.value === option.value"
                 [class.disabled]="option.disabled"
@@ -47,9 +51,9 @@
             }
           </li>
         } @else {
-          <button 
+          <button
             type="button"
-            class="option-item" 
+            class="option-item"
             role="option"
             [class.selected]="selectedOption()?.value === group.value"
             [class.disabled]="group.disabled"

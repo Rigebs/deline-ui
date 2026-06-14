@@ -1,12 +1,12 @@
 import { Component, signal, computed } from '@angular/core';
 import { FormControl, Validators, FormsModule } from '@angular/forms';
-import { Textarea } from 'deline-core';
+import { Textarea, FormField } from 'deline-core';
 import { ApiTable, ApiTableRow } from '../../../shared/components/api-table/api-table';
 import { CodeBlock } from '../../../shared/components/code-block/code-block';
 
 @Component({
   selector: 'app-textarea-doc',
-  imports: [Textarea, ApiTable, CodeBlock, FormsModule],
+  imports: [Textarea, FormField, ApiTable, CodeBlock, FormsModule],
   templateUrl: './textarea-doc.html',
 })
 export class TextareaDoc {
@@ -22,7 +22,7 @@ export class TextareaDoc {
   readonlyControl = new FormControl('Texto legal de ejemplo...');
 
   copyImport() {
-    navigator.clipboard.writeText(`import { Textarea } from 'deline-core';`).then(() => {
+    navigator.clipboard.writeText(`import { Textarea, FormField } from 'deline-core';`).then(() => {
       this.importCopied.set(true);
       setTimeout(() => this.importCopied.set(false), 2000);
     });
@@ -38,16 +38,22 @@ export class TextareaDoc {
   });
 
   inputProps: ApiTableRow[] = [
-    { name: 'label', type: 'string', default: '-', description: 'Etiqueta del campo (requerido).' },
+    { name: 'label', type: 'string', default: "''", description: 'Etiqueta del campo (se oculta dentro de dln-form-field).' },
     { name: 'control', type: 'FormControl', default: '-', description: 'Control reactivo de Angular (requerido).' },
     { name: 'placeholder', type: 'string', default: "''", description: 'Texto de placeholder.' },
     { name: 'rows', type: 'number', default: '4', description: 'Número de filas visibles.' },
     { name: 'maxLength', type: 'number', default: '0', description: 'Máximo de caracteres (0 = sin límite).' },
     { name: 'disabled', type: 'boolean', default: 'false', description: 'Deshabilita el campo.' },
     { name: 'readonly', type: 'boolean', default: 'false', description: 'Modo solo lectura.' },
+    { name: 'helperText', type: 'string', default: "''", description: 'Texto de ayuda debajo del campo (solo standalone).' },
+    { name: 'customError', type: 'string', default: "''", description: 'Mensaje de error personalizado (solo standalone).' },
+    { name: 'showCharCount', type: 'boolean', default: 'false', description: 'Muestra contador de caracteres (requiere maxLength).' },
+  ];
+
+  formFieldRows: ApiTableRow[] = [
+    { name: 'label', type: 'string', default: "''", description: 'Etiqueta del campo (reemplaza la del control interno).' },
     { name: 'helperText', type: 'string', default: "''", description: 'Texto de ayuda debajo del campo.' },
     { name: 'customError', type: 'string', default: "''", description: 'Mensaje de error personalizado.' },
-    { name: 'showCharCount', type: 'boolean', default: 'false', description: 'Muestra contador de caracteres (requiere maxLength).' },
   ];
 
   outputProps: ApiTableRow[] = [];

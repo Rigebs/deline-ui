@@ -2,8 +2,8 @@
   <div class="page-breadcrumb">
     <span class="page-breadcrumb-text">Componentes</span>
   </div>
-  <h1 class="page-title">Input / Text Field</h1>
-  <p class="page-subtitle">Campo de entrada de texto con label animado, estados de validación, soporte para inputs y textareas, y mensajes de error automáticos.</p>
+  <h1 class="page-title">Input</h1>
+  <p class="page-subtitle">Campo de entrada de texto con label animado, estados de validación y mensajes de error automáticos.</p>
 
   <div class="import-block">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
@@ -12,7 +12,7 @@
         {{ importCopied() ? '✓ Copiado' : 'Copiar' }}
       </button>
     </div>
-    <pre class="import-code"><code><span style="color:#c792ea;">import</span> <span style="color:#82aaff;">&#123; TextField &#125;</span> <span style="color:#c792ea;">from</span> <span class="hljs-string">'deline-core'</span>;</code></pre>
+    <pre class="import-code"><code><span style="color:#c792ea;">import</span> <span style="color:#82aaff;">&#123; Input, FormField &#125;</span> <span style="color:#c792ea;">from</span> <span class="hljs-string">'deline-core'</span>;</code></pre>
   </div>
 </header>
 
@@ -29,14 +29,13 @@
 
     <div class="playground-switcher">
       <div class="playground-preview" [class.is-hidden]="showCode()" style="flex-direction:column;gap:24px;max-width:420px;margin:0 auto;">
-        <dln-text-field
-          [label]="playLabel()"
-          [control]="playControl"
-          [placeholder]="playPlaceholder()"
-          [multiline]="playMultiline()"
-          [disabled]="playDisabled()"
-          [readonly]="playReadonly()"
-          [helperText]="playHelper()" />
+        <dln-form-field [label]="playLabel()" [helperText]="playHelper()">
+          <dln-input
+            [control]="playControl"
+            [placeholder]="playPlaceholder()"
+            [disabled]="playDisabled()"
+            [readonly]="playReadonly()" />
+        </dln-form-field>
       </div>
       <div class="playground-code" [class.is-visible]="showCode()">
         <app-code-block [code]="genCode()"></app-code-block>
@@ -44,31 +43,12 @@
     </div>
 
     <div class="playground-controls">
-      <div class="control-group" style="flex:2;">
-        <label class="control-label">Label</label>
-        <input type="text" class="control-input" [value]="playLabel()" (input)="playLabel.set($any($event.target).value)" placeholder="Etiqueta">
-      </div>
-      <div class="control-group" style="flex:2;">
-        <label class="control-label">Placeholder</label>
-        <input type="text" class="control-input" [value]="playPlaceholder()" (input)="playPlaceholder.set($any($event.target).value)" placeholder="Placeholder">
-      </div>
-      <div class="control-group">
-        <label class="control-label">Helper</label>
-        <input type="text" class="control-input" [value]="playHelper()" (input)="playHelper.set($any($event.target).value)" placeholder="Helper text">
-      </div>
-      <div class="control-checkboxes">
-        <label class="control-checkbox">
-          <input type="checkbox" [checked]="playDisabled()" (change)="playDisabled.set($any($event.target).checked)">
-          <span>Disabled</span>
-        </label>
-        <label class="control-checkbox">
-          <input type="checkbox" [checked]="playReadonly()" (change)="playReadonly.set($any($event.target).checked)">
-          <span>Readonly</span>
-        </label>
-        <label class="control-checkbox">
-          <input type="checkbox" [checked]="playMultiline()" (change)="playMultiline.set($any($event.target).checked)">
-          <span>Multiline</span>
-        </label>
+      <dln-input label="Label" [control]="playLabelCtrl" placeholder="Etiqueta" />
+      <dln-input label="Placeholder" [control]="playPlaceholderCtrl" placeholder="Placeholder" />
+      <dln-input label="Helper" [control]="playHelperCtrl" placeholder="Helper text" />
+      <div style="display:flex;flex-direction:column;justify-content:flex-end;gap:10px;">
+        <dln-checkbox [(checked)]="playDisabled" label="Disabled" />
+        <dln-checkbox [(checked)]="playReadonly" label="Readonly" />
       </div>
     </div>
   </div>
@@ -82,67 +62,68 @@
     <div class="variant-card">
       <h3 class="variant-card-title">Default</h3>
       <div class="variant-row">
-        <dln-text-field label="Nombre" [control]="prefilledControl" placeholder="Tu nombre" style="max-width:360px;" />
+        <dln-input label="Nombre" [control]="prefilledControl" placeholder="Tu nombre" style="max-width:360px;" />
       </div>
       <div class="variant-divider">
-        <app-code-block code='<dln-text-field label="Nombre" [control]="control" placeholder="Tu nombre" />'></app-code-block>
+        <app-code-block code='<dln-input label="Nombre" [control]="control" placeholder="Tu nombre" />'></app-code-block>
       </div>
     </div>
 
     <div class="variant-card">
       <h3 class="variant-card-title">Disabled</h3>
       <div class="variant-row">
-        <dln-text-field label="Usuario" [control]="disabledControl" style="max-width:360px;" />
+        <dln-input label="Usuario" [control]="disabledControl" style="max-width:360px;" />
       </div>
       <div class="variant-divider">
-        <app-code-block code='<dln-text-field label="Usuario" [control]="control" [disabled]="true" />'></app-code-block>
+        <app-code-block code='<dln-input label="Usuario" [control]="control" [disabled]="true" />'></app-code-block>
       </div>
     </div>
 
     <div class="variant-card">
       <h3 class="variant-card-title">Readonly</h3>
       <div class="variant-row">
-        <dln-text-field label="Email" [control]="readonlyControl" style="max-width:360px;" />
+        <dln-input label="Email" [readonly]="true" [control]="readonlyControl" style="max-width:360px;" />
       </div>
       <div class="variant-divider">
-        <app-code-block code='<dln-text-field label="Email" [control]="control" [readonly]="true" />'></app-code-block>
+        <app-code-block code='<dln-input label="Email" [control]="control" [readonly]="true" />'></app-code-block>
       </div>
     </div>
 
     <div class="variant-card">
       <h3 class="variant-card-title">Error state</h3>
       <div class="variant-row">
-        <dln-text-field label="Campo requerido" [control]="errorControl" helperText="Este campo es obligatorio" style="max-width:360px;" />
+        <dln-form-field label="Campo requerido" customError="Este campo es obligatorio">
+          <dln-input [control]="errorControl" />
+        </dln-form-field>
         <dln-button (click)="toggleError()" variant="outline" size="sm">Validar</dln-button>
       </div>
       <div class="variant-divider">
-        <app-code-block code='<!-- Al marcar como touched y dirty, muestra el error automáticamente -->'></app-code-block>
+        <app-code-block code='<dln-form-field label="Campo requerido" customError="Este campo es obligatorio">
+  <dln-input [control]="control" />
+</dln-form-field>'></app-code-block>
       </div>
     </div>
 
     <div class="variant-card">
-      <h3 class="variant-card-title">Multiline (textarea)</h3>
+      <h3 class="variant-card-title">Multiline</h3>
       <div class="variant-row">
-        <dln-text-field label="Comentarios" [control]="touchedControl" [multiline]="true" placeholder="Escribe tus comentarios..." helperText="Máximo 500 caracteres" style="max-width:360px;" />
-      </div>
-      <div class="variant-divider">
-        <app-code-block code='<dln-text-field label="Comentarios" [control]="control" [multiline]="true" />'></app-code-block>
+        <p style="margin:0;font-size:14px;color:var(--doc-text-secondary);">Para texto multilínea usa el componente <a routerLink="/components/textarea" style="color:var(--dl-primary);text-decoration:underline;">dln-textarea</a>.</p>
       </div>
     </div>
 
     <div class="variant-card">
       <h3 class="variant-card-title">Prefix & Suffix</h3>
       <div class="variant-row">
-        <dln-text-field label="Precio" [control]="prefilledControl" placeholder="0.00" style="max-width:360px;">
+        <dln-input label="Precio" type="number" [control]="prefilledControl" placeholder="0.00" style="max-width:360px;">
           <ng-template #prefix><span>$</span></ng-template>
           <ng-template #suffix><span>USD</span></ng-template>
-        </dln-text-field>
+        </dln-input>
       </div>
       <div class="variant-divider">
-        <app-code-block code='<dln-text-field label="Precio" [control]="control">
+        <app-code-block code='<dln-input label="Precio" type="number" [control]="control">
   <ng-template #prefix><span>$</span></ng-template>
   <ng-template #suffix><span>USD</span></ng-template>
-</dln-text-field>'></app-code-block>
+</dln-input>'></app-code-block>
       </div>
     </div>
   </div>
@@ -150,9 +131,10 @@
 
 <section class="docs-section" id="api">
   <h2 class="section-title">API Reference</h2>
-  <p class="section-desc">Estructura técnica de Inputs del componente TextField para desarrollo en Angular.</p>
+  <p class="section-desc">Estructura técnica de inputs del componente Input para desarrollo en Angular.</p>
 
-  <app-api-table title="input() Properties" [rows]="apiRows"></app-api-table>
+  <app-api-table title="input() Properties (dln-input)" [rows]="apiRows"></app-api-table>
+  <app-api-table title="input() Properties (dln-form-field)" [rows]="formFieldRows"></app-api-table>
 </section>
 
 <section class="docs-section" id="use-cases">
@@ -166,31 +148,18 @@
   emailControl = new FormControl("", [Validators.required, Validators.email]);
 }'></app-code-block>
       <div style="margin-top:12px;">
-        <app-code-block code='<dln-text-field
-  label="Correo electrónico"
-  [control]="emailControl"
-  type="email"
-  placeholder="ej: usuario@correo.com"
-  helperText="Nunca compartiremos tu correo" />'></app-code-block>
+        <app-code-block code='<dln-form-field label="Correo electrónico" helperText="Nunca compartiremos tu correo">
+  <dln-input [control]="emailControl" type="email" placeholder="ej: usuario@correo.com" />
+</dln-form-field>'></app-code-block>
       </div>
     </div>
 
     <div class="use-case-card">
       <div class="use-case-label">Mensaje de error personalizado</div>
-      <app-code-block code='<dln-text-field
-  label="Contraseña"
-  [control]="passwordControl"
-  type="password"
-  [customError]="Mi mensaje personalizado" />'></app-code-block>
+      <app-code-block code='<dln-form-field label="Contraseña" customError="Mi mensaje personalizado">
+  <dln-input [control]="passwordControl" type="password" />
+</dln-form-field>'></app-code-block>
     </div>
 
-    <div class="use-case-card">
-      <div class="use-case-label">Campo de texto multilínea</div>
-      <app-code-block code='<dln-text-field
-  label="Descripción"
-  [control]="descControl"
-  [multiline]="true"
-  placeholder="Escribe una descripción..." />'></app-code-block>
-    </div>
   </div>
 </section>

@@ -1,11 +1,13 @@
 <div class="date-picker-wrapper">
-    @if (label()) {
+    @if (label() && !hasParentFormField()) {
     <label class="field-label">{{ label() }}</label>
     }
 
     <div
         class="input-container"
         (click)="toggleCalendar()"
+        (focus)="onFocus()"
+        (blur)="onBlur()"
         role="combobox"
         [attr.aria-expanded]="isOpen()"
         [attr.aria-label]="ariaLabel() || label()"
