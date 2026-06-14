@@ -1,0 +1,97 @@
+<header class="page-header">
+  <div class="page-breadcrumb">
+    <span class="page-breadcrumb-text">Componentes</span>
+  </div>
+  <h1 class="page-title">DatePicker</h1>
+  <p class="page-subtitle">Selector de fecha nativo estilizado. Soporta fechas mínima/máxima y modelo bidireccional.</p>
+
+  <div class="import-block">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+      <span class="import-label">Importación Standalone Angular</span>
+      <button (click)="copyImport()" class="import-copy-btn">
+        {{ importCopied() ? '✓ Copiado' : 'Copiar' }}
+      </button>
+    </div>
+    <pre class="import-code"><code><span style="color:#c792ea;">import</span> <span style="color:#82aaff;">&#123; DatePicker &#125;</span> <span style="color:#c792ea;">from</span> <span class="hljs-string">'deline-core'</span>;</code></pre>
+  </div>
+</header>
+
+<section class="docs-section" id="playground">
+  <h2 class="section-title">Playground Interactivo</h2>
+
+  <div class="playground">
+    <div class="playground-header">
+      <div class="playground-tabs">
+        <button class="playground-tab" [class.playground-tab--active]="!showCode()" (click)="showCode.set(false);$event.preventDefault()">Vista Previa</button>
+        <button class="playground-tab" [class.playground-tab--active]="showCode()" (click)="showCode.set(true);$event.preventDefault()">Código Angular generado</button>
+      </div>
+    </div>
+
+    <div class="playground-switcher">
+      <div class="playground-preview" [class.is-hidden]="showCode()" style="flex-direction:column;gap:24px;">
+        <dln-date-picker [(value)]="playDate" label="Fecha de inicio"></dln-date-picker>
+        <p style="margin:0;color:var(--text-secondary);font-size:14px;">Fecha: <strong>{{ playDate() || '(sin seleccionar)' }}</strong></p>
+      </div>
+      <div class="playground-code" [class.is-visible]="showCode()">
+        <app-code-block [code]="genCode()"></app-code-block>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="docs-section" id="variants">
+  <h2 class="section-title">Variantes y Configuraciones</h2>
+  <p class="section-desc">Diferentes configuraciones del DatePicker.</p>
+
+  <div class="variants-list">
+    <div class="variant-card">
+      <h3 class="variant-card-title">Básico</h3>
+      <div class="variant-row">
+        <dln-date-picker label="Fecha de nacimiento"></dln-date-picker>
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <h3 class="variant-card-title">Con rango</h3>
+      <div class="variant-row">
+        <dln-date-picker label="Fecha" min="2025-01-01" max="2025-12-31"></dln-date-picker>
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <h3 class="variant-card-title">Deshabilitado</h3>
+      <div class="variant-row">
+        <dln-date-picker label="Fecha bloqueada" [disabled]="true"></dln-date-picker>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="docs-section" id="api">
+  <h2 class="section-title">API Reference</h2>
+  <p class="section-desc">Estructura técnica de Inputs, Outputs y selectores para desarrollo en Angular.</p>
+
+  <app-api-table title="input() Properties" [rows]="inputProps"></app-api-table>
+  <app-api-table title="output() Events" [rows]="outputProps" typeLabel="Tipo de Emisión" defaultLabel="Valor"></app-api-table>
+</section>
+
+<section class="docs-section" id="use-cases">
+  <h2 class="section-title">Casos de Uso Comunes</h2>
+  <p class="section-desc">Snippets listos para copiar e implementar en tus proyectos.</p>
+
+  <div class="use-cases">
+    <div class="use-case-card">
+      <div class="use-case-label">Filtro por fechas</div>
+      <app-code-block code='<dln-date-picker
+  label="Desde"
+  [(value)]="filtro.desde"
+  [max]="filtro.hasta()">
+</dln-date-picker>
+<dln-date-picker
+  label="Hasta"
+  [(value)]="filtro.hasta"
+  [min]="filtro.desde()">
+</dln-date-picker>'></app-code-block>
+    </div>
+  </div>
+</section>

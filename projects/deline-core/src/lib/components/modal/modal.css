@@ -30,14 +30,14 @@ dialog {
   border-radius: var(--modal-radius);
   padding: 0;
   background: var(--dl-bg);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 25px 50px -12px var(--dl-shadow-medium);
   max-height: var(--modal-max-height);
   width: var(--modal-width);
   overflow: hidden;
 }
 
 dialog::backdrop {
-  background: rgba(15, 23, 42, 0.5);
+  background: color-mix(in srgb, var(--dl-bg) 50%, transparent);
   backdrop-filter: blur(4px);
 }
 

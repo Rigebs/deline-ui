@@ -21,9 +21,9 @@
   --doc-primary-bg: #eff6ff;
   --doc-nav-bg: rgba(255, 255, 255, 0.85);
   --doc-card-bg: #ffffff;
-  --doc-code-bg: #0f172a;
-  --doc-code-text: #e2e8f0;
-  --doc-code-header: #1e293b;
+  --doc-code-bg: #f8fafc;
+  --doc-code-text: #334155;
+  --doc-code-border: #e2e8f0;
   --font-sans: 'Inter', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
@@ -41,6 +41,9 @@
   --doc-primary-bg: rgba(96, 165, 250, 0.1);
   --doc-nav-bg: rgba(15, 23, 42, 0.85);
   --doc-card-bg: #0f172a;
+  --doc-code-bg: #0f172a;
+  --doc-code-text: #e2e8f0;
+  --doc-code-border: #1e293b;
   color-scheme: dark;
 }
 
@@ -286,7 +289,7 @@ app-root {
 /* ===== IMPORT BLOCK ===== */
 .import-block {
   background: var(--doc-code-bg);
-  border: 1px solid #1e293b;
+  border: 1px solid var(--doc-code-border);
   border-radius: 12px;
   padding: 16px;
 }
@@ -301,10 +304,13 @@ app-root {
 .import-code {
   font-size: 13px;
   font-family: var(--font-mono);
-  color: #e2e8f0;
+  color: var(--doc-code-text);
   overflow-x: auto;
 }
 .import-code .hljs-string {
+  color: #059669;
+}
+.dark .import-code .hljs-string {
   color: #34d399;
 }
 .import-copy-btn {
@@ -320,7 +326,7 @@ app-root {
   text-align: right;
 }
 .import-copy-btn:hover {
-  color: #e2e8f0;
+  color: var(--doc-code-text);
 }
 
 /* ===== SECTION ===== */
@@ -344,8 +350,6 @@ app-root {
 .playground {
   border: 1px solid var(--doc-border);
   border-radius: 12px;
-  overflow: hidden;
-  background: var(--doc-card-bg);
 }
 .playground-header {
   background: var(--doc-bg-secondary);
@@ -353,6 +357,11 @@ app-root {
   padding: 10px 16px;
   display: flex;
   align-items: center;
+  border-radius: 12px 12px 0 0;
+}
+
+.playground > :last-child {
+  border-radius: 0 0 12px 12px;
 }
 .playground-tabs {
   display: flex;
@@ -403,7 +412,7 @@ app-root {
 .playground-code {
   opacity: 0;
   pointer-events: none;
-  border-top: 1px solid #1e293b;
+  border-top: 1px solid var(--doc-code-border);
   min-height: 160px;
 }
 .playground-code.is-visible {
@@ -484,6 +493,12 @@ app-root {
   color: var(--doc-text-tertiary);
   margin-bottom: 12px;
 }
+.variant-desc {
+  font-size: 13px;
+  color: var(--doc-text-secondary);
+  margin: -4px 0 16px;
+  line-height: 1.5;
+}
 .variant-row {
   display: flex;
   flex-wrap: wrap;
@@ -555,7 +570,7 @@ app-root {
 /* ===== CODE BLOCK ===== */
 .code-block {
   background: var(--doc-code-bg);
-  border: 1px solid #1e293b;
+  border: 1px solid var(--doc-code-border);
   border-radius: 12px;
   overflow: hidden;
 }
@@ -564,7 +579,7 @@ app-root {
   justify-content: space-between;
   align-items: center;
   padding: 8px 16px;
-  border-bottom: 1px solid #1e293b;
+  border-bottom: 1px solid var(--doc-code-border);
 }
 .code-lang {
   font-size: 11px;
@@ -586,7 +601,7 @@ app-root {
   text-align: center;
 }
 .code-copy:hover {
-  color: #e2e8f0;
+  color: var(--doc-code-text);
 }
 .code-block pre {
   padding: 16px;
@@ -596,13 +611,41 @@ app-root {
   margin: 0;
 }
 .code-block pre code {
-  color: #e2e8f0;
+  color: var(--doc-code-text);
   line-height: 1.5;
 }
 .code-block .hljs {
   background: transparent;
   padding: 0;
 }
+
+.code-block .hljs-selector-class { color: #7c3aed; }
+.code-block .hljs-selector-tag { color: #dc2626; }
+.code-block .hljs-name { color: #dc2626; }
+.code-block .hljs-attr { color: #b45309; }
+.code-block .hljs-string { color: #059669; }
+.code-block .hljs-number { color: #b45309; }
+.code-block .hljs-keyword { color: #7c3aed; }
+.code-block .hljs-built_in { color: #92400e; }
+.code-block .hljs-literal { color: #0891b2; }
+.code-block .hljs-title { color: #2563eb; }
+.code-block .hljs-attribute { color: #b45309; }
+.code-block .hljs-comment { color: #94a3b8; }
+.code-block .hljs-meta { color: #2563eb; }
+
+.dark .code-block .hljs-selector-class { color: #e5c07b; }
+.dark .code-block .hljs-selector-tag { color: #e06c75; }
+.dark .code-block .hljs-name { color: #e06c75; }
+.dark .code-block .hljs-attr { color: #d19a66; }
+.dark .code-block .hljs-string { color: #98c379; }
+.dark .code-block .hljs-number { color: #d19a66; }
+.dark .code-block .hljs-keyword { color: #c678dd; }
+.dark .code-block .hljs-built_in { color: #e5c07b; }
+.dark .code-block .hljs-literal { color: #56b6c2; }
+.dark .code-block .hljs-title { color: #61afef; }
+.dark .code-block .hljs-attribute { color: #d19a66; }
+.dark .code-block .hljs-comment { color: #5c6370; }
+.dark .code-block .hljs-meta { color: #61afef; }
 
 /* ===== USE CASE CARDS ===== */
 .use-cases {

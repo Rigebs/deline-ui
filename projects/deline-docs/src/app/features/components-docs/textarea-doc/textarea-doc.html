@@ -1,0 +1,126 @@
+<header class="page-header">
+  <div class="page-breadcrumb">
+    <span class="page-breadcrumb-text">Componentes</span>
+  </div>
+  <h1 class="page-title">Textarea</h1>
+  <p class="page-subtitle">Área de texto multilínea para descripciones largas. Soporta control reactivo, contador de caracteres y validación.</p>
+
+  <div class="import-block">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+      <span class="import-label">Importación Standalone Angular</span>
+      <button (click)="copyImport()" class="import-copy-btn">
+        {{ importCopied() ? '✓ Copiado' : 'Copiar' }}
+      </button>
+    </div>
+    <pre class="import-code"><code><span style="color:#c792ea;">import</span> <span style="color:#82aaff;">&#123; Textarea &#125;</span> <span style="color:#c792ea;">from</span> <span class="hljs-string">'deline-core'</span>;</code></pre>
+  </div>
+</header>
+
+<section class="docs-section" id="playground">
+  <h2 class="section-title">Playground Interactivo</h2>
+
+  <div class="playground">
+    <div class="playground-header">
+      <div class="playground-tabs">
+        <button class="playground-tab" [class.playground-tab--active]="!showCode()" (click)="showCode.set(false);$event.preventDefault()">Vista Previa</button>
+        <button class="playground-tab" [class.playground-tab--active]="showCode()" (click)="showCode.set(true);$event.preventDefault()">Código Angular generado</button>
+      </div>
+    </div>
+
+    <div class="playground-switcher">
+      <div class="playground-preview" [class.is-hidden]="showCode()" style="flex-direction:column;gap:24px;">
+        <dln-textarea label="Descripción" [control]="playControl" placeholder="Escribe una descripción..." [rows]="playRows()"></dln-textarea>
+      </div>
+      <div class="playground-code" [class.is-visible]="showCode()">
+        <app-code-block [code]="genCode()"></app-code-block>
+      </div>
+    </div>
+
+    <div class="playground-controls">
+      <div class="control-group">
+        <label class="control-label">Filas</label>
+        <select (change)="playRows.set(+$any($event.target).value)" class="control-select">
+          <option value="2">2</option>
+          <option value="4" selected>4</option>
+          <option value="8">8</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="docs-section" id="variants">
+  <h2 class="section-title">Variantes y Configuraciones</h2>
+  <p class="section-desc">Diferentes configuraciones del componente Textarea.</p>
+
+  <div class="variants-list">
+    <div class="variant-card">
+      <h3 class="variant-card-title">Básico</h3>
+      <div class="variant-row">
+        <dln-textarea label="Comentarios" [control]="basicControl" placeholder="Escribe un comentario..."></dln-textarea>
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <h3 class="variant-card-title">Con contador de caracteres</h3>
+      <div class="variant-row">
+        <dln-textarea label="Bio" [control]="charControl" [maxLength]="200" [showCharCount]="true" placeholder="Tu biografía..."></dln-textarea>
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <h3 class="variant-card-title">Con error</h3>
+      <div class="variant-row">
+        <dln-textarea label="Obligatorio" [control]="errorControl" placeholder="Este campo es obligatorio" [helperText]="'Escribe algo'"></dln-textarea>
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <h3 class="variant-card-title">Deshabilitado</h3>
+      <div class="variant-row">
+        <dln-textarea label="Bloqueado" [control]="disabledControl" [disabled]="true"></dln-textarea>
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <h3 class="variant-card-title">Readonly</h3>
+      <div class="variant-row">
+        <dln-textarea label="Términos" [control]="readonlyControl" [readonly]="true"></dln-textarea>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="docs-section" id="api">
+  <h2 class="section-title">API Reference</h2>
+  <p class="section-desc">Estructura técnica de Inputs, Outputs y selectores para desarrollo en Angular.</p>
+
+  <app-api-table title="input() Properties" [rows]="inputProps"></app-api-table>
+</section>
+
+<section class="docs-section" id="use-cases">
+  <h2 class="section-title">Casos de Uso Comunes</h2>
+  <p class="section-desc">Snippets listos para copiar e implementar en tus proyectos.</p>
+
+  <div class="use-cases">
+    <div class="use-case-card">
+      <div class="use-case-label">Formulario de contacto</div>
+      <app-code-block code='<dln-textarea
+  label="Mensaje"
+  [control]="mensajeControl"
+  [rows]="6"
+  placeholder="Escribe tu mensaje..."
+  [maxLength]="500"
+  [showCharCount]="true"
+></dln-textarea>'></app-code-block>
+    </div>
+
+    <div class="use-case-card">
+      <div class="use-case-label">Con validación</div>
+      <app-code-block code='this.descripcion = new FormControl("", [
+  Validators.required,
+  Validators.minLength(10)
+]);'></app-code-block>
+    </div>
+  </div>
+</section>

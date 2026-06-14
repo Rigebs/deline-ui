@@ -7,8 +7,8 @@
 .sidebar {
   width: 260px;
   height: 100%;
-  background-color: #ffffff;
-  border-right: 1px solid #e2e8f0;
+  background-color: var(--dl-bg);
+  border-right: 1px solid var(--dl-border-color);
   display: flex;
   flex-direction: column;
   transition: width 0.25s ease;
@@ -50,8 +50,8 @@
 .logo-icon {
   width: 32px;
   height: 32px;
-  background: #2563eb;
-  color: white;
+  background: var(--dl-primary);
+  color: var(--dl-primary-contrast);
   border-radius: 8px;
   display: grid;
   place-items: center;
@@ -61,13 +61,13 @@
 .logo-text {
   font-size: 1.05rem;
   font-weight: 700;
-  color: #1e293b;
+  color: var(--dl-text);
   white-space: nowrap;
 }
 
 .toggle-btn {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  background: var(--dl-bg-secondary);
+  border: 1px solid var(--dl-border-color);
   border-radius: 6px;
   padding: 4px;
   cursor: pointer;
@@ -101,7 +101,7 @@
   border: none;
   background: transparent;
   border-radius: 10px;
-  color: #64748b;
+  color: var(--dl-text-secondary);
   cursor: pointer;
   transition:
     background 0.15s ease,
@@ -110,13 +110,13 @@
 }
 
 .nav-item:hover {
-  background-color: #f1f5f9;
-  color: #1e293b;
+  background-color: var(--dl-ghost-hover-bg);
+  color: var(--dl-text);
 }
 
 .nav-item.active {
-  background-color: #eff6ff;
-  color: #2563eb;
+  background-color: var(--dl-primary-bg-light);
+  color: var(--dl-primary);
 }
 
 /* Nav item collapsed (ICON RAIL) */
@@ -146,8 +146,9 @@
   left: calc(100% + 10px);
   top: 50%;
   transform: translateY(-50%);
-  background: #0f172a;
-  color: white;
+  background: var(--dl-bg);
+  color: var(--dl-text);
+  border: 1px solid var(--dl-border-color);
   padding: 6px 10px;
   border-radius: 6px;
   font-size: 0.75rem;
@@ -172,7 +173,7 @@
 
 .sidebar-footer {
   padding: 12px;
-  border-top: 1px solid #e2e8f0;
+  border-top: 1px solid var(--dl-border-color);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -192,7 +193,7 @@
 .user-avatar {
   width: 36px;
   height: 36px;
-  background: #e2e8f0;
+  background: var(--dl-bg-secondary);
   border-radius: 50%;
   display: grid;
   place-items: center;
@@ -204,13 +205,13 @@
   margin: 0;
   font-size: 0.875rem;
   font-weight: 600;
-  color: #1e293b;
+  color: var(--dl-text);
 }
 
 .user-role {
   margin: 0;
   font-size: 0.75rem;
-  color: #64748b;
+  color: var(--dl-text-secondary);
 }
 
 /* Logout */
@@ -223,5 +224,5 @@
 }
 
 .logout-btn:hover {
-  background: #fee2e2;
+  background: var(--dl-error-bg);
 }

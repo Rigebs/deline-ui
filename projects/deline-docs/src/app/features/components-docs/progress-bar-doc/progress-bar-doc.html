@@ -1,0 +1,109 @@
+<header class="page-header">
+  <div class="page-breadcrumb">
+    <span class="page-breadcrumb-text">Componentes</span>
+  </div>
+  <h1 class="page-title">ProgressBar</h1>
+  <p class="page-subtitle">Barra de progreso visual para indicar el avance de una operación. Soporta modo determinado e indeterminado.</p>
+
+  <div class="import-block">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+      <span class="import-label">Importación Standalone Angular</span>
+      <button (click)="copyImport()" class="import-copy-btn">
+        {{ importCopied() ? '✓ Copiado' : 'Copiar' }}
+      </button>
+    </div>
+    <pre class="import-code"><code><span style="color:#c792ea;">import</span> <span style="color:#82aaff;">&#123; ProgressBar &#125;</span> <span style="color:#c792ea;">from</span> <span class="hljs-string">'deline-core'</span>;</code></pre>
+  </div>
+</header>
+
+<section class="docs-section" id="playground">
+  <h2 class="section-title">Playground Interactivo</h2>
+
+  <div class="playground">
+    <div class="playground-header">
+      <div class="playground-tabs">
+        <button class="playground-tab" [class.playground-tab--active]="!showCode()" (click)="showCode.set(false);$event.preventDefault()">Vista Previa</button>
+        <button class="playground-tab" [class.playground-tab--active]="showCode()" (click)="showCode.set(true);$event.preventDefault()">Código Angular generado</button>
+      </div>
+    </div>
+
+    <div class="playground-switcher">
+      <div class="playground-preview" [class.is-hidden]="showCode()" style="flex-direction:column;gap:24px;">
+        <dln-progress-bar [value]="playValue()" label="Progreso" [showValue]="true"></dln-progress-bar>
+      </div>
+      <div class="playground-code" [class.is-visible]="showCode()">
+        <app-code-block [code]="genCode()"></app-code-block>
+      </div>
+    </div>
+
+    <div class="playground-controls">
+      <div class="control-group">
+        <label class="control-label">Valor: {{ playValue() }}%</label>
+        <input type="range" min="0" max="100" [value]="playValue()" (input)="playValue.set(+$any($event.target).value)" class="control-range" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="docs-section" id="variants">
+  <h2 class="section-title">Variantes y Configuraciones</h2>
+  <p class="section-desc">Diferentes variantes y estados del ProgressBar.</p>
+
+  <div class="variants-list">
+    <div class="variant-card">
+      <h3 class="variant-card-title">Variantes de color</h3>
+      <div class="variant-row" style="flex-direction:column;gap:12px;">
+        <dln-progress-bar [value]="75" variant="primary" label="Primary"></dln-progress-bar>
+        <dln-progress-bar [value]="60" variant="success" label="Success"></dln-progress-bar>
+        <dln-progress-bar [value]="45" variant="warning" label="Warning"></dln-progress-bar>
+        <dln-progress-bar [value]="30" variant="error" label="Error"></dln-progress-bar>
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <h3 class="variant-card-title">Indeterminado</h3>
+      <div class="variant-row">
+        <dln-progress-bar label="Cargando..." [indeterminate]="true"></dln-progress-bar>
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <h3 class="variant-card-title">Sin etiqueta</h3>
+      <div class="variant-row">
+        <dln-progress-bar [value]="80"></dln-progress-bar>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="docs-section" id="api">
+  <h2 class="section-title">API Reference</h2>
+  <p class="section-desc">Estructura técnica de Inputs, Outputs y selectores para desarrollo en Angular.</p>
+
+  <app-api-table title="input() Properties" [rows]="inputProps"></app-api-table>
+</section>
+
+<section class="docs-section" id="use-cases">
+  <h2 class="section-title">Casos de Uso Comunes</h2>
+  <p class="section-desc">Snippets listos para copiar e implementar en tus proyectos.</p>
+
+  <div class="use-cases">
+    <div class="use-case-card">
+      <div class="use-case-label">Subida de archivos</div>
+      <app-code-block code='<dln-progress-bar
+  [value]="uploadProgress"
+  label="Subiendo..."
+  variant="primary"
+  [showValue]="true"
+></dln-progress-bar>'></app-code-block>
+    </div>
+
+    <div class="use-case-card">
+      <div class="use-case-label">Carga inicial</div>
+      <app-code-block code='<dln-progress-bar
+  label="Preparando datos..."
+  [indeterminate]="true"
+></dln-progress-bar>'></app-code-block>
+    </div>
+  </div>
+</section>

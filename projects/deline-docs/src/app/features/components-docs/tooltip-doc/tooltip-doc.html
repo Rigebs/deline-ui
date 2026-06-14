@@ -1,0 +1,109 @@
+<header class="page-header">
+  <div class="page-breadcrumb">
+    <span class="page-breadcrumb-text">Componentes</span>
+  </div>
+  <h1 class="page-title">Tooltip</h1>
+  <p class="page-subtitle">Información contextual que aparece al hacer hover o focus sobre un elemento. Soporta 4 posiciones y retardo configurable.</p>
+
+  <div class="import-block">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+      <span class="import-label">Importación Standalone Angular</span>
+      <button (click)="copyImport()" class="import-copy-btn">
+        {{ importCopied() ? '✓ Copiado' : 'Copiar' }}
+      </button>
+    </div>
+    <pre class="import-code"><code><span style="color:#c792ea;">import</span> <span style="color:#82aaff;">&#123; Tooltip &#125;</span> <span style="color:#c792ea;">from</span> <span class="hljs-string">'deline-core'</span>;</code></pre>
+  </div>
+</header>
+
+<section class="docs-section" id="playground">
+  <h2 class="section-title">Playground Interactivo</h2>
+
+  <div class="playground">
+    <div class="playground-header">
+      <div class="playground-tabs">
+        <button class="playground-tab" [class.playground-tab--active]="!showCode()" (click)="showCode.set(false);$event.preventDefault()">Vista Previa</button>
+        <button class="playground-tab" [class.playground-tab--active]="showCode()" (click)="showCode.set(true);$event.preventDefault()">Código Angular generado</button>
+      </div>
+    </div>
+
+    <div class="playground-switcher">
+      <div class="playground-preview" [class.is-hidden]="showCode()" style="flex-direction:column;gap:64px;align-items:center;padding:48px;">
+        <dln-tooltip text="Esto es un tooltip">
+          <span style="padding:8px 16px;border:1px solid var(--border);border-radius:6px;cursor:pointer;">Pasa el mouse aquí</span>
+        </dln-tooltip>
+      </div>
+      <div class="playground-code" [class.is-visible]="showCode()">
+        <app-code-block code='<dln-tooltip text="Esto es un tooltip">
+  <span>Pasa el mouse aquí</span>
+</dln-tooltip>'></app-code-block>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="docs-section" id="variants">
+  <h2 class="section-title">Posiciones</h2>
+  <p class="section-desc">Las 4 posiciones disponibles del Tooltip.</p>
+
+  <div class="variants-list">
+    <div class="variant-card">
+      <h3 class="variant-card-title">Top (default)</h3>
+      <div class="variant-row" style="justify-content:center;padding:24px;">
+        <dln-tooltip text="Tooltip arriba" position="top">
+          <button style="padding:8px 16px;">Arriba</button>
+        </dln-tooltip>
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <h3 class="variant-card-title">Bottom</h3>
+      <div class="variant-row" style="justify-content:center;padding:24px;">
+        <dln-tooltip text="Tooltip abajo" position="bottom">
+          <button style="padding:8px 16px;">Abajo</button>
+        </dln-tooltip>
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <h3 class="variant-card-title">Left</h3>
+      <div class="variant-row" style="justify-content:center;padding:24px;">
+        <dln-tooltip text="Tooltip izquierda" position="left">
+          <button style="padding:8px 16px;">Izquierda</button>
+        </dln-tooltip>
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <h3 class="variant-card-title">Right</h3>
+      <div class="variant-row" style="justify-content:center;padding:24px;">
+        <dln-tooltip text="Tooltip derecha" position="right">
+          <button style="padding:8px 16px;">Derecha</button>
+        </dln-tooltip>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="docs-section" id="api">
+  <h2 class="section-title">API Reference</h2>
+  <p class="section-desc">Estructura técnica de Inputs, Outputs y selectores para desarrollo en Angular.</p>
+
+  <app-api-table title="input() Properties" [rows]="inputProps"></app-api-table>
+</section>
+
+<section class="docs-section" id="use-cases">
+  <h2 class="section-title">Casos de Uso Comunes</h2>
+  <p class="section-desc">Snippets listos para copiar e implementar en tus proyectos.</p>
+
+  <div class="use-cases">
+    <div class="use-case-card">
+      <div class="use-case-label">Icono con descripción</div>
+      <app-code-block code='<dln-tooltip text="Cerrar sesión" position="bottom">
+  <button (click)="logout()">
+    <dln-icon name="logout"></dln-icon>
+  </button>
+</dln-tooltip>'></app-code-block>
+    </div>
+  </div>
+</section>

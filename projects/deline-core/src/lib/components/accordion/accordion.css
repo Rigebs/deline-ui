@@ -1,9 +1,15 @@
-.accordion-panel {
-    border-bottom: 1px solid var(--dl-border-color);
+:host {
+    display: block;
+    width: 100%;
+    border-top: 1px solid var(--dl-border-color);
 }
 
-.accordion-panel:last-child {
-    border-bottom: none;
+:host:first-child {
+    border-top: none;
+}
+
+.accordion-panel {
+    width: 100%;
 }
 
 .accordion-header {
@@ -12,7 +18,7 @@
     justify-content: space-between;
     width: 100%;
     padding: 0.875rem 1rem;
-    background: none;
+    background: var(--dl-secondary);
     border: none;
     cursor: pointer;
     font: inherit;
@@ -25,12 +31,33 @@
 }
 
 .accordion-header:hover {
-    background: var(--dl-bg-secondary);
+    background: var(--dl-ghost-hover-bg);
+}
+
+:host-context(.dark) {
+    background: var(--dl-bg);
+    border-top-color: var(--dl-bg);
+}
+
+:host-context(.dark) .accordion-header {
+    background: var(--dl-border-color);
+}
+
+:host-context(.dark) .accordion-header:hover {
+    background: var(--dl-ghost-hover-bg);
 }
 
 .accordion-header:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+}
+
+.accordion-header:disabled:hover {
+    background: var(--dl-secondary);
+}
+
+:host-context(.dark) .accordion-header:disabled:hover {
+    background: var(--dl-border-color);
 }
 
 .accordion-header:focus-visible {
@@ -44,6 +71,7 @@
 
 .accordion-body {
     border-top: 1px solid var(--dl-border-color);
+    width: 100%;
 }
 
 .accordion-body-inner {

@@ -1,0 +1,107 @@
+<header class="page-header">
+  <div class="page-breadcrumb">
+    <span class="page-breadcrumb-text">Componentes</span>
+  </div>
+  <h1 class="page-title">Radio</h1>
+  <p class="page-subtitle">Botones de selección única que permiten elegir una opción dentro de un grupo. Soporta modelo bidireccional y deshabilitado por grupo o individual.</p>
+
+  <div class="import-block">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+      <span class="import-label">Importación Standalone Angular</span>
+      <button (click)="copyImport()" class="import-copy-btn">
+        {{ importCopied() ? '✓ Copiado' : 'Copiar' }}
+      </button>
+    </div>
+    <pre class="import-code"><code><span style="color:#c792ea;">import</span> <span style="color:#82aaff;">&#123; Radio, RadioGroupComponent &#125;</span> <span style="color:#c792ea;">from</span> <span class="hljs-string">'deline-core'</span>;</code></pre>
+  </div>
+</header>
+
+<section class="docs-section" id="playground">
+  <h2 class="section-title">Playground Interactivo</h2>
+
+  <div class="playground">
+    <div class="playground-header">
+      <div class="playground-tabs">
+        <button class="playground-tab" [class.playground-tab--active]="!showCode()" (click)="showCode.set(false);$event.preventDefault()">Vista Previa</button>
+        <button class="playground-tab" [class.playground-tab--active]="showCode()" (click)="showCode.set(true);$event.preventDefault()">Código Angular generado</button>
+      </div>
+    </div>
+
+    <div class="playground-switcher">
+      <div class="playground-preview" [class.is-hidden]="showCode()" style="flex-direction:column;gap:24px;">
+        <dln-radio-group [value]="playValue()" (changed)="playValue.set($event)">
+          <dln-radio value="opcion1" label="Opción 1"></dln-radio>
+          <dln-radio value="opcion2" label="Opción 2"></dln-radio>
+          <dln-radio value="opcion3" label="Opción 3"></dln-radio>
+        </dln-radio-group>
+        <p style="margin:0;color:var(--text-secondary);font-size:14px;">Seleccionado: <strong>{{ playValue() }}</strong></p>
+      </div>
+      <div class="playground-code" [class.is-visible]="showCode()">
+        <app-code-block [code]="genCode()"></app-code-block>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="docs-section" id="variants">
+  <h2 class="section-title">Variantes y Configuraciones</h2>
+  <p class="section-desc">Diferentes estados del componente Radio.</p>
+
+  <div class="variants-list">
+    <div class="variant-card">
+      <h3 class="variant-card-title">Grupo básico</h3>
+      <div class="variant-row">
+        <dln-radio-group>
+          <dln-radio value="a" label="Opción A"></dln-radio>
+          <dln-radio value="b" label="Opción B"></dln-radio>
+          <dln-radio value="c" label="Opción C"></dln-radio>
+        </dln-radio-group>
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <h3 class="variant-card-title">Grupo deshabilitado</h3>
+      <div class="variant-row">
+        <dln-radio-group [disabled]="true">
+          <dln-radio value="x" label="Deshabilitado"></dln-radio>
+          <dln-radio value="y" label="Deshabilitado"></dln-radio>
+        </dln-radio-group>
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <h3 class="variant-card-title">Radio individual deshabilitado</h3>
+      <div class="variant-row">
+        <dln-radio-group>
+          <dln-radio value="1" label="Habilitado"></dln-radio>
+          <dln-radio value="2" label="Deshabilitado" [disabled]="true"></dln-radio>
+        </dln-radio-group>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="docs-section" id="api">
+  <h2 class="section-title">API Reference</h2>
+  <p class="section-desc">Estructura técnica de Inputs, Outputs y selectores para desarrollo en Angular.</p>
+
+  <app-api-table title="RadioGroup input() Properties" [rows]="inputProps"></app-api-table>
+  <app-api-table title="Radio input() Properties" [rows]="inputProps"></app-api-table>
+  <app-api-table title="output() Events" [rows]="outputProps" typeLabel="Tipo de Emisión" defaultLabel="Valor"></app-api-table>
+</section>
+
+<section class="docs-section" id="use-cases">
+  <h2 class="section-title">Casos de Uso Comunes</h2>
+  <p class="section-desc">Snippets listos para copiar e implementar en tus proyectos.</p>
+
+  <div class="use-cases">
+    <div class="use-case-card">
+      <div class="use-case-label">Selección de método de pago</div>
+      <app-code-block code='<dln-radio-group [(value)]="metodoPago">
+  <dln-radio value="tarjeta" label="Tarjeta de crédito"></dln-radio>
+  <dln-radio value="paypal" label="PayPal"></dln-radio>
+  <dln-radio value="transferencia" label="Transferencia"></dln-radio>
+</dln-radio-group>'></app-code-block>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,91 @@
+<header class="page-header">
+  <div class="page-breadcrumb">
+    <span class="page-breadcrumb-text">Componentes</span>
+  </div>
+  <h1 class="page-title">Search</h1>
+  <p class="page-subtitle">Campo de búsqueda con debounce, botón de limpiar y submit al presionar Enter. Ideal para filtros y búsqueda global.</p>
+
+  <div class="import-block">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+      <span class="import-label">Importación Standalone Angular</span>
+      <button (click)="copyImport()" class="import-copy-btn">
+        {{ importCopied() ? '✓ Copiado' : 'Copiar' }}
+      </button>
+    </div>
+    <pre class="import-code"><code><span style="color:#c792ea;">import</span> <span style="color:#82aaff;">&#123; Search &#125;</span> <span style="color:#c792ea;">from</span> <span class="hljs-string">'deline-core'</span>;</code></pre>
+  </div>
+</header>
+
+<section class="docs-section" id="playground">
+  <h2 class="section-title">Playground Interactivo</h2>
+
+  <div class="playground">
+    <div class="playground-header">
+      <div class="playground-tabs">
+        <button class="playground-tab" [class.playground-tab--active]="!showCode()" (click)="showCode.set(false);$event.preventDefault()">Vista Previa</button>
+        <button class="playground-tab" [class.playground-tab--active]="showCode()" (click)="showCode.set(true);$event.preventDefault()">Código Angular generado</button>
+      </div>
+    </div>
+
+    <div class="playground-switcher">
+      <div class="playground-preview" [class.is-hidden]="showCode()" style="flex-direction:column;gap:24px;">
+        <dln-search [(value)]="searchQuery" (searched)="onSearched($event)" (cleared)="onCleared()"></dln-search>
+        @if (searchResults()) {
+        <p style="margin:0;font-size:14px;color:var(--text-secondary);">{{ searchResults() }}</p>
+        }
+      </div>
+      <div class="playground-code" [class.is-visible]="showCode()">
+        <app-code-block code='<dln-search
+  [(value)]="query"
+  (searched)="onSearch($event)"
+  (cleared)="onClear()">
+></dln-search>'></app-code-block>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="docs-section" id="variants">
+  <h2 class="section-title">Variantes</h2>
+  <p class="section-desc">Diferentes configuraciones del Search.</p>
+
+  <div class="variants-list">
+    <div class="variant-card">
+      <h3 class="variant-card-title">Deshabilitado</h3>
+      <div class="variant-row">
+        <dln-search [disabled]="true" placeholder="Búsqueda bloqueada"></dln-search>
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <h3 class="variant-card-title">Placeholder personalizado</h3>
+      <div class="variant-row">
+        <dln-search placeholder="Buscar productos..."></dln-search>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="docs-section" id="api">
+  <h2 class="section-title">API Reference</h2>
+  <p class="section-desc">Estructura técnica de Inputs, Outputs y selectores para desarrollo en Angular.</p>
+
+  <app-api-table title="input() Properties" [rows]="inputProps"></app-api-table>
+  <app-api-table title="output() Events" [rows]="outputProps" typeLabel="Tipo de Emisión" defaultLabel="Valor"></app-api-table>
+</section>
+
+<section class="docs-section" id="use-cases">
+  <h2 class="section-title">Casos de Uso Comunes</h2>
+  <p class="section-desc">Snippets listos para copiar e implementar en tus proyectos.</p>
+
+  <div class="use-cases">
+    <div class="use-case-card">
+      <div class="use-case-label">Filtro de tabla</div>
+      <app-code-block code='<dln-search
+  [(value)]="filtro"
+  (searched)="cargarDatos($event)"
+  placeholder="Buscar en tabla..."
+></dln-search>'></app-code-block>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,136 @@
+<header class="page-header">
+  <div class="page-breadcrumb">
+    <span class="page-breadcrumb-text">Componentes</span>
+  </div>
+  <h1 class="page-title">Accordion</h1>
+  <p class="page-subtitle">Panel de contenido expandible para organizar secciones. Soporta modo multi y control individual por panel.</p>
+
+  <div class="import-block">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+      <span class="import-label">Importación Standalone Angular</span>
+      <button (click)="copyImport()" class="import-copy-btn">
+        {{ importCopied() ? '✓ Copiado' : 'Copiar' }}
+      </button>
+    </div>
+    <pre class="import-code"><code><span style="color:#c792ea;">import</span> <span style="color:#82aaff;">&#123; Accordion, AccordionPanel &#125;</span> <span style="color:#c792ea;">from</span> <span class="hljs-string">'deline-core'</span>;</code></pre>
+  </div>
+</header>
+
+<section class="docs-section" id="playground">
+  <h2 class="section-title">Playground Interactivo</h2>
+
+  <div class="playground">
+    <div class="playground-header">
+      <div class="playground-tabs">
+        <button class="playground-tab" [class.playground-tab--active]="!showCode()" (click)="showCode.set(false);$event.preventDefault()">Vista Previa</button>
+        <button class="playground-tab" [class.playground-tab--active]="showCode()" (click)="showCode.set(true);$event.preventDefault()">Código Angular generado</button>
+      </div>
+    </div>
+
+    <div class="playground-switcher">
+      <div class="playground-preview" [class.is-hidden]="showCode()" style="flex-direction:column;gap:24px;justify-content:flex-start;">
+        <dln-accordion>
+          <dln-accordion-panel header="¿Qué es Deline?">
+            <p>Deline es una librería de componentes Angular construida con señales y standalone components.</p>
+          </dln-accordion-panel>
+          <dln-accordion-panel header="¿Cómo instalar?">
+            <p>Ejecuta <code>npm install deline-core</code> en tu proyecto Angular.</p>
+          </dln-accordion-panel>
+          <dln-accordion-panel header="Soporte">
+            <p>Revisa la documentación en cada componente para más detalles.</p>
+          </dln-accordion-panel>
+        </dln-accordion>
+      </div>
+      <div class="playground-code" [class.is-visible]="showCode()">
+        <app-code-block code='<dln-accordion>
+  <dln-accordion-panel header="¿Qué es Deline?">
+    <p>Contenido del panel</p>
+  </dln-accordion-panel>
+  <dln-accordion-panel header="¿Cómo instalar?">
+    <p>npm install deline-core</p>
+  </dln-accordion-panel>
+</dln-accordion>'></app-code-block>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="docs-section" id="variants">
+  <h2 class="section-title">Variantes y Configuraciones</h2>
+  <p class="section-desc">Diferentes configuraciones del Accordion.</p>
+
+  <div class="variants-list">
+    <div class="variant-card">
+      <h3 class="variant-card-title">Modo single (default)</h3>
+      <p class="variant-desc">Solo un panel abierto a la vez — al abrir uno, los demás se cierran.</p>
+      <div class="variant-row">
+        <dln-accordion>
+          <dln-accordion-panel header="Sección 1"><p>Contenido de la sección 1</p></dln-accordion-panel>
+          <dln-accordion-panel header="Sección 2"><p>Contenido de la sección 2</p></dln-accordion-panel>
+        </dln-accordion>
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <h3 class="variant-card-title">Modo multi</h3>
+      <p class="variant-desc">Varios paneles abiertos al mismo tiempo — cada uno se controla independientemente.</p>
+      <div class="variant-row">
+        <dln-accordion [multi]="true">
+          <dln-accordion-panel header="Panel 1"><p>Contenido del panel 1</p></dln-accordion-panel>
+          <dln-accordion-panel header="Panel 2"><p>Contenido del panel 2</p></dln-accordion-panel>
+        </dln-accordion>
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <h3 class="variant-card-title">Panel inicialmente abierto</h3>
+      <div class="variant-row">
+        <dln-accordion>
+          <dln-accordion-panel header="Abierto por defecto" [expanded]="true">
+            <p>Este panel comienza abierto.</p>
+          </dln-accordion-panel>
+          <dln-accordion-panel header="Cerrado">
+            <p>Este panel comienza cerrado.</p>
+          </dln-accordion-panel>
+        </dln-accordion>
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <h3 class="variant-card-title">Panel deshabilitado</h3>
+      <div class="variant-row">
+        <dln-accordion>
+          <dln-accordion-panel header="Habilitado"><p>Puedo abrirme</p></dln-accordion-panel>
+          <dln-accordion-panel header="Deshabilitado" [disabled]="true"><p>No puedes abrirme</p></dln-accordion-panel>
+        </dln-accordion>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="docs-section" id="api">
+  <h2 class="section-title">API Reference</h2>
+  <p class="section-desc">Estructura técnica de Inputs, Outputs y selectores para desarrollo en Angular.</p>
+
+  <app-api-table title="input() Properties" [rows]="inputProps"></app-api-table>
+  <app-api-table title="output() Events" [rows]="outputProps" typeLabel="Tipo de Emisión" defaultLabel="Valor"></app-api-table>
+</section>
+
+<section class="docs-section" id="use-cases">
+  <h2 class="section-title">Casos de Uso Comunes</h2>
+  <p class="section-desc">Snippets listos para copiar e implementar en tus proyectos.</p>
+
+  <div class="use-cases">
+    <div class="use-case-card">
+      <div class="use-case-label">FAQ</div>
+      <app-code-block code='<dln-accordion>
+  <dln-accordion-panel header="¿Cómo creo una cuenta?">
+    <p>Haz clic en "Registrarse" y completa el formulario.</p>
+  </dln-accordion-panel>
+  <dln-accordion-panel header="¿Cómo restauro mi contraseña?">
+    <p>Ve a "Olvidé mi contraseña" y sigue las instrucciones.</p>
+  </dln-accordion-panel>
+</dln-accordion>'></app-code-block>
+    </div>
+  </div>
+</section>
