@@ -21,7 +21,6 @@ import { IconComponent } from 'deline-icons';
     '[attr.aria-disabled]': 'disabled()',
     '[attr.aria-required]': 'required()',
     '(document:click)': 'onClickOutside($event)',
-    '(keydown)': 'onKeyDown($event)',
   },
   templateUrl: './multi-select.html',
   styleUrl: './multi-select.css',
@@ -58,14 +57,32 @@ export class MultiSelect {
     return opts;
   });
 
-  availableOptions = computed(() => {
-    const selectedValues = this.selectedItems().map((s) => s.value);
-    return this.flatOptions().filter((opt) => !selectedValues.includes(opt.value) && !opt.disabled);
+  renderedItems = computed<({ kind: 'header'; label: string } | { kind: 'option'; option: SelectOption; flatIndex: number })[]>(() => {
+    const items: ({ kind: 'header'; label: string } | { kind: 'option'; option: SelectOption; flatIndex: number })[] = [];
+    let idx = 0;
+    const selectedValues = new Set(this.selectedItems().map((s) => s.value));
+
+    for (const item of this.options()) {
+      if ('options' in item) {
+        const available = item.options.filter((o) => !selectedValues.has(o.value) && !o.disabled);
+        if (available.length > 0) {
+          items.push({ kind: 'header', label: item.label });
+          for (const opt of available) {
+            items.push({ kind: 'option', option: opt, flatIndex: idx++ });
+          }
+        }
+      } else {
+        if (!selectedValues.has(item.value) && !item.disabled) {
+          items.push({ kind: 'option', option: item, flatIndex: idx++ });
+        }
+      }
+    }
+    return items;
   });
 
-  isOptionSelected = (value: unknown): boolean => {
-    return this.selectedItems().some((s) => s.value === value);
-  };
+  availableOptions = computed(() =>
+    this.renderedItems().filter((i): i is { kind: 'option'; option: SelectOption; flatIndex: number } => i.kind === 'option').map((i) => i.option),
+  );
 
   displayText = computed(() => {
     const count = this.selectedItems().length;

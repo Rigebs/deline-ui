@@ -39,13 +39,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.5rem 0.875rem;
+  padding: 0.75rem 1rem;
   min-height: 45px;
   cursor: pointer;
 
-  background: var(--dl-bg-secondary);
-  border: 1px solid var(--dl-border-color);
-  border-radius: var(--dl-radius);
+  background: var(--field-bg, var(--dl-bg-secondary));
+  border-bottom: 2px solid var(--field-border, var(--dl-border-color));
+  border-radius: var(--dl-radius) var(--dl-radius) 0 0;
 
   transition: all 0.2s ease;
 }
@@ -57,7 +57,7 @@
 
 :host(.is-open) .input-container {
   background: var(--dl-input-focus-bg);
-  border-color: var(--dl-primary);
+  border-bottom-color: var(--dl-primary);
 }
 
 /* Chips */
@@ -103,35 +103,36 @@
 /* Dropdown */
 .dropdown-list {
   position: absolute;
-  top: calc(100% + 2px);
+  top: 100%;
   left: 0;
   right: 0;
   z-index: 100;
 
   background: var(--dl-bg);
   border: 1px solid var(--dl-border-color);
+  border-top: none;
   border-radius: 0 0 var(--dl-radius) var(--dl-radius);
   box-shadow: 0 10px 15px -3px var(--dl-shadow-medium);
 
   max-height: 250px;
   overflow-y: auto;
+  padding: 4px 0;
+  margin: 0;
 }
 
-.option-group {
-  border-bottom: 1px solid var(--dl-border-color);
+/* Group header */
+.dropdown-header {
+  list-style: none;
 }
 
-.option-group:last-child {
-  border-bottom: none;
-}
-
-.group-label {
-  padding: 6px 12px;
-  font-size: 0.75rem;
+.dropdown-header-label {
+  display: block;
+  padding: 8px 12px 4px;
+  font-size: 0.6875rem;
   font-weight: 600;
   text-transform: uppercase;
+  letter-spacing: 0.04em;
   color: var(--dl-text-secondary);
-  background: var(--dl-bg-secondary);
 }
 
 /* Options */
@@ -139,12 +140,20 @@
   width: 100%;
   text-align: left;
   padding: 8px 12px;
+  padding-left: 24px;
   font-size: 0.875rem;
   cursor: pointer;
   color: var(--dl-text);
   background: transparent;
   border: none;
   font: inherit;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.option-item:first-of-type {
+  margin-top: 4px;
 }
 
 .option-item:hover:not(.disabled) {

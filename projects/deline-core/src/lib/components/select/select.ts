@@ -28,7 +28,6 @@ import { FormField } from '../form-field/form-field';
     '[attr.aria-disabled]': 'disabled()',
     '[attr.aria-required]': 'required()',
     '(document:click)': 'onClickOutside($event)',
-    '(keydown)': 'onKeyDown($event)',
   },
   templateUrl: './select.html',
   styleUrl: './select.css',
@@ -83,6 +82,34 @@ export class Select implements DlnControl {
     return opts;
   });
 
+  renderedItems = computed<({ kind: 'header'; label: string } | { kind: 'option'; option: SelectOption; flatIndex: number })[]>(() => {
+    const items: ({ kind: 'header'; label: string } | { kind: 'option'; option: SelectOption; flatIndex: number })[] = [];
+    let idx = 0;
+
+    for (const item of this.options()) {
+      if ('options' in item) {
+        const available = item.options.filter((o) => !o.disabled);
+        if (available.length > 0) {
+          items.push({ kind: 'header', label: item.label });
+          for (const opt of available) {
+            items.push({ kind: 'option', option: opt, flatIndex: idx++ });
+          }
+        }
+      } else {
+        if (!item.disabled) {
+          items.push({ kind: 'option', option: item, flatIndex: idx++ });
+        }
+      }
+    }
+    return items;
+  });
+
+  availableOptions = computed(() =>
+    this.renderedItems().filter((i): i is { kind: 'option'; option: SelectOption; flatIndex: number } => i.kind === 'option').map((i) => i.option),
+  );
+
+  focusedIndex = signal(-1);
+
   protected hasParentFormField = computed(() => !!this.parentFormField);
 
   constructor() {
@@ -96,6 +123,17 @@ export class Select implements DlnControl {
   toggle(): void {
     if (this.disabled()) return;
     this.isOpen.update((v) => !v);
+    if (!this.isOpen()) {
+      this.focusedIndex.set(-1);
+    } else {
+      const selected = this.selectedOption();
+      if (selected) {
+        const idx = this.availableOptions().findIndex((o) => o.value === selected.value);
+        this.focusedIndex.set(idx >= 0 ? idx : 0);
+      } else {
+        this.focusedIndex.set(0);
+      }
+    }
   }
 
   select(option: SelectOption): void {
@@ -113,23 +151,23 @@ export class Select implements DlnControl {
 
   onKeyDown(event: KeyboardEvent) {
     if (this.disabled()) return;
-    const opts = this.flatOptions().filter(o => !o.disabled);
-    const currentIndex = this.selectedOption() ? opts.findIndex(o => o.value === this.selectedOption()!.value) : -1;
+    const opts = this.availableOptions();
+    const fi = this.focusedIndex();
 
     switch (event.key) {
       case 'ArrowDown':
         event.preventDefault();
         if (!this.isOpen()) this.toggle();
-        else if (currentIndex < opts.length - 1) this.selectedOption.set(opts[currentIndex + 1]);
+        else if (fi < opts.length - 1) this.focusedIndex.set(fi + 1);
         break;
       case 'ArrowUp':
         event.preventDefault();
-        if (this.isOpen() && currentIndex > 0) this.selectedOption.set(opts[currentIndex - 1]);
+        if (this.isOpen() && fi > 0) this.focusedIndex.set(fi - 1);
         break;
       case 'Enter':
       case ' ':
         event.preventDefault();
-        if (this.isOpen() && this.selectedOption()) this.select(this.selectedOption()!);
+        if (this.isOpen() && opts[fi]) this.select(opts[fi]);
         else this.toggle();
         break;
       case 'Escape':

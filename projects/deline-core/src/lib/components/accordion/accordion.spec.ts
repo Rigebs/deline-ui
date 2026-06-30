@@ -5,7 +5,6 @@ import { Accordion, AccordionPanel } from './accordion';
 @Component({
   template: '<dln-accordion><dln-accordion-panel header="Test"><p>Content</p></dln-accordion-panel></dln-accordion>',
   imports: [Accordion, AccordionPanel],
-  standalone: true,
 })
 class TestHost {}
 

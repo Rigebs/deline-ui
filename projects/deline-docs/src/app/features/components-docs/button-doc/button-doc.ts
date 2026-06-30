@@ -31,9 +31,9 @@ export class ButtonDoc {
 
   playSize = computed(() => this.size() as 'sm' | 'md' | 'lg');
 
-  setVariant(v: string) { this.variant.set(v as any); }
-  setColor(c: string) { this.color.set(c as any); }
-  setSize(s: string) { this.size.set(s as any); }
+  setVariant(v: string) { this.variant.set(v as 'solid' | 'outlined' | 'text'); }
+  setColor(c: string) { this.color.set(c as 'primary' | 'secondary' | 'danger'); }
+  setSize(s: string) { this.size.set(s as 'sm' | 'md' | 'lg'); }
   setDisabled(d: boolean) { this.disabled.set(d); }
   setLoading(l: boolean) { this.loading.set(l); }
   toggleCode() { this.showCode.update(v => !v); }

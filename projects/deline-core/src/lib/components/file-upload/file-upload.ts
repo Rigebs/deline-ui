@@ -1,4 +1,4 @@
-import { Component, signal, output, ElementRef, ViewChild } from '@angular/core';
+import { Component, signal, output, viewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'dln-file-upload',
@@ -10,7 +10,11 @@ import { Component, signal, output, ElementRef, ViewChild } from '@angular/core'
   styleUrl: './file-upload.css',
 })
 export class FileUpload {
-  @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
+  private fileInputRef = viewChild.required<ElementRef<HTMLInputElement>>('fileInput');
+
+  private get fileInput(): HTMLInputElement {
+    return this.fileInputRef().nativeElement;
+  }
 
   isDragging = signal(false);
   fileName = signal<string | null>(null);
@@ -49,13 +53,13 @@ export class FileUpload {
   }
 
   protected triggerSelect() {
-    this.fileInput.nativeElement.click();
+    this.fileInput.click();
   }
 
   protected removeFile(event: Event) {
     event.stopPropagation();
     this.fileName.set(null);
     this.previewUrl.set(null);
-    this.fileInput.nativeElement.value = '';
+    this.fileInput.value = '';
   }
 }

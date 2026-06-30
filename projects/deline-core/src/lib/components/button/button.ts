@@ -34,7 +34,7 @@ export class Button {
   fullWidth = input(false);
 
   href = input<string>('');
-  routerLink = input<string | any[] | null>(null);
+  routerLink = input<string | (string | number)[] | null>(null);
   routerLinkActive = input<string>('');
   routerLinkExact = input(false);
   target = input<string>('');

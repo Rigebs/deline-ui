@@ -111,11 +111,12 @@
   <div class="use-cases">
     <div class="use-case-card">
       <div class="use-case-label">Lista de tareas</div>
-      <app-code-block code='<dln-checkbox
-  *ngFor="let tarea of tareas"
-  [(checked)]="tarea.completada"
-  [label]="tarea.nombre">
-</dln-checkbox>'></app-code-block>
+      <app-code-block code='@for (tarea of tareas; track tarea) {
+  <dln-checkbox
+    [(checked)]="tarea.completada"
+    [label]="tarea.nombre">
+  </dln-checkbox>
+}'></app-code-block>
     </div>
 
     <div class="use-case-card">

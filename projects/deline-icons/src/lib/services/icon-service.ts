@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ICON_REGISTRY, IconName } from '../icon-registry';
+import { ICON_REGISTRY, IconName } from '../icon/icon-registry';
 
 export interface IconData {
   name: string;

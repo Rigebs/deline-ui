@@ -103,17 +103,17 @@
   [(activeIndex)]="tabIndex">
 </dln-tabs>
 
-<ng-container [ngSwitch]="tabIndex">
-  <ng-container *ngSwitchCase="0">
+@switch (tabIndex) {
+  @case (0) {
     <p>Contenido del perfil</p>
-  </ng-container>
-  <ng-container *ngSwitchCase="1">
+  }
+  @case (1) {
     <p>Contenido de ajustes</p>
-  </ng-container>
-  <ng-container *ngSwitchCase="2">
+  }
+  @case (2) {
     <p>Contenido de notificaciones</p>
-  </ng-container>
-</ng-container>'></app-code-block>
+  }
+}'></app-code-block>
     </div>
 
     <div class="use-case-card">

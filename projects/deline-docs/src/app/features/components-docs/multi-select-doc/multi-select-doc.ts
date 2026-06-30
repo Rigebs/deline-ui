@@ -1,13 +1,13 @@
 import { Component, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MultiSelect, SelectOption, SelectOptionGroup } from 'deline-core';
+import { MultiSelect, SelectOption, SelectOptionGroup, Checkbox } from 'deline-core';
 import { ApiTable, ApiTableRow } from '../../../shared/components/api-table/api-table';
 import { CodeBlock } from '../../../shared/components/code-block/code-block';
 
 @Component({
   selector: 'app-multi-select-doc',
-  imports: [CommonModule, FormsModule, MultiSelect, ApiTable, CodeBlock],
+  imports: [CommonModule, FormsModule, MultiSelect, Checkbox, ApiTable, CodeBlock],
   templateUrl: './multi-select-doc.html',
   styleUrl: './multi-select-doc.css',
 })

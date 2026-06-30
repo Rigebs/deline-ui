@@ -20,7 +20,7 @@ export class ToastService {
 
   state = this.toastState.asReadonly();
 
-  private timeoutId?: any;
+  private timeoutId?: ReturnType<typeof setTimeout>;
 
   show(message: string, type: ToastType = 'info', duration: number = 3000) {
     if (this.timeoutId) clearTimeout(this.timeoutId);

@@ -5,7 +5,6 @@ import { Radio, RadioGroupComponent } from './radio';
 @Component({
   template: '<dln-radio-group><dln-radio value="a" label="Option A"></dln-radio></dln-radio-group>',
   imports: [RadioGroupComponent, Radio],
-  standalone: true,
 })
 class TestHost {}
 
