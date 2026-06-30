@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Navbar } from '../../components/navbar/navbar';
 import { Sidebar } from '../../components/sidebar/sidebar';
@@ -8,4 +8,14 @@ import { Sidebar } from '../../components/sidebar/sidebar';
   imports: [RouterOutlet, Navbar, Sidebar],
   templateUrl: './docs-layout.html',
 })
-export class DocsLayout {}
+export class DocsLayout {
+  sidebarOpen = signal(false);
+
+  toggleSidebar(): void {
+    this.sidebarOpen.update(v => !v);
+  }
+
+  closeSidebar(): void {
+    this.sidebarOpen.set(false);
+  }
+}

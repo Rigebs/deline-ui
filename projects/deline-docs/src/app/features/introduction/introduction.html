@@ -1,23 +1,69 @@
-<div class="intro-header">
-  <span style="font-size:14px;font-weight:500;color:var(--doc-primary-text);display:block;margin-bottom:8px;">Documentación</span>
-  <h1 class="intro-title">Deline UI</h1>
-  <p class="intro-desc">
-    Biblioteca de componentes Angular moderna, tipada y accesible. Construida con standalone components, señales y diseño atómico.
+<div class="hero">
+  <div class="hero-badge">Documentación</div>
+  <h1 class="hero-title">Deline UI</h1>
+  <p class="hero-desc">
+    Biblioteca de componentes Angular moderna, tipada y accesible.<br>
+    Construida con <strong>standalone components</strong>, <strong>señales</strong> y <strong>diseño atómico</strong>.
   </p>
 
-  <div class="import-block" style="max-width:560px;">
-    <div class="import-label">Instalación</div>
-    <pre class="import-code"><code>npm install deline-core deline-icons</code></pre>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <span class="hero-stat-value">{{ ALL_COMPONENTS.length }}</span>
+      <span class="hero-stat-label">Componentes</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-value">32</span>
+      <span class="hero-stat-label">Iconos</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-value">Angular 20</span>
+      <span class="hero-stat-label">Framework</span>
+    </div>
+  </div>
+
+  <div class="hero-install">
+    <div class="hero-install-header">
+      <span class="hero-install-label">Instalación</span>
+      <button (click)="copyInstall()" class="hero-install-copy">
+        {{ installCopied() ? '✓ Copiado' : 'Copiar' }}
+      </button>
+    </div>
+    <pre class="hero-install-code"><code>npm install deline-core deline-icons</code></pre>
   </div>
 </div>
 
 <section>
-  <h2 class="section-title">Componentes Disponibles</h2>
+  <div class="section-header">
+    <h2 class="section-title">Componentes</h2>
+    <div class="category-filters">
+      @for (cat of categories; track cat.key) {
+        <button
+          class="category-chip"
+          [class.category-chip--active]="activeCategory() === cat.key"
+          (click)="setCategory(cat.key)">
+          {{ cat.label }}
+        </button>
+      }
+    </div>
+  </div>
+
+  @if (filteredComponents().length === 0) {
+    <p class="empty-category">No hay componentes en esta categoría.</p>
+  }
+
   <div class="components-grid">
-    @for (cmp of components; track cmp.route) {
+    @for (cmp of filteredComponents(); track cmp.route) {
       <a [routerLink]="cmp.route" class="component-card">
-        <h4 class="component-card-title">{{ cmp.label }}</h4>
+        <div class="component-card-header">
+          <h4 class="component-card-title">{{ cmp.label }}</h4>
+          @if (cmp.status === 'new' || cmp.status === 'beta') {
+            <span class="component-card-badge" [class.badge-new]="cmp.status === 'new'" [class.badge-beta]="cmp.status === 'beta'">
+              {{ cmp.status === 'new' ? 'Nuevo' : 'Beta' }}
+            </span>
+          }
+        </div>
         <p class="component-card-desc">{{ cmp.description }}</p>
+        <span class="component-card-category">{{ CATEGORY_LABELS[cmp.category] }}</span>
       </a>
     }
   </div>
